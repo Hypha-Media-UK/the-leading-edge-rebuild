@@ -8,14 +8,14 @@ const testimonialTransition = ref(true);
 // Instagram image mapping function
 const getInstagramImage = (index) => {
   const imageMap = {
-    1: 'Abigailleadingedge.jpg',
-    2: 'Abigailcaramel.jpg',
-    3: 'leadingedge0148.jpg',
-    4: 'leadingedge0147.jpg',
-    5: 'leadingedge0112.jpg',
-    6: 'leadingedge0111.jpg'
+    1: 'test001.webp',
+    2: 'test002.webp',
+    3: 'test003.webp',
+    4: 'test004.webp',
+    5: 'test002.webp',
+    6: 'test002.webp'
   };
-  return imageMap[index] || 'Abigailleadingedge.jpg';
+  return imageMap[index] || 'test001.webp';
 };
 
 // Testimonials data
@@ -25,35 +25,35 @@ const testimonials = [
     quote: "The Leading Edge has completely transformed my hair care routine. The team is professional, knowledgeable, and always makes me feel welcome.",
     name: "Sarah Johnson",
     role: "Regular Client",
-    image: "bridal-look.jpg"
+    image: "test001.webp"
   },
   {
     id: 2,
     quote: "Absolutely love the results every time I visit. The stylists here are true artists and always keep up with the latest trends and techniques.",
     name: "Michael Thompson",
     role: "Loyal Customer",
-    image: "groom-hair.jpg"
+    image: "test002.webp"
   },
   {
     id: 3,
     quote: "Their attention to detail is incredible. I came in with a vague idea of what I wanted and left with exactly the style I didn't even know I needed!",
     name: "Emma Wilson",
     role: "First-time Client",
-    image: "wedding-bliss.jpg"
+    image: "test003.webp"
   },
   {
     id: 4,
     quote: "The spa treatments here are divine. The perfect place to relax and unwind while being pampered by true professionals.",
     name: "James Reynolds",
     role: "Spa Regular",
-    image: "007.jpg"
+    image: "test004.webp"
   },
   {
     id: 5,
     quote: "I've been to many salons, but none compare to The Leading Edge. The quality of service and products they use are simply unmatched.",
     name: "Olivia Garcia",
     role: "VIP Member",
-    image: "Abigail1.jpg"
+    image: "test003.webp"
   }
 ];
 
@@ -270,7 +270,7 @@ onBeforeUnmount(() => {
                 <p>{{ currentTestimonial.quote }}</p>
                 <div class="client">
                   <div class="client-image">
-                    <img :src="`/images/downloaded/${currentTestimonial.image}`" :alt="`${currentTestimonial.name} - ${currentTestimonial.role}`">
+                    <img :src="`/images/new/testimonials/${currentTestimonial.image}`" :alt="`${currentTestimonial.name} - ${currentTestimonial.role}`">
                   </div>
                   <div class="client-info">
                     <h4>{{ currentTestimonial.name }}</h4>
