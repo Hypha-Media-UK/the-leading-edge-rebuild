@@ -8,12 +8,12 @@ const testimonialTransition = ref(true);
 // Instagram image mapping function
 const getInstagramImage = (index) => {
   const imageMap = {
-    1: 'test001.webp',
-    2: 'test002.webp',
-    3: 'test003.webp',
-    4: 'test004.webp',
-    5: 'test002.webp',
-    6: 'test002.webp'
+    1: 'insta1.webp',
+    2: 'insta2.webp',
+    3: 'insta3.webp',
+    4: 'insta4.webp',
+    5: 'insta5.webp',
+    6: 'insta6.webp'
   };
   return imageMap[index] || 'test001.webp';
 };
@@ -372,7 +372,7 @@ onBeforeUnmount(() => {
             :enter="{ opacity: 1, y: 0, transition: { delay: n * 100, duration: 600 } }"
           >
             <img 
-              :src="`/images/downloaded/${getInstagramImage(n)}`"
+              :src="`/images/new/insta/${getInstagramImage(n)}`"
               :alt="`Instagram post ${n}`"
               class="instagram-image"
             >

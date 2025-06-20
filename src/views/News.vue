@@ -9,7 +9,7 @@ const newsItems = [
     id: 1,
     title: "Summer Hair Trends 2025",
     date: "June 15, 2025",
-    image: "/images/downloaded/APR-2021-01.jpg",
+    image: "/images/new/news/news1.webp",
     excerpt: "Discover the hottest hair trends for Summer 2025. From beachy waves to bold colors, our stylists share their expert predictions.",
     content: `
       <p>As the summer season approaches, it's time to refresh your look with the latest hair trends that are making waves in the beauty industry. Our expert stylists at The Leading Edge have compiled their top predictions for the hottest styles of Summer 2025.</p>
@@ -30,7 +30,7 @@ const newsItems = [
     id: 2,
     title: "New Organic Skincare Line Now Available",
     date: "June 5, 2025",
-    image: "/images/downloaded/APR-2021-22.jpg",
+    image: "/images/new/news/news2.webp",
     excerpt: "We're excited to announce our new range of organic, cruelty-free skincare products, now available at The Leading Edge.",
     content: `
       <p>The Leading Edge is proud to introduce our new exclusive line of organic skincare products. Crafted with natural ingredients and formulated without harsh chemicals, these products are designed to nourish and rejuvenate your skin.</p>
@@ -54,7 +54,7 @@ const newsItems = [
     id: 3,
     title: "Meet Our New Senior Stylist, Alex",
     date: "May 20, 2025",
-    image: "/images/downloaded/BarrieAitken.jpg",
+    image: "/images/new/news/news3.webp",
     excerpt: "We're delighted to welcome Alex Roberts to our team of talented professionals at The Leading Edge.",
     content: `
       <p>The Leading Edge family is growing! We're thrilled to introduce our newest senior stylist, Alex Roberts, who brings over 12 years of industry experience to our salon.</p>
@@ -75,7 +75,7 @@ const newsItems = [
     id: 4,
     title: "Bridal Package Special Offer",
     date: "May 10, 2025",
-    image: "/images/downloaded/CH1_9468.jpg",
+    image: "/images/new/news/news4.webp",
     excerpt: "Planning your wedding? Take advantage of our special bridal package that covers all your beauty needs for the big day.",
     content: `
       <p>Your wedding day is one of the most important days of your life, and looking your absolute best is essential. The Leading Edge is offering a comprehensive bridal beauty package to ensure you feel confident and radiant on your special day.</p>
@@ -101,7 +101,7 @@ const newsItems = [
     id: 5,
     title: "Salon Renovation Complete",
     date: "April 25, 2025",
-    image: "/images/downloaded/APR-2021-14.jpg",
+    image: "/images/new/news/news5.webp",
     excerpt: "We've upgraded our salon space to enhance your experience. Come visit us to enjoy our new facilities and relaxation areas.",
     content: `
       <p>After months of planning and several weeks of renovation, we're excited to announce that our salon makeover is finally complete! We've transformed our space to create an even more luxurious and comfortable environment for our valued clients.</p>
