@@ -199,16 +199,16 @@ onMounted(() => {
           
           <div class="services-gallery">
             <div class="gallery-item">
-              <img src="/images/downloaded/leadingedge0148.jpg" alt="Hair Styling Example 1">
+              <img src="/images/new/misc/style1.webp" alt="Hair Styling Example 1">
             </div>
             <div class="gallery-item">
-              <img src="/images/downloaded/leadingedge0147.jpg" alt="Hair Styling Example 2">
+              <img src="/images/new/misc/style2.webp" alt="Hair Styling Example 2">
             </div>
             <div class="gallery-item">
-              <img src="/images/downloaded/leadingedge0111.jpg" alt="Hair Styling Example 3">
+              <img src="/images/new/misc/style3.webp" alt="Hair Styling Example 3">
             </div>
             <div class="gallery-item">
-              <img src="/images/downloaded/leadingedge0112.jpg" alt="Hair Styling Example 4">
+              <img src="/images/new/misc/style4.webp" alt="Hair Styling Example 4">
             </div>
           </div>
           
