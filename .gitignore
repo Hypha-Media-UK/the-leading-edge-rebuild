@@ -30,4 +30,3 @@ coverage
 !.env.example
 
 # Build files
-/dist
