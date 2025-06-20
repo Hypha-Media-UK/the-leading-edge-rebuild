@@ -19,6 +19,24 @@ const closeTeamMemberDetails = () => {
 // Team members data
 const teamMembers = [
   {
+    id: 10,
+    name: 'Alex Johnson',
+    role: 'Makeup Artist',
+    bio: 'Alex brings creative vision and exceptional technical skill to our makeup services. With a background in fashion and editorial work, Alex specializes in creating personalized looks that enhance each client\'s natural beauty while reflecting their individual style and personality.',
+    specialties: ['Bridal Makeup', 'Editorial Looks', 'Special Effects'],
+    image: '/images/new/staff/staff10.webp',
+    instagram: '@alexjohnsonmakeup'
+  },
+  {
+    id: 4,
+    name: 'Oliver Baker',
+    role: 'Style Director',
+    bio: 'Oliver\'s passion for hair began at a young age, and he\'s spent the last decade perfecting his craft. His work has been featured in leading fashion magazines, and he brings his editorial expertise to every client\'s experience.',
+    specialties: ['Editorial Styling', 'Hair Extensions', 'Curly Hair Specialist'],
+    image: '/images/new/staff/staff4.webp',
+    instagram: '@oliverbaker'
+  },
+  {
     id: 1,
     name: 'Emma Thompson',
     role: 'Founder & Creative Director',
@@ -44,15 +62,6 @@ const teamMembers = [
     specialties: ['Balayage', 'Color Correction', 'Fashion Colors'],
     image: '/images/new/staff/staff3.webp',
     instagram: '@sophiachen'
-  },
-  {
-    id: 4,
-    name: 'Oliver Baker',
-    role: 'Style Director',
-    bio: 'Oliver\'s passion for hair began at a young age, and he\'s spent the last decade perfecting his craft. His work has been featured in leading fashion magazines, and he brings his editorial expertise to every client\'s experience.',
-    specialties: ['Editorial Styling', 'Hair Extensions', 'Curly Hair Specialist'],
-    image: '/images/new/staff/staff4.webp',
-    instagram: '@oliverbaker'
   },
   {
     id: 5,
