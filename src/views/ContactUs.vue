@@ -257,7 +257,7 @@ onMounted(() => {
               <h3>Our Location</h3>
               <p>61 Dowson Road<br>Hyde<br>Cheshire<br>SK14 1QS</p>
           <div class="map-container">
-            <div class="map-image" style="background-image: url('/images/downloaded/DJI_0136.jpg'); background-size: cover; background-position: center;">
+            <div class="map-image" style="background-image: url('/images/new/misc/misc001.webp'); background-size: cover; background-position: center;">
             </div>
             <a href="https://maps.google.com/?q=61+Dowson+Road,+Hyde,+Cheshire,+SK14+1QS" target="_blank" class="btn secondary">Get Directions</a>
           </div>
