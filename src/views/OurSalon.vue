@@ -626,7 +626,7 @@ section {
 
 // CTA Section
 .cta-section {
-  background-image: linear-gradient(to right, rgba($primary-color, 0.9), rgba($accent-color, 0.9)), url('/images/downloaded/LeadingEdge-011.jpg');
+  background-image: linear-gradient(to right, rgba($primary-color, 0.9), rgba($accent-color, 0.9));
   background-size: cover;
   background-position: center;
   color: white;

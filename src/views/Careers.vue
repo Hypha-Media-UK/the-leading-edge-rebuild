@@ -939,7 +939,6 @@ section {
     
     .culture-image {
       height: 400px;
-      background-image: url('/images/downloaded/staff/LeadingEdge_300317-028-Copy.jpg');
       background-size: cover;
       background-position: center;
       border-radius: 8px;

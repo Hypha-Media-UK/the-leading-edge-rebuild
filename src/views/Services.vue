@@ -724,7 +724,7 @@ onMounted(() => {
 
 // Booking CTA
 .booking-cta {
-  background-image: linear-gradient(to right, rgba($primary-color, 0.9), rgba($accent-color, 0.9)), url('/images/downloaded/wedding-bliss.jpg');
+  background-image: linear-gradient(to right, rgba($primary-color, 0.9), rgba($accent-color, 0.9));
   background-size: cover;
   background-position: center;
   color: white;
