@@ -382,7 +382,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-// Page Header
 .page-header {
   background-color: $primary-color;
   color: white;
