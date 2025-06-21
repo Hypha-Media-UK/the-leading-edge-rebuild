@@ -68,7 +68,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../../styles/main.scss';
 
 header {
   position: fixed;

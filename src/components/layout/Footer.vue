@@ -81,7 +81,6 @@ const currentYear = ref(new Date().getFullYear());
 </template>
 
 <style lang="scss" scoped>
-@import '../../styles/main.scss';
 
 footer {
   background-color: $primary-color;
