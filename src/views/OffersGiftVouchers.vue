@@ -227,8 +227,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../styles/main.scss';
-
 // Page Header
 .page-header {
   background-color: $primary-color;
@@ -359,7 +357,7 @@ section {
     
     .voucher-subtext {
       margin-top: 1rem;
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       font-style: italic;
       font-size: 0.95rem;
     }
@@ -442,7 +440,7 @@ section {
       p {
         margin-bottom: 0.8rem;
         font-size: 0.95rem;
-        color: lighten($primary-color, 15%);
+        color: custom-lighten($primary-color, 15%);
         text-align: left;
       }
     }
@@ -464,7 +462,7 @@ section {
       }
       
       &:hover {
-        color: darken($accent-color, 10%);
+        color: custom-darken($accent-color, 10%);
       }
     }
   }
@@ -502,7 +500,7 @@ section {
     }
     
     &.friend-offer::before {
-      background: linear-gradient(to right, $accent-color, lighten($accent-color, 15%));
+      background: linear-gradient(to right, $accent-color, custom-lighten($accent-color, 15%));
     }
     
     &.nhs-offer::before {
@@ -510,7 +508,7 @@ section {
     }
     
     &.student-offer::before {
-      background: linear-gradient(to right, #D0D171, lighten(#D0D171, 15%));
+      background: linear-gradient(to right, #D0D171, custom-lighten(#D0D171, 15%));
     }
     
     .card-icon {
@@ -536,7 +534,7 @@ section {
     
     &.student-offer .card-icon {
       background-color: rgba(#D0D171, 0.1);
-      color: darken(#D0D171, 15%);
+      color: custom-darken(#D0D171, 15%);
     }
     
     h2 {
@@ -569,11 +567,11 @@ section {
     
     &.student-offer .offer-highlight span {
       background-color: rgba(#D0D171, 0.1);
-      color: darken(#D0D171, 20%);
+      color: custom-darken(#D0D171, 20%);
     }
     
     p {
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       line-height: 1.6;
       margin-bottom: 1rem;
       flex: 1;
@@ -597,7 +595,7 @@ section {
       }
       
       &:hover {
-        color: darken($accent-color, 10%);
+        color: custom-darken($accent-color, 10%);
         
         i {
           transform: rotate(90deg);
@@ -668,8 +666,8 @@ section {
     border: 2px solid $accent-color;
     
     &:hover {
-      background-color: darken($accent-color, 10%);
-      border-color: darken($accent-color, 10%);
+      background-color: custom-darken($accent-color, 10%);
+      border-color: custom-darken($accent-color, 10%);
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }

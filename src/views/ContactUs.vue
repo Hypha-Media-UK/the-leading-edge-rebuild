@@ -382,8 +382,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../styles/main.scss';
-
 // Page Header
 .page-header {
   background-color: $primary-color;
@@ -444,7 +442,7 @@ onMounted(() => {
       }
       
       p {
-        color: lighten($primary-color, 20%);
+        color: custom-lighten($primary-color, 20%);
       }
     }
     
@@ -466,7 +464,7 @@ onMounted(() => {
       
       p {
         margin-bottom: 2rem;
-        color: lighten($primary-color, 20%);
+        color: custom-lighten($primary-color, 20%);
       }
     }
     
@@ -570,7 +568,7 @@ onMounted(() => {
       }
       
       p {
-        color: lighten($primary-color, 20%);
+        color: custom-lighten($primary-color, 20%);
         line-height: 1.6;
         margin-bottom: 1rem;
       }
@@ -610,7 +608,7 @@ onMounted(() => {
           }
           
           .time {
-            color: lighten($primary-color, 20%);
+            color: custom-lighten($primary-color, 20%);
           }
           
           &.closed {
@@ -637,7 +635,7 @@ onMounted(() => {
           }
           
           a {
-            color: lighten($primary-color, 20%);
+            color: custom-lighten($primary-color, 20%);
             text-decoration: none;
             transition: color 0.3s ease;
             
@@ -725,7 +723,7 @@ onMounted(() => {
     }
     
     p {
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       line-height: 1.6;
       margin: 0;
     }
@@ -750,8 +748,8 @@ onMounted(() => {
     border-color: $accent-color;
     
     &:hover {
-      background-color: darken($accent-color, 10%);
-      border-color: darken($accent-color, 10%);
+      background-color: custom-darken($accent-color, 10%);
+      border-color: custom-darken($accent-color, 10%);
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }

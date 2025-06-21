@@ -409,7 +409,7 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../styles/main.scss';
+/* Use the color module directly */
 
 // Hero Section
 .hero {
@@ -492,8 +492,8 @@ onBeforeUnmount(() => {
     border: 2px solid $accent-color;
     
     &:hover {
-      background-color: darken($accent-color, 10%);
-      border-color: darken($accent-color, 10%);
+      background-color: custom-darken($accent-color, 10%);
+      border-color: custom-darken($accent-color, 10%);
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
@@ -513,13 +513,13 @@ onBeforeUnmount(() => {
   }
   
   &.tertiary {
-    background-color: lighten($accent-color, 15%);
+    background-color: custom-lighten($accent-color, 15%);
     color: white;
-    border: 2px solid lighten($accent-color, 15%);
+    border: 2px solid custom-lighten($accent-color, 15%);
     
     &:hover {
-      background-color: lighten($accent-color, 25%);
-      border-color: lighten($accent-color, 25%);
+      background-color: custom-lighten($accent-color, 25%);
+      border-color: custom-lighten($accent-color, 25%);
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
@@ -607,7 +607,7 @@ section {
     }
     
     p {
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       line-height: 1.6;
     }
   }
@@ -667,7 +667,7 @@ section {
       }
       
       p {
-        color: lighten($primary-color, 20%);
+        color: custom-lighten($primary-color, 20%);
         margin-bottom: 1rem;
         line-height: 1.6;
       }
@@ -769,7 +769,7 @@ section {
         }
         
         span {
-          color: lighten($primary-color, 30%);
+          color: custom-lighten($primary-color, 30%);
           font-size: 0.9rem;
         }
       }

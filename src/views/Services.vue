@@ -450,8 +450,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../styles/main.scss';
-
 // Page Header
 .page-header {
   background-color: $primary-color;
@@ -521,7 +519,7 @@ onMounted(() => {
       }
       
       &:hover {
-        background-color: darken($light-color, 5%);
+        background-color: custom-darken($light-color, 5%);
       }
       
       &.active {
@@ -573,7 +571,7 @@ onMounted(() => {
     }
     
     p {
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       line-height: 1.6;
     }
   }
@@ -608,7 +606,7 @@ onMounted(() => {
         }
         
         p {
-          color: lighten($primary-color, 20%);
+          color: custom-lighten($primary-color, 20%);
           margin: 0;
         }
       }
@@ -678,7 +676,7 @@ onMounted(() => {
         .package-description {
           margin-bottom: 1.5rem;
           line-height: 1.6;
-          color: lighten($primary-color, 20%);
+          color: custom-lighten($primary-color, 20%);
         }
         
         .package-includes {
@@ -706,7 +704,7 @@ onMounted(() => {
         
         .package-duration {
           font-style: italic;
-          color: lighten($primary-color, 30%);
+          color: custom-lighten($primary-color, 30%);
           margin-bottom: 1.5rem;
           
           i {
@@ -777,8 +775,8 @@ onMounted(() => {
     border: 2px solid $accent-color;
     
     &:hover {
-      background-color: darken($accent-color, 10%);
-      border-color: darken($accent-color, 10%);
+      background-color: custom-darken($accent-color, 10%);
+      border-color: custom-darken($accent-color, 10%);
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }

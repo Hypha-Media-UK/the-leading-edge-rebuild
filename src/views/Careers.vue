@@ -485,8 +485,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../styles/main.scss';
-
 // Page Header
 .page-header {
   background-color: $primary-color;
@@ -539,7 +537,7 @@ section {
   p {
     max-width: 700px;
     margin: 0 auto;
-    color: lighten($primary-color, 20%);
+    color: custom-lighten($primary-color, 20%);
     font-size: 1.1rem;
   }
 }
@@ -579,7 +577,7 @@ section {
     }
     
     p {
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       line-height: 1.6;
     }
   }
@@ -630,7 +628,7 @@ section {
       }
       
       .location {
-        color: lighten($primary-color, 30%);
+        color: custom-lighten($primary-color, 30%);
         font-size: 0.9rem;
         
         i {
@@ -640,7 +638,7 @@ section {
     }
     
     .position-excerpt {
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       margin-bottom: 1.5rem;
       line-height: 1.6;
     }
@@ -656,7 +654,7 @@ section {
     box-shadow: 0 5px 15px rgba($primary-color, 0.05);
     
     p {
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       line-height: 1.6;
     }
   }
@@ -728,7 +726,7 @@ section {
           }
           
           .location {
-            color: lighten($primary-color, 30%);
+            color: custom-lighten($primary-color, 30%);
             font-size: 0.9rem;
             
             i {
@@ -742,7 +740,7 @@ section {
           
           p {
             line-height: 1.8;
-            color: lighten($primary-color, 20%);
+            color: custom-lighten($primary-color, 20%);
           }
         }
         
@@ -770,7 +768,7 @@ section {
             padding-left: 1.5rem;
             
             li {
-              color: lighten($primary-color, 20%);
+              color: custom-lighten($primary-color, 20%);
               margin-bottom: 0.8rem;
               line-height: 1.6;
             }
@@ -824,7 +822,7 @@ section {
       
       p {
         margin-bottom: 2rem;
-        color: lighten($primary-color, 20%);
+        color: custom-lighten($primary-color, 20%);
         line-height: 1.6;
       }
     }
@@ -880,7 +878,7 @@ section {
           
           .file-info {
             font-size: 0.85rem;
-            color: lighten($primary-color, 30%);
+            color: custom-lighten($primary-color, 30%);
             margin-top: 0.5rem;
           }
         }
@@ -929,9 +927,9 @@ section {
       p {
         margin-bottom: 1.5rem;
         line-height: 1.8;
-        color: lighten($primary-color, 20%);
-        
-        &:last-child {
+    color: custom-lighten($primary-color, 20%);
+    
+    &:last-child {
           margin-bottom: 0;
         }
       }
@@ -971,8 +969,8 @@ section {
     border-color: $accent-color;
     
     &:hover {
-      background-color: darken($accent-color, 10%);
-      border-color: darken($accent-color, 10%);
+      background-color: custom-darken($accent-color, 10%);
+      border-color: custom-darken($accent-color, 10%);
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }

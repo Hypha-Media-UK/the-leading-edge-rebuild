@@ -267,7 +267,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../styles/main.scss';
 
 // Page Header
 .page-header {
@@ -314,7 +313,7 @@ section {
   p {
     max-width: 700px;
     margin: 0 auto;
-    color: lighten($primary-color, 20%);
+    color: custom-lighten($primary-color, 20%);
     font-size: 1.1rem;
   }
 }
@@ -369,7 +368,7 @@ section {
     p {
       margin-bottom: 1.5rem;
       line-height: 1.8;
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       
       &:last-child {
         margin-bottom: 0;
@@ -413,7 +412,7 @@ section {
     }
     
     p {
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       line-height: 1.6;
     }
   }
@@ -502,7 +501,7 @@ section {
     p {
       margin-bottom: 1.5rem;
       line-height: 1.8;
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       
       &:last-child {
         margin-bottom: 0;

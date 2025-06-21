@@ -1,3 +1,14 @@
+@use 'sass:color';
+
+// Create color adjustment functions directly
+@function custom-darken($color, $amount) {
+  @return color.adjust($color, $lightness: -$amount);
+}
+
+@function custom-lighten($color, $amount) {
+  @return color.adjust($color, $lightness: $amount);
+}
+
 // Color Variables
 $primary-color: #404E5C;
 $secondary-color: #B5AA9D;
@@ -54,7 +65,7 @@ a {
   transition: color 0.3s ease;
   
   &:hover {
-    color: darken($accent-color, 10%);
+    color: custom-darken($accent-color, 10%);
   }
 }
 
@@ -90,8 +101,8 @@ img {
     border: 2px solid $accent-color;
     
     &:hover {
-      background-color: darken($accent-color, 10%);
-      border-color: darken($accent-color, 10%);
+      background-color: custom-darken($accent-color, 10%);
+      border-color: custom-darken($accent-color, 10%);
     }
   }
   

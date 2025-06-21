@@ -154,7 +154,7 @@ nav {
         }
         
         &:hover {
-          background-color: darken($accent-color, 10%);
+          background-color: custom-darken($accent-color, 10%);
         }
       }
     }

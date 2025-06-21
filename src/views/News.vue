@@ -268,8 +268,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../styles/main.scss';
-
 // Page Header
 .page-header {
   background-color: $primary-color;
@@ -361,7 +359,7 @@ onMounted(() => {
         margin-bottom: 1rem;
         
         .date {
-          color: lighten($primary-color, 30%);
+          color: custom-lighten($primary-color, 30%);
           font-size: 0.9rem;
           
           i {
@@ -379,7 +377,7 @@ onMounted(() => {
       }
       
       p {
-        color: lighten($primary-color, 20%);
+        color: custom-lighten($primary-color, 20%);
         margin-bottom: 1.5rem;
         line-height: 1.6;
       }
@@ -435,7 +433,7 @@ onMounted(() => {
           margin-bottom: 0.8rem;
           
           .date {
-            color: lighten($primary-color, 30%);
+            color: custom-lighten($primary-color, 30%);
             font-size: 0.85rem;
             
             i {
@@ -453,7 +451,7 @@ onMounted(() => {
         }
         
         p {
-          color: lighten($primary-color, 20%);
+          color: custom-lighten($primary-color, 20%);
           margin-bottom: 1rem;
           line-height: 1.6;
           font-size: 0.95rem;
@@ -495,7 +493,7 @@ onMounted(() => {
       margin-bottom: 1.5rem;
       
       .date {
-        color: lighten($primary-color, 30%);
+        color: custom-lighten($primary-color, 30%);
         font-size: 0.95rem;
         
         i {
@@ -518,7 +516,7 @@ onMounted(() => {
     }
     
     .news-text {
-      color: lighten($primary-color, 20%);
+      color: custom-lighten($primary-color, 20%);
       line-height: 1.8;
       
       p {
@@ -617,7 +615,7 @@ onMounted(() => {
   }
   
   &:hover {
-    color: darken($accent-color, 10%);
+    color: custom-darken($accent-color, 10%);
     
     i {
       transform: translateX(3px);
