@@ -13,7 +13,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "./src/styles/index.scss" as *;`
+        // Using modern Sass API format
+        additionalData: '@use "./src/styles/index.scss" as *;'
       }
     }
   },
