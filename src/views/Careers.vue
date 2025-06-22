@@ -1,11 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
+// Only keep isLoaded for animations
 const isLoaded = ref(false);
-const applicationSubmitted = ref(false);
-const formError = ref(false);
 
-// Career positions
+// Keep position data for display purposes
 const positions = [
   {
     id: 1,
@@ -72,95 +71,14 @@ const positions = [
   }
 ];
 
-// Application form
-const form = ref({
+// Sample form structure for display only - no functionality
+const form = {
   name: '',
   email: '',
   phone: '',
   position: '',
   experience: '',
   message: '',
-  resume: null
-});
-
-// Form validation
-const errors = ref({});
-
-const validateForm = () => {
-  errors.value = {};
-  
-  if (!form.value.name.trim()) {
-    errors.value.name = 'Name is required';
-  }
-  
-  if (!form.value.email.trim()) {
-    errors.value.email = 'Email is required';
-  } else if (!/^\S+@\S+\.\S+$/.test(form.value.email)) {
-    errors.value.email = 'Please enter a valid email address';
-  }
-  
-  if (!form.value.phone.trim()) {
-    errors.value.phone = 'Phone number is required';
-  }
-  
-  if (!form.value.position) {
-    errors.value.position = 'Please select a position';
-  }
-  
-  if (!form.value.experience) {
-    errors.value.experience = 'Please select your experience level';
-  }
-  
-  return Object.keys(errors.value).length === 0;
-};
-
-const submitApplication = () => {
-  if (validateForm()) {
-    // This would be replaced with actual API call to backend
-    setTimeout(() => {
-      applicationSubmitted.value = true;
-      
-      // Reset form
-      form.value = {
-        name: '',
-        email: '',
-        phone: '',
-        position: '',
-        experience: '',
-        message: '',
-        resume: null
-      };
-    }, 1000);
-  } else {
-    formError.value = true;
-    setTimeout(() => {
-      formError.value = false;
-    }, 3000);
-  }
-};
-
-// Selected position for detailed view
-const selectedPosition = ref(null);
-
-const showPositionDetails = (id) => {
-  selectedPosition.value = id;
-};
-
-const closePositionDetails = () => {
-  selectedPosition.value = null;
-};
-
-// Apply for a specific position
-const applyForPosition = (id) => {
-  const position = positions.find(p => p.id === id);
-  if (position) {
-    form.value.position = position.title;
-    closePositionDetails();
-    // Scroll to application form
-    setTimeout(() => {
-      document.getElementById('application-form').scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  }
 };
 
 onMounted(() => {
@@ -278,7 +196,6 @@ onMounted(() => {
             v-motion
             :initial="{ opacity: 0, y: 30 }"
             :enter="{ opacity: 1, y: 0, transition: { delay: 200 + (index * 100), duration: 600 } }"
-            @click="showPositionDetails(position.id)"
           >
             <h3>{{ position.title }}</h3>
             <div class="position-meta">
@@ -297,49 +214,6 @@ onMounted(() => {
       </div>
     </section>
 
-    <!-- Position Details Modal -->
-    <div class="position-modal" v-if="selectedPosition" @click="closePositionDetails">
-      <div class="modal-content" @click.stop>
-        <button class="close-button" @click="closePositionDetails">&times;</button>
-        
-        <div class="modal-body" v-if="selectedPosition">
-          <div class="position-details" v-if="positions.find(p => p.id === selectedPosition)">
-            <h2>{{ positions.find(p => p.id === selectedPosition).title }}</h2>
-            <div class="position-meta">
-              <span class="type">{{ positions.find(p => p.id === selectedPosition).type }}</span>
-              <span class="location"><i class="fas fa-map-marker-alt"></i> {{ positions.find(p => p.id === selectedPosition).location }}</span>
-            </div>
-            
-            <div class="position-description">
-              <p>{{ positions.find(p => p.id === selectedPosition).description }}</p>
-            </div>
-            
-            <div class="position-section">
-              <h3>Responsibilities</h3>
-              <ul>
-                <li v-for="(item, i) in positions.find(p => p.id === selectedPosition).responsibilities" :key="i">
-                  {{ item }}
-                </li>
-              </ul>
-            </div>
-            
-            <div class="position-section">
-              <h3>Requirements</h3>
-              <ul>
-                <li v-for="(item, i) in positions.find(p => p.id === selectedPosition).requirements" :key="i">
-                  {{ item }}
-                </li>
-              </ul>
-            </div>
-            
-            <div class="position-cta">
-              <button @click="applyForPosition(selectedPosition)" class="btn primary">Apply Now</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Application Form -->
     <section id="application-form" class="application-section">
       <div class="container">
@@ -355,26 +229,14 @@ onMounted(() => {
           :initial="{ opacity: 0, y: 30 }"
           :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }"
         >
-          <div v-if="applicationSubmitted" class="form-success">
-            <div class="success-icon">
-              <i class="fas fa-check-circle"></i>
-            </div>
-            <h3>Thank You!</h3>
-            <p>Your application has been successfully submitted. Our team will review your information and contact you if there's a match for your skills and experience.</p>
-            <button @click="applicationSubmitted = false" class="btn primary">Submit Another Application</button>
-          </div>
-          
-          <form v-else @submit.prevent="submitApplication" class="application-form">
+          <form class="application-form">
             <div class="form-group">
               <label for="name">Full Name *</label>
               <input 
                 type="text" 
                 id="name" 
-                v-model="form.name" 
-                :class="{ 'error': errors.name }"
                 placeholder="Your full name"
               >
-              <span v-if="errors.name" class="error-message">{{ errors.name }}</span>
             </div>
             
             <div class="form-group">
@@ -382,11 +244,8 @@ onMounted(() => {
               <input 
                 type="email" 
                 id="email" 
-                v-model="form.email" 
-                :class="{ 'error': errors.email }"
                 placeholder="Your email address"
               >
-              <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
             </div>
             
             <div class="form-group">
@@ -394,19 +253,14 @@ onMounted(() => {
               <input 
                 type="tel" 
                 id="phone" 
-                v-model="form.phone" 
-                :class="{ 'error': errors.phone }"
                 placeholder="Your phone number"
               >
-              <span v-if="errors.phone" class="error-message">{{ errors.phone }}</span>
             </div>
             
             <div class="form-group">
               <label for="position">Position of Interest *</label>
               <select 
-                id="position" 
-                v-model="form.position" 
-                :class="{ 'error': errors.position }"
+                id="position"
               >
                 <option value="">Select a position</option>
                 <option v-for="position in positions" :key="position.id" :value="position.title">
@@ -414,15 +268,12 @@ onMounted(() => {
                 </option>
                 <option value="other">Other/Future Opportunities</option>
               </select>
-              <span v-if="errors.position" class="error-message">{{ errors.position }}</span>
             </div>
             
             <div class="form-group">
               <label for="experience">Years of Experience *</label>
               <select 
-                id="experience" 
-                v-model="form.experience" 
-                :class="{ 'error': errors.experience }"
+                id="experience"
               >
                 <option value="">Select experience level</option>
                 <option value="0-1">Less than 1 year</option>
@@ -430,14 +281,12 @@ onMounted(() => {
                 <option value="3-5">3-5 years</option>
                 <option value="5+">5+ years</option>
               </select>
-              <span v-if="errors.experience" class="error-message">{{ errors.experience }}</span>
             </div>
             
             <div class="form-group">
               <label for="message">Why do you want to join our team?</label>
               <textarea 
                 id="message" 
-                v-model="form.message" 
                 placeholder="Tell us about yourself and why you'd like to join The Leading Edge"
                 rows="4"
               ></textarea>
@@ -446,16 +295,12 @@ onMounted(() => {
             <div class="form-group">
               <label for="resume">Upload CV/Resume (Optional)</label>
               <div class="file-upload">
-                <input type="file" id="resume" @change="form.resume = $event.target.files[0]">
+                <input type="file" id="resume">
                 <p class="file-info">PDF or Word document (max 5MB)</p>
               </div>
             </div>
             
-            <div class="form-alert" v-if="formError">
-              <p>Please fix the errors in the form before submitting.</p>
-            </div>
-            
-            <button type="submit" class="btn primary">Submit Application</button>
+            <button type="button" class="btn primary">Submit Application</button>
           </form>
         </div>
       </div>
@@ -658,134 +503,6 @@ section {
     p {
       color: lighten($primary-color, 20%);
       line-height: 1.6;
-    }
-  }
-}
-
-// Position Modal
-.position-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 2rem;
-  
-  .modal-content {
-    background-color: white;
-    border-radius: 8px;
-    max-width: 800px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    
-    .close-button {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      font-size: 2rem;
-      color: $primary-color;
-      cursor: pointer;
-      z-index: 10;
-      
-      &:hover {
-        color: $accent-color;
-      }
-    }
-    
-    .modal-body {
-      padding: 2rem;
-      
-      .position-details {
-        h2 {
-          font-size: 2rem;
-          margin-bottom: 1rem;
-          color: $primary-color;
-        }
-        
-        .position-meta {
-          display: flex;
-          align-items: center;
-          margin-bottom: 1.5rem;
-          
-          .type {
-            background-color: rgba($accent-color, 0.1);
-            color: $accent-color;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-right: 1rem;
-          }
-          
-          .location {
-            color: lighten($primary-color, 30%);
-            font-size: 0.9rem;
-            
-            i {
-              margin-right: 0.3rem;
-            }
-          }
-        }
-        
-        .position-description {
-          margin-bottom: 2rem;
-          
-          p {
-            line-height: 1.8;
-            color: lighten($primary-color, 20%);
-          }
-        }
-        
-        .position-section {
-          margin-bottom: 2rem;
-          
-          h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: $primary-color;
-            position: relative;
-            
-            &::after {
-              content: '';
-              position: absolute;
-              bottom: -5px;
-              left: 0;
-              width: 50px;
-              height: 2px;
-              background-color: $accent-color;
-            }
-          }
-          
-          ul {
-            padding-left: 1.5rem;
-            
-            li {
-              color: lighten($primary-color, 20%);
-              margin-bottom: 0.8rem;
-              line-height: 1.6;
-            }
-          }
-        }
-        
-        .position-cta {
-          text-align: center;
-          margin-top: 3rem;
-          
-          .btn {
-            min-width: 200px;
-          }
-        }
-      }
     }
   }
 }
