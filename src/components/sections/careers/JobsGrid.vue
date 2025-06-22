@@ -1,229 +1,80 @@
 <template>
-  <section class="jobs-section">
+  <section class="openings-section">
     <div class="container">
       <SectionHeader 
         :title="title" 
         :description="description"
       />
       
-      <div 
-        class="search-filters"
-        v-motion
-        :initial="{ opacity: 0, y: 20 }"
-        :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 600 } }"
-      >
-        <div class="search-bar">
-          <i class="fas fa-search"></i>
-          <input 
-            type="text" 
-            v-model="searchQuery" 
-            placeholder="Search positions..." 
-            @input="$emit('search', searchQuery)"
-          >
-        </div>
-        
-        <div v-if="jobTypes && jobTypes.length" class="job-type-filter">
-          <select 
-            v-model="selectedType"
-            @change="$emit('filter-change', selectedType)"
-          >
-            <option value="">All Job Types</option>
-            <option v-for="type in jobTypes" :key="type" :value="type">{{ type }}</option>
-          </select>
+      <div class="positions-grid">
+        <div 
+          v-for="(position, index) in positions" 
+          :key="position.id"
+          class="position-card"
+          v-motion
+          :initial="{ opacity: 0, y: 30 }"
+          :enter="{ opacity: 1, y: 0, transition: { delay: 200 + (index * 100), duration: 600 } }"
+        >
+          <h3>{{ position.title }}</h3>
+          <div class="position-meta">
+            <span class="type">{{ position.type }}</span>
+            <span class="location"><i class="fas fa-map-marker-alt"></i> {{ position.location }}</span>
+          </div>
+          <p class="position-excerpt">{{ position.description.substring(0, 120) }}...</p>
+          <button class="btn-text">View Details</button>
         </div>
       </div>
       
-      <div v-if="filteredJobs.length === 0" class="no-jobs">
-        <p>No jobs match your current filters. Please try different search criteria.</p>
-      </div>
-      
-      <div v-else class="jobs-list">
-        <JobListingCard
-          v-for="(job, index) in filteredJobs"
-          :key="job.id"
-          :id="job.id"
-          :title="job.title"
-          :jobType="job.jobType"
-          :location="job.location"
-          :excerpt="job.excerpt"
-          :description="job.description"
-          :requirements="job.requirements"
-          :benefits="job.benefits"
-          :isExpanded="expandedJobId === job.id"
-          :delay="200 + (index * 150)"
-          @expand="expandJob"
-          @collapse="collapseJob"
-          @apply="$emit('apply-job', $event)"
-        />
-      </div>
-      
-      <div 
-        v-if="showApplyInfo"
-        class="apply-info"
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 600 } }"
-      >
-        <h3>How to Apply</h3>
-        <p>To apply for any of our positions, please email your CV and a cover letter to <a href="mailto:careers@leadingedgehairandbeauty.co.uk">careers@leadingedgehairandbeauty.co.uk</a>, or drop by our salon with your details.</p>
-        <p>Please specify the position you're applying for in the subject line.</p>
+      <!-- No positions message (if needed) -->
+      <div v-if="positions.length === 0" class="no-positions">
+        <p>We don't have any openings at the moment, but we're always interested in meeting talented professionals. Please feel free to submit your application for future consideration.</p>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
 import SectionHeader from '@/components/ui/SectionHeader.vue';
-import JobListingCard from '@/components/ui/JobListingCard.vue';
 
-const props = defineProps({
+defineProps({
   title: {
     type: String,
-    default: 'Current Job Openings'
+    default: 'Current Openings'
   },
   description: {
     type: String,
-    default: 'Join our talented team of professionals in our award-winning salon'
+    default: 'Explore our current job opportunities and find the perfect role for your skills and passion.'
   },
-  jobs: {
+  positions: {
     type: Array,
     required: true
-  },
-  jobTypes: {
-    type: Array,
-    default: () => ['Full-time', 'Part-time', 'Contract', 'Internship']
-  },
-  showApplyInfo: {
-    type: Boolean,
-    default: true
   }
 });
-
-const emit = defineEmits(['search', 'filter-change', 'apply-job']);
-
-const searchQuery = ref('');
-const selectedType = ref('');
-const expandedJobId = ref(null);
-
-// Filtered jobs based on search and type
-const filteredJobs = computed(() => {
-  let filtered = props.jobs;
-  
-  // Filter by type
-  if (selectedType.value) {
-    filtered = filtered.filter(job => job.jobType === selectedType.value);
-  }
-  
-  // Filter by search term
-  if (searchQuery.value.trim()) {
-    const query = searchQuery.value.toLowerCase();
-    filtered = filtered.filter(job => 
-      job.title.toLowerCase().includes(query) || 
-      job.excerpt.toLowerCase().includes(query) ||
-      (job.description && job.description.toLowerCase().includes(query))
-    );
-  }
-  
-  return filtered;
-});
-
-// Function to expand a job
-const expandJob = (jobId) => {
-  expandedJobId.value = jobId;
-};
-
-// Function to collapse a job
-const collapseJob = () => {
-  expandedJobId.value = null;
-};
 </script>
 
 <style lang="scss" scoped>
-.jobs-section {
-  padding: 5rem 0;
+.openings-section {
   background-color: $light-color;
+  padding: 5rem 0;
   
-  .search-filters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 3rem;
-    
-    .search-bar {
-      flex: 1;
-      max-width: 500px;
-      position: relative;
-      
-      i {
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: custom-lighten($primary-color, 30%);
-      }
-      
-      input {
-        width: 100%;
-        padding: 0.8rem 1rem 0.8rem 2.5rem;
-        border: 1px solid rgba($primary-color, 0.1);
-        border-radius: 4px;
-        font-size: 1rem;
-        
-        &:focus {
-          outline: none;
-          border-color: $accent-color;
-        }
-      }
-    }
-    
-    .job-type-filter {
-      select {
-        padding: 0.8rem 1rem;
-        border: 1px solid rgba($primary-color, 0.1);
-        border-radius: 4px;
-        font-size: 1rem;
-        background-color: white;
-        cursor: pointer;
-        
-        &:focus {
-          outline: none;
-          border-color: $accent-color;
-        }
-      }
-    }
-    
-    @media (max-width: 768px) {
-      flex-direction: column;
-      gap: 1rem;
-      
-      .search-bar {
-        max-width: 100%;
-      }
-    }
+  .positions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
   }
   
-  .no-jobs {
+  .position-card {
     background-color: white;
-    padding: 2rem;
     border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 5px 20px rgba($primary-color, 0.08);
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba($primary-color, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
     
-    p {
-      color: custom-lighten($primary-color, 20%);
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba($primary-color, 0.1);
     }
-  }
-  
-  .jobs-list {
-    margin-bottom: 3rem;
-  }
-  
-  .apply-info {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 20px rgba($primary-color, 0.08);
-    text-align: center;
     
     h3 {
       font-size: 1.4rem;
@@ -231,25 +82,73 @@ const collapseJob = () => {
       color: $primary-color;
     }
     
-    p {
-      color: custom-lighten($primary-color, 20%);
-      line-height: 1.6;
+    .position-meta {
+      display: flex;
+      align-items: center;
       margin-bottom: 1rem;
       
-      &:last-child {
-        margin-bottom: 0;
+      .type {
+        background-color: rgba($accent-color, 0.1);
+        color: $accent-color;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-right: 1rem;
+      }
+      
+      .location {
+        color: lighten($primary-color, 30%);
+        font-size: 0.9rem;
+        
+        i {
+          margin-right: 0.3rem;
+        }
       }
     }
     
-    a {
-      color: $accent-color;
-      font-weight: 600;
-      text-decoration: none;
-      
-      &:hover {
-        text-decoration: underline;
-      }
+    .position-excerpt {
+      color: lighten($primary-color, 20%);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
     }
+  }
+  
+  .no-positions {
+    text-align: center;
+    background-color: white;
+    border-radius: 8px;
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba($primary-color, 0.05);
+    
+    p {
+      color: lighten($primary-color, 20%);
+      line-height: 1.6;
+    }
+  }
+}
+
+.btn-text {
+  color: $accent-color;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: $accent-color;
+    transition: width 0.3s ease;
+  }
+  
+  &:hover::after {
+    width: 100%;
   }
 }
 </style>

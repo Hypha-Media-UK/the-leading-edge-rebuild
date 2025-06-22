@@ -1,5 +1,5 @@
 <template>
-  <section class="benefits-section">
+  <section class="why-join-section">
     <div class="container">
       <SectionHeader 
         :title="title" 
@@ -12,10 +12,10 @@
           :key="index"
           class="benefit-item"
           v-motion
-          :initial="{ opacity: 0, y: 30 }"
-          :enter="{ opacity: 1, y: 0, transition: { delay: 200 + (index * 100), duration: 600 } }"
+          :initial="{ opacity: 0, scale: 0.8 }"
+          :enter="{ opacity: 1, scale: 1, transition: { delay: 200 + (index * 100), duration: 600 } }"
         >
-          <div class="benefit-icon">
+          <div class="icon">
             <i :class="benefit.icon"></i>
           </div>
           <h3>{{ benefit.title }}</h3>
@@ -32,11 +32,11 @@ import SectionHeader from '@/components/ui/SectionHeader.vue';
 defineProps({
   title: {
     type: String,
-    default: 'Why Work With Us'
+    default: 'Why Join The Leading Edge?'
   },
   description: {
     type: String,
-    default: 'Discover the many benefits of joining The Leading Edge team'
+    default: 'At The Leading Edge, we believe in nurturing talent and providing our team members with the tools and environment they need to thrive.'
   },
   benefits: {
     type: Array,
@@ -46,54 +46,43 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-.benefits-section {
-  padding: 5rem 0;
+.why-join-section {
   background-color: white;
+  padding: 5rem 0;
   
   .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
+  }
+  
+  .benefit-item {
+    background-color: $light-color;
+    padding: 2.5rem 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba($primary-color, 0.05);
+    transition: all 0.3s ease;
     
-    .benefit-item {
-      background-color: $light-color;
-      padding: 2rem;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba($primary-color, 0.05);
-      transition: all 0.3s ease;
-      
-      &:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba($primary-color, 0.1);
-      }
-      
-      .benefit-icon {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 1.5rem;
-        background-color: rgba($accent-color, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        i {
-          font-size: 2rem;
-          color: $accent-color;
-        }
-      }
-      
-      h3 {
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-        color: $primary-color;
-      }
-      
-      p {
-        color: custom-lighten($primary-color, 20%);
-        line-height: 1.6;
-      }
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba($primary-color, 0.1);
+    }
+    
+    .icon {
+      font-size: 2.5rem;
+      color: $accent-color;
+      margin-bottom: 1.5rem;
+    }
+    
+    h3 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+    
+    p {
+      color: lighten($primary-color, 20%);
+      line-height: 1.6;
     }
   }
   
