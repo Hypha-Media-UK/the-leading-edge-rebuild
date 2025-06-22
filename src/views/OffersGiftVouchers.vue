@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import PromotionsGrid from '@/components/sections/offers/PromotionsGrid.vue';
 import GiftVoucherSection from '@/components/sections/offers/GiftVoucherSection.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
 import type { Promotion } from '@/types/offers';
 
-const isLoaded = ref<boolean>(false);
 
 // Promotions data
 const promotions: Promotion[] = [
@@ -64,9 +63,6 @@ const promotions: Promotion[] = [
   }
 ];
 
-onMounted((): void => {
-  isLoaded.value = true;
-});
 </script>
 
 <template>
@@ -79,9 +75,9 @@ onMounted((): void => {
       <template #extra>
         <div 
           class="gift-voucher-cta"
-          v-motion
-          :initial="{ opacity: 0, y: 20 }"
-          :enter="{ opacity: 1, y: 0, transition: { delay: 700, duration: 600 } }"
+          
+          
+          
         >
           <a href="https://leadingedgehairandbeauty.co.uk/gift-vouchers" target="_blank" class="btn primary-special">
             <i class="fas fa-gift"></i> Gift Vouchers Available Here

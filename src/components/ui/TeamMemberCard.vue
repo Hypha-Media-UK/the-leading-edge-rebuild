@@ -1,9 +1,6 @@
 <template>
   <div 
     class="team-member"
-    v-motion
-    :initial="{ opacity: 0, y: 50 }"
-    :enter="{ opacity: 1, y: 0, transition: { delay: delay, duration: 600 } }"
     @click="$emit('click', member.id)"
   >
     <div class="member-image">
@@ -25,10 +22,6 @@ defineProps({
     type: Object,
     required: true
   },
-  delay: {
-    type: Number,
-    default: 200
-  }
 });
 
 defineEmits(['click']);

@@ -4,18 +4,18 @@
       <div class="about-content">
         <div 
           class="about-image"
-          v-motion
-          :initial="{ opacity: 0, x: -100 }"
-          :enter="{ opacity: 1, x: 0, transition: { delay: 200, duration: 800 } }"
+          
+          
+          
         >
           <img :src="image" :alt="imageAlt">
         </div>
         
         <div class="about-text">
           <h2 
-            v-motion
-            :initial="{ opacity: 0 }"
-            :enter="{ opacity: 1, transition: { delay: 400, duration: 600 } }"
+            
+            
+            
           >
             {{ title }}
           </h2>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import HeroSection from '@/components/sections/home/HeroSection.vue';
 import FeaturesSection from '@/components/sections/home/FeaturesSection.vue';
 import ServicesPreviewSection from '@/components/sections/home/ServicesPreviewSection.vue';
@@ -43,7 +43,6 @@ interface HeroButton {
   variant: 'primary' | 'secondary';
 }
 
-const isLoaded = ref<boolean>(false);
 
 // Features data
 const features: Feature[] = [
@@ -148,9 +147,6 @@ const products: Product[] = [
   { image: '/images/new/products/prod4.webp', alt: 'Premium Brand Product 4' }
 ];
 
-onMounted(() => {
-  isLoaded.value = true;
-});
 </script>
 
 <template>

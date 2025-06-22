@@ -1,9 +1,9 @@
 <template>
   <div 
     class="news-card"
-    v-motion
-    :initial="{ opacity: 0, y: 50 }"
-    :enter="{ opacity: 1, y: 0, transition: { delay: delay, duration: 600 } }"
+    
+    
+    
   >
     <div class="news-image">
       <img :src="article.image" :alt="article.title">

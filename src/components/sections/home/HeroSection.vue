@@ -3,27 +3,11 @@
     <div class="container">
       <div class="hero-content">
         <div class="text-content">
-          <h1 
-            v-motion
-            :initial="{ opacity: 0, y: 100 }"
-            :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }"
-            v-html="heading"
-          ></h1>
-          <p 
-            v-motion
-            :initial="{ opacity: 0 }"
-            :enter="{ opacity: 1, transition: { delay: 600, duration: 800 } }"
-          >
-            {{ text }}
-          </p>
+          <h1 v-html="heading"></h1>
+          <p>{{ text }}</p>
         </div>
         
-        <div 
-          class="hero-buttons"
-          v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { delay: 1000, duration: 800 } }"
-        >
+        <div class="hero-buttons">
           <Button 
             v-for="(button, index) in buttons" 
             :key="index"

@@ -6,7 +6,6 @@
       :title="service.title"
       :description="service.description"
       :price="service.price"
-      :delay="200 + (index * 100)"
     />
   </div>
 </template>

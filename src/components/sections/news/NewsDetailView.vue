@@ -1,15 +1,15 @@
 <template>
   <div 
     class="news-detail"
-    v-motion
-    :initial="{ opacity: 0, scale: 0.95 }"
-    :enter="{ opacity: 1, scale: 1, transition: { duration: 600 } }"
+    
+    
+    
   >
     <div 
       class="back-button"
-      v-motion
-      :initial="{ opacity: 0, x: -20 }"
-      :enter="{ opacity: 1, x: 0, transition: { delay: 200, duration: 600 } }"
+      
+      
+      
     >
       <Button @click="$emit('back')" variant="secondary" iconLeft="fas fa-arrow-left">
         Back to News
@@ -26,26 +26,26 @@
       
       <div 
         class="news-image"
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :enter="{ opacity: 1, y: 0, transition: { delay: 400, duration: 600 } }"
+        
+        
+        
       >
         <img :src="article.image" :alt="article.title">
       </div>
       
       <div 
         class="news-text"
-        v-motion
-        :initial="{ opacity: 0 }"
-        :enter="{ opacity: 1, transition: { delay: 600, duration: 600 } }"
+        
+        
+        
         v-html="article.content"
       ></div>
       
       <div 
         class="share-links"
-        v-motion
-        :initial="{ opacity: 0 }"
-        :enter="{ opacity: 1, transition: { delay: 800, duration: 600 } }"
+        
+        
+        
       >
         <p>Share this article:</p>
         <div class="social-share">
@@ -59,9 +59,9 @@
       <div 
         class="related-news"
         v-if="relatedArticles && relatedArticles.length"
-        v-motion
-        :initial="{ opacity: 0 }"
-        :enter="{ opacity: 1, transition: { delay: 1000, duration: 600 } }"
+        
+        
+        
       >
         <h3>You might also like</h3>
         <div class="related-grid">

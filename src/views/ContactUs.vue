@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import ContactInfoSection from '@/components/sections/contact/ContactInfoSection.vue';
 import FAQSection from '@/components/sections/contact/FAQSection.vue';
@@ -13,7 +13,6 @@ import type {
   FormData 
 } from '@/types/contact';
 
-const isLoaded = ref<boolean>(false);
 
 // FAQs data
 const faqs: FAQ[] = [
@@ -98,9 +97,6 @@ const handleFormReset = (): void => {
   console.log('Form reset');
 };
 
-onMounted(() => {
-  isLoaded.value = true;
-});
 </script>
 
 <template>

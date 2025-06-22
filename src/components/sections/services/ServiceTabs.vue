@@ -1,10 +1,5 @@
 <template>
-  <div 
-    class="tabs-container"
-    v-motion
-    :initial="{ opacity: 0, y: 30 }"
-    :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 600 } }"
-  >
+  <div class="tabs-container">
     <div 
       v-for="(tab, index) in tabs"
       :key="tab.id"

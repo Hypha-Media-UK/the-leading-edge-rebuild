@@ -8,9 +8,9 @@
       
       <div 
         class="application-form-container"
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }"
+        
+        
+        
       >
         <form class="application-form">
           <div class="form-group">

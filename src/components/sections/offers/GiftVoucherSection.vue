@@ -3,9 +3,9 @@
     <div class="container">
       <div 
         class="gift-voucher-content"
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :enter="{ opacity: 1, y: 0, transition: { delay: delay, duration: 600 } }"
+        
+        
+        
       >
         <h2 v-if="title">{{ title }}</h2>
         <p v-if="description">{{ description }}</p>

@@ -11,9 +11,6 @@
           v-for="(benefit, index) in benefits"
           :key="index"
           class="benefit-item"
-          v-motion
-          :initial="{ opacity: 0, scale: 0.8 }"
-          :enter="{ opacity: 1, scale: 1, transition: { delay: 200 + (index * 100), duration: 600 } }"
         >
           <div class="icon">
             <i :class="benefit.icon"></i>

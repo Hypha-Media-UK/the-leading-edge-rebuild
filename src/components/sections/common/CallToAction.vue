@@ -3,9 +3,9 @@
     <div class="container">
       <div 
         class="cta-content"
-        v-motion
-        :initial="{ opacity: 0, scale: 0.9 }"
-        :enter="{ opacity: 1, scale: 1, transition: { duration: 800 } }"
+        
+        
+        
       >
         <h2>{{ title }}</h2>
         <p>{{ text }}</p>

@@ -1,9 +1,9 @@
 <template>
   <div 
     class="service-card"
-    v-motion
-    :initial="{ opacity: 0, x: motionX }"
-    :enter="{ opacity: 1, x: 0, transition: { delay: delay, duration: 600 } }"
+    
+    
+    
   >
     <div class="service-image">
       <img :src="image" :alt="title">

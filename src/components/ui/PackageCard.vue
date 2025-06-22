@@ -1,9 +1,9 @@
 <template>
   <div 
     class="package-item"
-    v-motion
-    :initial="{ opacity: 0, scale: 0.9 }"
-    :enter="{ opacity: 1, scale: 1, transition: { delay: delay, duration: 600 } }"
+    
+    
+    
   >
     <div class="package-header">
       <h3>{{ title }}</h3>

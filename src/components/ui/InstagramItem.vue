@@ -1,9 +1,9 @@
 <template>
   <div 
     class="instagram-item"
-    v-motion
-    :initial="{ opacity: 0, y: 50 }"
-    :enter="{ opacity: 1, y: 0, transition: { delay: delay, duration: 600 } }"
+    
+    
+    
   >
     <img 
       :src="imageSrc"

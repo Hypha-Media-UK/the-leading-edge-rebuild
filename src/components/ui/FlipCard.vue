@@ -3,9 +3,9 @@
     <div 
       class="card-flipper" 
       :class="{ 'is-flipped': isFlipped }"
-      v-motion
-      :initial="{ opacity: 0, y: 30 }"
-      :enter="{ opacity: 1, y: 0, transition: { delay: delay, duration: 600 } }"
+      
+      
+      
     >
       <!-- Front Side -->
       <div class="card-front" :class="frontClass">

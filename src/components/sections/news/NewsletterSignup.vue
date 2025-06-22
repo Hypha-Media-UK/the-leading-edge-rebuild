@@ -4,9 +4,9 @@
       <div class="newsletter-content">
         <div 
           class="newsletter-text"
-          v-motion
-          :initial="{ opacity: 0, x: -50 }"
-          :enter="{ opacity: 1, x: 0, transition: { delay: 200, duration: 800 } }"
+          
+          
+          
         >
           <h2>{{ title }}</h2>
           <p>{{ description }}</p>
@@ -15,9 +15,9 @@
         <form 
           @submit.prevent="handleSubmit" 
           class="newsletter-form"
-          v-motion
-          :initial="{ opacity: 0, x: 50 }"
-          :enter="{ opacity: 1, x: 0, transition: { delay: 400, duration: 800 } }"
+          
+          
+          
         >
           <div class="form-group">
             <input 

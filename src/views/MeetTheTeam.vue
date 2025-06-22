@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import TeamGrid from '@/components/sections/team/TeamGrid.vue';
 import TeamMemberModal from '@/components/ui/TeamMemberModal.vue';
@@ -7,7 +7,6 @@ import TeamValuesSection from '@/components/sections/team/TeamValuesSection.vue'
 import CallToAction from '@/components/sections/common/CallToAction.vue';
 import type { TeamMember, TeamValue } from '@/types/team';
 
-const isLoaded = ref<boolean>(false);
 const selectedTeamMember = ref<number | null>(null);
 
 const showTeamMemberDetails = (id: number): void => {
@@ -147,9 +146,6 @@ const selectedTeamMemberData = computed<ExtendedTeamMember | null>(() => {
   return teamMembers.find(m => m.id === selectedTeamMember.value) || null;
 });
 
-onMounted((): void => {
-  isLoaded.value = true;
-});
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import AboutStory from '@/components/sections/salon/AboutStory.vue';
 import PhilosophyGrid from '@/components/sections/salon/PhilosophyGrid.vue';
@@ -8,7 +8,6 @@ import CallToAction from '@/components/sections/common/CallToAction.vue';
 import type { PhilosophyItem, InteriorImage } from '@/types/salon';
 import type { Product } from '@/types/products';
 
-const isLoaded = ref<boolean>(false);
 
 // Philosophy items data
 const philosophyItems: PhilosophyItem[] = [
@@ -50,9 +49,6 @@ const products: Product[] = [
   { image: '/images/new/products/prod4.webp', alt: 'Premium Brand Product 4' }
 ];
 
-onMounted((): void => {
-  isLoaded.value = true;
-});
 </script>
 
 <template>
@@ -70,23 +66,23 @@ onMounted((): void => {
       imageAlt="The Leading Edge salon team"
     >
       <p 
-        v-motion
-        :initial="{ opacity: 0 }"
-        :enter="{ opacity: 1, transition: { delay: 600, duration: 600 } }"
+        
+        
+        
       >
         Founded in 2010, The Leading Edge was born from a passion for creating a salon experience that blends luxurious comfort with exceptional skill. Our journey began with a simple vision: to create a space where clients can relax, rejuvenate, and leave feeling both beautiful and confident.
       </p>
       <p 
-        v-motion
-        :initial="{ opacity: 0 }"
-        :enter="{ opacity: 1, transition: { delay: 800, duration: 600 } }"
+        
+        
+        
       >
         Over the years, we've grown from a small team of dedicated stylists to a full-service salon with a reputation for excellence. Our commitment to continuous education ensures that our team stays at the forefront of industry trends and techniques.
       </p>
       <p 
-        v-motion
-        :initial="{ opacity: 0 }"
-        :enter="{ opacity: 1, transition: { delay: 1000, duration: 600 } }"
+        
+        
+        
       >
         Today, The Leading Edge stands as a testament to our dedication to the craft of hair and beauty, serving clients from all walks of life who share our appreciation for quality and attention to detail.
       </p>

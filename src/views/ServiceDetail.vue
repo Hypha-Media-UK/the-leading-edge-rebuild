@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import ServiceTabs from '@/components/sections/services/ServiceTabs.vue';
 import SubTabsRow from '@/components/sections/services/SubTabsRow.vue';
 import ServiceContentSection from '@/components/sections/services/ServiceContentSection.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
 import type { ServiceItem } from '@/types/services';
-import { useFadeIn } from '@/composables/useAnimations';
 import { 
   mainServiceTabs, 
   hairSubTabs,
@@ -23,7 +22,6 @@ import {
   eyesNailsServices
 } from '@/data/services';
 
-const isLoaded = ref<boolean>(false);
 const activeTab = ref<string>('allHair');
 const activeSubTab = ref<string>('cuttingStyling');
 
@@ -44,12 +42,6 @@ const setActiveSubTab = (subTab: string): void => {
   activeSubTab.value = subTab;
 };
 
-// Get the appropriate animation for intro content
-const introAnimation = useFadeIn(200, 600);
-
-onMounted((): void => {
-  isLoaded.value = true;
-});
 </script>
 
 <template>
@@ -63,11 +55,7 @@ onMounted((): void => {
     <!-- Services Intro -->
     <section class="services-intro">
       <div class="container">
-        <div 
-          class="intro-content"
-          v-motion
-          v-bind="introAnimation"
-        >
+        <div class="intro-content">
           <p>All our stylists are supported with training through the "Wella Academy" where they learn new skills and techniques to keep up to date with all the latest colours and trends. Rest assured our team will give you valuable tips and advice on how to keep your style and hair in tip top condition.</p>
           <p>We continually score 4.91 out of 5 in over 1800 independent reviews carried out by visitors to our salon.</p>
         </div>

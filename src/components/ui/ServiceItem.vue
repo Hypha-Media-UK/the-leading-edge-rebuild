@@ -1,10 +1,5 @@
 <template>
-  <div 
-    class="service-item"
-    v-motion
-    :initial="{ opacity: 0, x: -30 }"
-    :enter="{ opacity: 1, x: 0, transition: { delay: delay, duration: 600 } }"
-  >
+  <div class="service-item">
     <div class="service-info">
       <h3>{{ title }}</h3>
       <p>{{ description }}</p>
@@ -26,10 +21,6 @@ defineProps({
   price: {
     type: String,
     required: true
-  },
-  delay: {
-    type: Number,
-    default: 200
   }
 });
 </script>

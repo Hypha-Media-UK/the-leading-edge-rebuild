@@ -1,13 +1,9 @@
 <script setup>
-import { ref, onMounted } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import BenefitsSection from '@/components/sections/careers/BenefitsSection.vue';
 import JobsGrid from '@/components/sections/careers/JobsGrid.vue';
 import CareersApplicationForm from '@/components/sections/careers/CareersApplicationForm.vue';
 import CultureSection from '@/components/sections/careers/CultureSection.vue';
-
-// Only keep isLoaded for animations
-const isLoaded = ref(false);
 
 // Career positions data
 const positions = [
@@ -107,9 +103,6 @@ const cultureParagraphs = [
   'If you\'re passionate about beauty, dedicated to excellence, and love making people feel their best, we\'d love to hear from you!'
 ];
 
-onMounted(() => {
-  isLoaded.value = true;
-});
 </script>
 
 <template>
@@ -117,24 +110,11 @@ onMounted(() => {
     <!-- Page Header -->
     <section class="page-header">
       <div class="container">
-        <h1 
-          v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }"
-        >
+        <h1>
           Join Our Team
         </h1>
-        <div 
-          class="separator"
-          v-motion
-          :initial="{ opacity: 0, scale: 0 }"
-          :enter="{ opacity: 1, scale: 1, transition: { delay: 300, duration: 600 } }"
-        ></div>
-        <p
-          v-motion
-          :initial="{ opacity: 0 }"
-          :enter="{ opacity: 1, transition: { delay: 500, duration: 800 } }"
-        >
+        <div class="separator"></div>
+        <p>
           Be part of The Leading Edge family and grow your career with us
         </p>
       </div>

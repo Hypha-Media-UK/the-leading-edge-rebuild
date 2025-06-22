@@ -1,9 +1,9 @@
 <template>
   <div 
     class="faq-item"
-    v-motion
-    :initial="{ opacity: 0, y: 30 }"
-    :enter="{ opacity: 1, y: 0, transition: { delay: delay, duration: 600 } }"
+    
+    
+    
   >
     <h3>{{ question }}</h3>
     <p>{{ answer }}</p>

@@ -11,9 +11,9 @@
           v-for="(step, index) in steps"
           :key="index"
           class="process-step"
-          v-motion
-          :initial="{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }"
-          :enter="{ opacity: 1, x: 0, transition: { delay: 200 + (index * 200), duration: 600 } }"
+          
+          
+          
         >
           <div class="step-number">{{ index + 1 }}</div>
           <div class="step-content">
@@ -26,9 +26,9 @@
       <div 
         v-if="$slots.cta"
         class="process-cta"
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :enter="{ opacity: 1, y: 0, transition: { delay: 200 + (steps.length * 200), duration: 600 } }"
+        
+        
+        
       >
         <slot name="cta"></slot>
       </div>

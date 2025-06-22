@@ -6,9 +6,9 @@
       <div class="modal-body">
         <div 
           class="member-details"
-          v-motion
-          :initial="{ opacity: 0, scale: 0.9 }"
-          :enter="{ opacity: 1, scale: 1, transition: { duration: 400 } }"
+          
+          
+          
         >
           <div class="member-profile-grid">
             <div class="member-image-container">

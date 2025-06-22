@@ -11,9 +11,9 @@
           v-for="(image, index) in images"
           :key="index"
           :class="['gallery-item', `item-${index + 1}`]"
-          v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { delay: 200 + (index * 200), duration: 600 } }"
+          
+          
+          
         >
           <img :src="image.src" :alt="image.alt || 'Salon interior'">
         </div>
@@ -21,9 +21,9 @@
       
       <div 
         class="interior-description"
-        v-motion
-        :initial="{ opacity: 0 }"
-        :enter="{ opacity: 1, transition: { delay: 1000, duration: 600 } }"
+        
+        
+        
       >
         <slot></slot>
       </div>

@@ -11,9 +11,9 @@
           v-for="(product, index) in products"
           :key="index"
           :class="['brand', `brand-position-${index}`]"
-          v-motion
-          :initial="{ opacity: 0 }"
-          :enter="{ opacity: 1, transition: { delay: 200 + (index * 200), duration: 600 } }"
+          
+          
+          
         >
           <img :src="product.image" :alt="product.alt || 'Premium product'">
         </div>

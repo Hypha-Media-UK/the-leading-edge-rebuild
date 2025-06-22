@@ -4,9 +4,9 @@
       <div class="contact-grid">
         <div 
           class="contact-form-container"
-          v-motion
-          :initial="{ opacity: 0, x: -50 }"
-          :enter="{ opacity: 1, x: 0, transition: { delay: 200, duration: 800 } }"
+          
+          
+          
         >
           <ContactForm 
             :title="formTitle"
@@ -20,9 +20,9 @@
 
         <div 
           class="contact-details"
-          v-motion
-          :initial="{ opacity: 0, x: 50 }"
-          :enter="{ opacity: 1, x: 0, transition: { delay: 400, duration: 800 } }"
+          
+          
+          
         >
           <ContactCard
             type="location"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import NewsGrid from '@/components/sections/news/NewsGrid.vue';
 import FeaturedNewsItem from '@/components/sections/news/FeaturedNewsItem.vue';
@@ -7,7 +7,6 @@ import NewsDetailView from '@/components/sections/news/NewsDetailView.vue';
 import NewsletterSignup from '@/components/sections/news/NewsletterSignup.vue';
 import type { NewsArticle, NewsCategory } from '@/types/news';
 
-const isLoaded = ref<boolean>(false);
 
 // Sample news data
 const newsItems: NewsArticle[] = [
@@ -207,9 +206,6 @@ const handleNewsletterSignup = (email: string): void => {
   // In a real application, you would send this to your backend
 };
 
-onMounted((): void => {
-  isLoaded.value = true;
-});
 </script>
 
 <template>

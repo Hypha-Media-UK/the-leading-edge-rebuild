@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { MotionPlugin } from '@vueuse/motion'
 import App from './App.vue'
 
 // Import all views
@@ -42,33 +41,9 @@ const router = createRouter({
 // Create Vue app
 const app = createApp(App)
 
-// Add custom motion transitions for page animations
-app.config.globalProperties.$motion = {
-  transitions: {
-    beforeEnter(el) {
-      el.style.opacity = '0'
-      el.style.transform = 'translateY(20px)'
-    },
-    enter(el, done) {
-      setTimeout(() => {
-        el.style.transition = 'all 0.6s ease'
-        el.style.opacity = '1'
-        el.style.transform = 'translateY(0)'
-        setTimeout(done, 600)
-      }, 100)
-    },
-    leave(el, done) {
-      el.style.transition = 'all 0.3s ease'
-      el.style.opacity = '0'
-      el.style.transform = 'translateY(-20px)'
-      setTimeout(done, 300)
-    }
-  }
-}
 
 // Use plugins
 app.use(router)
-app.use(MotionPlugin)
 
 // Mount app
 app.mount('#app')

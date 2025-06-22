@@ -22,9 +22,9 @@
         v-for="(service, index) in services"
         :key="index"
         class="service-item"
-        v-motion
-        :initial="{ opacity: 0, x: -30 }"
-        :enter="{ opacity: 1, x: 0, transition: { delay: 200 + (index * 100), duration: 600 } }"
+        
+        
+        
       >
         <div class="service-info">
           <h3>{{ service.title }}</h3>

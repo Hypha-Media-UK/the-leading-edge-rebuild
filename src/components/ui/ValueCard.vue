@@ -1,9 +1,9 @@
 <template>
   <div 
     class="value-item"
-    v-motion
-    :initial="{ opacity: 0, scale: 0.8 }"
-    :enter="{ opacity: 1, scale: 1, transition: { delay: delay, duration: 600 } }"
+    
+    
+    
     :hovered="{ y: -10, transition: { duration: 300 } }"
   >
     <div class="icon" v-if="icon">

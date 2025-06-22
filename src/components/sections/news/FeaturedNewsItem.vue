@@ -1,9 +1,9 @@
 <template>
   <div 
     class="featured-news"
-    v-motion
-    :initial="{ opacity: 0, y: 50 }"
-    :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }"
+    
+    
+    
     @click="$emit('click', article)"
   >
     <div class="featured-image">

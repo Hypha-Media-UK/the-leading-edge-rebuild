@@ -1,10 +1,5 @@
 <template>
-  <div 
-    class="job-card"
-    v-motion
-    :initial="{ opacity: 0, y: 50 }"
-    :enter="{ opacity: 1, y: 0, transition: { delay: delay, duration: 600 } }"
-  >
+  <div class="job-card">
     <div class="job-header">
       <h3>{{ title }}</h3>
       <div class="job-meta">
@@ -109,10 +104,6 @@ defineProps({
     type: Boolean,
     default: false
   },
-  delay: {
-    type: Number,
-    default: 200
-  }
 });
 
 defineEmits(['expand', 'collapse', 'apply']);

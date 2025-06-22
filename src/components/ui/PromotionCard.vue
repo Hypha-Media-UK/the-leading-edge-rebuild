@@ -1,9 +1,9 @@
 <template>
   <div 
     class="promotion-card"
-    v-motion
-    :initial="{ opacity: 0, y: 50 }"
-    :enter="{ opacity: 1, y: 0, transition: { delay: delay, duration: 600 } }"
+    
+    
+    
   >
     <div class="promotion-tag" v-if="tag">{{ tag }}</div>
     <div class="promotion-image" v-if="image">

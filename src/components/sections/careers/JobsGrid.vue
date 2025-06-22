@@ -11,9 +11,6 @@
           v-for="(position, index) in positions" 
           :key="position.id"
           class="position-card"
-          v-motion
-          :initial="{ opacity: 0, y: 30 }"
-          :enter="{ opacity: 1, y: 0, transition: { delay: 200 + (index * 100), duration: 600 } }"
         >
           <h3>{{ position.title }}</h3>
           <div class="position-meta">

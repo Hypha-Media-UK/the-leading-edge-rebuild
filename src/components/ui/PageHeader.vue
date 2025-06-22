@@ -1,25 +1,11 @@
 <template>
   <section class="page-header">
     <div class="container">
-      <h1 
-        v-motion
-        :initial="{ opacity: 0, y: 50 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }"
-      >
+      <h1>
         {{ title }}
       </h1>
-      <div 
-        class="separator"
-        v-motion
-        :initial="{ opacity: 0, scale: 0 }"
-        :enter="{ opacity: 1, scale: 1, transition: { delay: 300, duration: 600 } }"
-      ></div>
-      <p
-        v-if="description"
-        v-motion
-        :initial="{ opacity: 0 }"
-        :enter="{ opacity: 1, transition: { delay: 500, duration: 800 } }"
-      >
+      <div class="separator"></div>
+      <p v-if="description">
         {{ description }}
       </p>
       

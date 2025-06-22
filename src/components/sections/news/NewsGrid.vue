@@ -9,9 +9,9 @@
       <div class="news-filters" v-if="showFilters && categories.length > 0">
         <div 
           class="category-filter"
-          v-motion
-          :initial="{ opacity: 0, y: 20 }"
-          :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 600 } }"
+          
+          
+          
         >
           <span 
             :class="['filter-item', { 'active': activeCategory === 'all' }]"
@@ -42,9 +42,9 @@
       <div 
         class="news-pagination"
         v-if="pagination && totalPages > 1"
-        v-motion
-        :initial="{ opacity: 0 }"
-        :enter="{ opacity: 1, transition: { delay: 800, duration: 600 } }"
+        
+        
+        
       >
         <button 
           class="pagination-btn prev"

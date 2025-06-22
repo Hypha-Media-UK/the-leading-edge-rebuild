@@ -1,12 +1,7 @@
 <template>
   <section class="culture-section">
     <div class="container">
-      <div 
-        class="culture-content"
-        v-motion
-        :initial="{ opacity: 0, scale: 0.9 }"
-        :enter="{ opacity: 1, scale: 1, transition: { delay: 200, duration: 800 } }"
-      >
+      <div class="culture-content">
         <div class="culture-text">
           <h2>{{ title }}</h2>
           <p v-for="(paragraph, index) in paragraphs" :key="index" 

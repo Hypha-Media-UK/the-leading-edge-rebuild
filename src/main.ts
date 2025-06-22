@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import { MotionPlugin } from '@vueuse/motion'
 import App from './App.vue'
 
 // Define routes with lazy loading
@@ -59,7 +58,6 @@ const app = createApp(App)
 
 // Use plugins
 app.use(router)
-app.use(MotionPlugin)
 
 // Mount app
 app.mount('#app')
