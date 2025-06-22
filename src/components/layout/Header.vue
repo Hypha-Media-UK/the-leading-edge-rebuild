@@ -216,7 +216,7 @@ nav {
   }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1200px) {
   .menu-toggle {
     display: block;
   }

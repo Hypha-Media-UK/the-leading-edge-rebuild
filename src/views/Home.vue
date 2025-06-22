@@ -419,19 +419,25 @@ onBeforeUnmount(() => {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  display: flex;
+  display: grid;
   align-items: center;
   color: white;
   margin-top: -80px; // Offset the header padding
   border-bottom: 2px solid white;
-  
+  .container {
+    // padding: 0;
+  }
   .hero-content {
     width: 100%;
     max-width: 1200px;
-    padding: 2rem;
+    // padding: 2rem;
     position: relative;
+    margin-top: 100px;
     z-index: 1;
     color: white;
+    // display: flex;
+    flex-direction: column;
+    justify-content: center;
     
     .text-content {
       max-width: 700px;
@@ -464,14 +470,21 @@ onBeforeUnmount(() => {
     display: flex;
     flex-wrap: nowrap;
     gap: 1rem;
+    margin-top: 1.5rem;
+    
+    @media (max-width: 1200px) {
+      gap: 0.8rem;
+    }
     
     @media (max-width: 991px) {
       flex-wrap: wrap;
+      gap: 0.7rem;
     }
     
     @media (max-width: 768px) {
       flex-direction: column;
       width: 100%;
+      gap: 0.6rem;
     }
   }
 }
@@ -485,6 +498,20 @@ onBeforeUnmount(() => {
   text-decoration: none;
   text-align: center;
   transition: all 0.3s ease;
+  
+  @media (max-width: 1200px) {
+    padding: 0.9rem 1.8rem;
+  }
+  
+  @media (max-width: 992px) {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
   
   &.primary {
     background-color: $accent-color;
@@ -1023,9 +1050,20 @@ section {
 }
 
 // Responsive adjustments
+
 @media (max-width: 991px) {
   .hero {
     background-attachment: scroll;
+    
+    .hero-content {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      p {
+        font-size: 1rem;
+      }
+    }
   }
 }
 
