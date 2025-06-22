@@ -1,167 +1,191 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import PageHeader from '@/components/ui/PageHeader.vue';
+import JobsGrid from '@/components/sections/careers/JobsGrid.vue';
+import BenefitsSection from '@/components/sections/careers/BenefitsSection.vue';
+import ProcessSteps from '@/components/sections/careers/ProcessSteps.vue';
+import Button from '@/components/ui/Button.vue';
+import CallToAction from '@/components/sections/common/CallToAction.vue';
 
 const isLoaded = ref(false);
-const applicationSubmitted = ref(false);
-const formError = ref(false);
+const expandedJobId = ref(null);
+const showApplicationForm = ref(false);
+const selectedJobId = ref(null);
 
-// Career positions
-const positions = [
+// Sample jobs data
+const jobs = [
   {
     id: 1,
     title: 'Senior Hair Stylist',
-    type: 'Full-time',
-    location: 'London',
-    description: 'We are looking for an experienced hair stylist with a minimum of 5 years in the industry. The ideal candidate will have expertise in cutting, coloring, and styling techniques for all hair types.',
-    responsibilities: [
-      'Provide exceptional hair services to clients including cutting, coloring, and styling',
-      'Stay updated on the latest hair trends and techniques',
-      'Maintain a clean and organized workspace',
-      'Build and maintain a loyal client base',
-      'Collaborate with team members for special events and promotions'
-    ],
+    jobType: 'Full-time',
+    location: 'Hyde, Cheshire',
+    excerpt: 'We are looking for an experienced hair stylist to join our team at The Leading Edge. The ideal candidate will have at least 5 years of experience and a passion for creating beautiful hair transformations.',
+    description: 'As a Senior Hair Stylist at The Leading Edge, you will be responsible for providing exceptional hair services to our clients, including cutting, coloring, and styling. You will also be expected to stay up-to-date with the latest trends and techniques in the industry.',
     requirements: [
-      'Minimum 5 years of experience as a hair stylist',
-      'Valid cosmetology license',
-      'Strong portfolio demonstrating technical skills',
-      'Excellent customer service skills',
-      'Ability to work weekends and some evenings'
+      'At least 5 years of experience as a professional hair stylist',
+      'Advanced training in hair cutting and coloring techniques',
+      'Experience with a variety of hair types and textures',
+      'Strong communication and customer service skills',
+      'Ability to work well in a team environment',
+      'Portfolio of previous work'
+    ],
+    benefits: [
+      'Competitive salary plus commission',
+      'Ongoing professional development and training',
+      'Employee discount on products and services',
+      'Flexible scheduling',
+      'Friendly and supportive work environment'
     ]
   },
   {
     id: 2,
     title: 'Beauty Therapist',
-    type: 'Part-time / Full-time',
-    location: 'London',
-    description: 'We are seeking a skilled beauty therapist to join our team. The successful candidate will provide a range of beauty treatments including facials, body treatments, and makeup application.',
-    responsibilities: [
-      'Perform various beauty treatments to the highest standard',
-      'Provide skincare consultations and recommend appropriate products',
-      'Keep up-to-date with the latest beauty trends and techniques',
-      'Maintain treatment room cleanliness and hygiene',
-      'Assist with retail sales and promotions'
-    ],
+    jobType: 'Full-time',
+    location: 'Hyde, Cheshire',
+    excerpt: 'Join our team as a Beauty Therapist and help our clients look and feel their best. We are seeking a qualified professional with experience in a range of beauty treatments.',
+    description: 'As a Beauty Therapist at The Leading Edge, you will perform a variety of beauty treatments including facials, waxing, manicures, pedicures, and more. You will be responsible for providing personalized recommendations to clients and ensuring they have a relaxing and enjoyable experience.',
     requirements: [
-      'NVQ Level 3 in Beauty Therapy or equivalent',
-      'At least 2 years of experience in a professional salon setting',
-      'Knowledge of premium skincare brands and treatments',
-      'Excellent communication and interpersonal skills',
-      'Flexibility to work evenings and weekends'
+      'NVQ Level 3 in Beauty Therapy or equivalent qualification',
+      'At least 2 years of experience in a professional salon or spa',
+      'Proficiency in a wide range of beauty treatments',
+      'Knowledge of skincare products and treatments',
+      'Excellent customer service skills',
+      'Ability to work weekends and some evenings'
+    ],
+    benefits: [
+      'Competitive salary plus commission',
+      'Ongoing professional development and training',
+      'Employee discount on products and services',
+      'Flexible scheduling',
+      'Friendly and supportive work environment'
     ]
   },
   {
     id: 3,
-    title: 'Salon Receptionist',
-    type: 'Full-time',
-    location: 'London',
-    description: 'We are looking for a friendly and organized receptionist to be the first point of contact for our clients. The ideal candidate will have excellent communication skills and a passion for customer service.',
-    responsibilities: [
-      'Greet clients and manage the reception desk',
-      'Handle booking appointments and managing the salon schedule',
-      'Process payments and maintain accurate records',
-      'Answer phone calls and respond to emails',
-      'Assist with retail sales and inventory management'
-    ],
+    title: 'Nail Technician',
+    jobType: 'Part-time',
+    location: 'Hyde, Cheshire',
+    excerpt: 'We are currently recruiting a skilled Nail Technician to join our team. If you have a passion for nail art and providing exceptional service, we want to hear from you.',
+    description: 'As a Nail Technician at The Leading Edge, you will be responsible for providing a range of nail services including manicures, pedicures, gel nails, and nail art. You will work closely with clients to understand their needs and provide personalized recommendations.',
     requirements: [
-      'Previous experience in a customer service role, preferably in a salon environment',
-      'Proficiency with scheduling software and point-of-sale systems',
-      'Excellent organizational and multitasking abilities',
-      'Professional appearance and friendly demeanor',
-      'Available to work flexible hours including weekends'
+      'Relevant qualification in nail technology',
+      'At least 1 year of experience in a professional salon',
+      'Proficiency in a variety of nail techniques including gel, acrylic, and nail art',
+      'Attention to detail and creativity',
+      'Excellent customer service skills',
+      'Availability to work flexible hours including weekends'
+    ],
+    benefits: [
+      'Competitive hourly rate plus commission',
+      'Training opportunities to learn new techniques',
+      'Employee discount on products and services',
+      'Flexible scheduling',
+      'Positive and creative work environment'
+    ]
+  },
+  {
+    id: 4,
+    title: 'Salon Receptionist',
+    jobType: 'Part-time',
+    location: 'Hyde, Cheshire',
+    excerpt: 'We are looking for a friendly and organized Salon Receptionist to be the first point of contact for our clients. This role is essential in creating a positive first impression and ensuring smooth salon operations.',
+    description: 'As a Receptionist at The Leading Edge, you will be responsible for greeting clients, managing appointments, answering phone calls and emails, processing payments, and maintaining the reception area. You will play a key role in ensuring our clients have a seamless and enjoyable experience from the moment they contact us.',
+    requirements: [
+      'Previous experience in a customer service or reception role',
+      'Excellent communication and interpersonal skills',
+      'Proficiency in using appointment booking systems',
+      'Basic computer skills and familiarity with point-of-sale systems',
+      'Ability to multitask in a fast-paced environment',
+      'Professional appearance and positive attitude'
+    ],
+    benefits: [
+      'Competitive hourly rate',
+      'Employee discount on products and services',
+      'Opportunity to learn about the beauty industry',
+      'Friendly and supportive work environment',
+      'Potential for career growth within the salon'
     ]
   }
 ];
 
-// Application form
-const form = ref({
-  name: '',
-  email: '',
-  phone: '',
-  position: '',
-  experience: '',
-  message: '',
-  resume: null
+// Benefits data
+const benefits = [
+  {
+    icon: 'fas fa-graduation-cap',
+    title: 'Continuous Education',
+    description: 'We invest in our team\'s development with regular training sessions, workshops, and opportunities to attend industry events.'
+  },
+  {
+    icon: 'fas fa-users',
+    title: 'Supportive Team',
+    description: 'Join a collaborative, friendly team that supports each other and celebrates achievements together.'
+  },
+  {
+    icon: 'fas fa-chart-line',
+    title: 'Career Growth',
+    description: 'We offer clear paths for advancement and promotion based on performance, skills, and dedication.'
+  },
+  {
+    icon: 'fas fa-percentage',
+    title: 'Competitive Pay',
+    description: 'Enjoy competitive base salaries plus commission structures that reward your hard work and talent.'
+  },
+  {
+    icon: 'fas fa-balance-scale',
+    title: 'Work-Life Balance',
+    description: 'We value your personal time with flexible scheduling options and a healthy work environment.'
+  },
+  {
+    icon: 'fas fa-heart',
+    title: 'Employee Discounts',
+    description: 'Access to exclusive discounts on our premium services and professional products.'
+  }
+];
+
+// Application process steps
+const applicationSteps = [
+  {
+    title: 'Submit Your Application',
+    description: 'Send your CV and cover letter to our careers email or apply through our website for open positions.'
+  },
+  {
+    title: 'Initial Phone Interview',
+    description: 'Our team will reach out to discuss your experience and interest in the role and answer any questions you may have.'
+  },
+  {
+    title: 'In-Person Interview',
+    description: 'Visit our salon to meet the team and demonstrate your skills with a practical assessment relevant to the position.'
+  },
+  {
+    title: 'Final Decision',
+    description: 'We\'ll make a decision quickly and reach out with an offer if you\'re the right fit for our team.'
+  }
+];
+
+// Functions to handle job interactions
+const handleJobExpand = (jobId) => {
+  expandedJobId.value = jobId;
+};
+
+const handleJobCollapse = () => {
+  expandedJobId.value = null;
+};
+
+const handleJobApplication = (jobId) => {
+  selectedJobId.value = jobId;
+  showApplicationForm.value = true;
+  // Scroll to application form
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
+};
+
+// Get selected job details for the application form
+const selectedJob = computed(() => {
+  if (!selectedJobId.value) return null;
+  return jobs.find(job => job.id === selectedJobId.value) || null;
 });
-
-// Form validation
-const errors = ref({});
-
-const validateForm = () => {
-  errors.value = {};
-  
-  if (!form.value.name.trim()) {
-    errors.value.name = 'Name is required';
-  }
-  
-  if (!form.value.email.trim()) {
-    errors.value.email = 'Email is required';
-  } else if (!/^\S+@\S+\.\S+$/.test(form.value.email)) {
-    errors.value.email = 'Please enter a valid email address';
-  }
-  
-  if (!form.value.phone.trim()) {
-    errors.value.phone = 'Phone number is required';
-  }
-  
-  if (!form.value.position) {
-    errors.value.position = 'Please select a position';
-  }
-  
-  if (!form.value.experience) {
-    errors.value.experience = 'Please select your experience level';
-  }
-  
-  return Object.keys(errors.value).length === 0;
-};
-
-const submitApplication = () => {
-  if (validateForm()) {
-    // This would be replaced with actual API call to backend
-    setTimeout(() => {
-      applicationSubmitted.value = true;
-      
-      // Reset form
-      form.value = {
-        name: '',
-        email: '',
-        phone: '',
-        position: '',
-        experience: '',
-        message: '',
-        resume: null
-      };
-    }, 1000);
-  } else {
-    formError.value = true;
-    setTimeout(() => {
-      formError.value = false;
-    }, 3000);
-  }
-};
-
-// Selected position for detailed view
-const selectedPosition = ref(null);
-
-const showPositionDetails = (id) => {
-  selectedPosition.value = id;
-};
-
-const closePositionDetails = () => {
-  selectedPosition.value = null;
-};
-
-// Apply for a specific position
-const applyForPosition = (id) => {
-  const position = positions.find(p => p.id === id);
-  if (position) {
-    form.value.position = position.title;
-    closePositionDetails();
-    // Scroll to application form
-    setTimeout(() => {
-      document.getElementById('application-form').scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  }
-};
 
 onMounted(() => {
   isLoaded.value = true;
@@ -171,831 +195,145 @@ onMounted(() => {
 <template>
   <div class="careers-page">
     <!-- Page Header -->
-    <section class="page-header">
+    <PageHeader
+      title="Join Our Team"
+      description="Become part of the Leading Edge family and grow your career in a supportive, creative environment"
+    />
+
+    <!-- Jobs Grid Section -->
+    <JobsGrid
+      :jobs="jobs"
+      :jobTypes="['Full-time', 'Part-time', 'Contract', 'Internship']"
+      @apply-job="handleJobApplication"
+    />
+
+    <!-- Benefits Section -->
+    <BenefitsSection
+      title="Why Work With Us"
+      description="Discover the many benefits of joining The Leading Edge team"
+      :benefits="benefits"
+    />
+
+    <!-- Application Process Section -->
+    <ProcessSteps
+      title="Our Application Process"
+      description="Here's how you can join our team in just a few simple steps"
+      :steps="applicationSteps"
+    >
+      <template #cta>
+        <Button 
+          variant="primary" 
+          size="large"
+          icon="fas fa-paper-plane"
+          @click="handleJobApplication(null)"
+        >
+          Apply Now
+        </Button>
+      </template>
+    </ProcessSteps>
+
+    <!-- Application Form (simplified version) -->
+    <section v-if="showApplicationForm" class="application-form-section">
       <div class="container">
-        <h1 
+        <div 
+          class="application-form"
           v-motion
           :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }"
+          :enter="{ opacity: 1, y: 0, transition: { duration: 600 } }"
         >
-          Join Our Team
-        </h1>
-        <div 
-          class="separator"
-          v-motion
-          :initial="{ opacity: 0, scale: 0 }"
-          :enter="{ opacity: 1, scale: 1, transition: { delay: 300, duration: 600 } }"
-        ></div>
-        <p
-          v-motion
-          :initial="{ opacity: 0 }"
-          :enter="{ opacity: 1, transition: { delay: 500, duration: 800 } }"
-        >
-          Be part of The Leading Edge family and grow your career with us
-        </p>
-      </div>
-    </section>
-
-    <!-- Why Join Us Section -->
-    <section class="why-join-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>Why Join The Leading Edge?</h2>
-          <div class="separator"></div>
-          <p>At The Leading Edge, we believe in nurturing talent and providing our team members with the tools and environment they need to thrive.</p>
-        </div>
-        
-        <div class="benefits-grid">
-          <div 
-            class="benefit-item"
-            v-motion
-            :initial="{ opacity: 0, scale: 0.8 }"
-            :enter="{ opacity: 1, scale: 1, transition: { delay: 200, duration: 600 } }"
-          >
-            <div class="icon">
-              <i class="fas fa-graduation-cap"></i>
-            </div>
-            <h3>Continuous Education</h3>
-            <p>We invest in our team's growth with regular training sessions, workshops, and opportunities to attend industry events.</p>
+          <h2>{{ selectedJob ? `Apply for ${selectedJob.title}` : 'Job Application' }}</h2>
+          
+          <p class="form-notice">
+            To apply for {{ selectedJob ? `the ${selectedJob.title} position` : 'a position at The Leading Edge' }}, please email your CV and cover letter to:
+          </p>
+          
+          <div class="email-contact">
+            <a href="mailto:careers@leadingedgehairandbeauty.co.uk">careers@leadingedgehairandbeauty.co.uk</a>
           </div>
           
-          <div 
-            class="benefit-item"
-            v-motion
-            :initial="{ opacity: 0, scale: 0.8 }"
-            :enter="{ opacity: 1, scale: 1, transition: { delay: 300, duration: 600 } }"
-          >
-            <div class="icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <h3>Career Growth</h3>
-            <p>Clear career pathways and mentorship opportunities allow you to advance your skills and take on new challenges.</p>
-          </div>
+          <p class="application-note">
+            Please include the position you're applying for in the subject line. We look forward to reviewing your application!
+          </p>
           
-          <div 
-            class="benefit-item"
-            v-motion
-            :initial="{ opacity: 0, scale: 0.8 }"
-            :enter="{ opacity: 1, scale: 1, transition: { delay: 400, duration: 600 } }"
-          >
-            <div class="icon">
-              <i class="fas fa-user-friends"></i>
-            </div>
-            <h3>Supportive Team</h3>
-            <p>Join a collaborative and inclusive environment where creativity and individual expression are valued.</p>
-          </div>
-          
-          <div 
-            class="benefit-item"
-            v-motion
-            :initial="{ opacity: 0, scale: 0.8 }"
-            :enter="{ opacity: 1, scale: 1, transition: { delay: 500, duration: 600 } }"
-          >
-            <div class="icon">
-              <i class="fas fa-award"></i>
-            </div>
-            <h3>Recognition & Rewards</h3>
-            <p>Competitive compensation, performance bonuses, and employee recognition programs to celebrate your achievements.</p>
+          <div class="form-actions">
+            <Button 
+              @click="showApplicationForm = false" 
+              variant="secondary"
+              size="small"
+            >
+              Close
+            </Button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Current Openings -->
-    <section class="openings-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>Current Openings</h2>
-          <div class="separator"></div>
-          <p>Explore our current job opportunities and find the perfect role for your skills and passion.</p>
-        </div>
-        
-        <div class="positions-grid">
-          <div 
-            v-for="(position, index) in positions" 
-            :key="position.id"
-            class="position-card"
-            v-motion
-            :initial="{ opacity: 0, y: 30 }"
-            :enter="{ opacity: 1, y: 0, transition: { delay: 200 + (index * 100), duration: 600 } }"
-            @click="showPositionDetails(position.id)"
-          >
-            <h3>{{ position.title }}</h3>
-            <div class="position-meta">
-              <span class="type">{{ position.type }}</span>
-              <span class="location"><i class="fas fa-map-marker-alt"></i> {{ position.location }}</span>
-            </div>
-            <p class="position-excerpt">{{ position.description.substring(0, 120) }}...</p>
-            <button class="btn-text">View Details</button>
-          </div>
-        </div>
-        
-        <!-- No positions message (if needed) -->
-        <div v-if="positions.length === 0" class="no-positions">
-          <p>We don't have any openings at the moment, but we're always interested in meeting talented professionals. Please feel free to submit your application for future consideration.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Position Details Modal -->
-    <div class="position-modal" v-if="selectedPosition" @click="closePositionDetails">
-      <div class="modal-content" @click.stop>
-        <button class="close-button" @click="closePositionDetails">&times;</button>
-        
-        <div class="modal-body" v-if="selectedPosition">
-          <div class="position-details" v-if="positions.find(p => p.id === selectedPosition)">
-            <h2>{{ positions.find(p => p.id === selectedPosition).title }}</h2>
-            <div class="position-meta">
-              <span class="type">{{ positions.find(p => p.id === selectedPosition).type }}</span>
-              <span class="location"><i class="fas fa-map-marker-alt"></i> {{ positions.find(p => p.id === selectedPosition).location }}</span>
-            </div>
-            
-            <div class="position-description">
-              <p>{{ positions.find(p => p.id === selectedPosition).description }}</p>
-            </div>
-            
-            <div class="position-section">
-              <h3>Responsibilities</h3>
-              <ul>
-                <li v-for="(item, i) in positions.find(p => p.id === selectedPosition).responsibilities" :key="i">
-                  {{ item }}
-                </li>
-              </ul>
-            </div>
-            
-            <div class="position-section">
-              <h3>Requirements</h3>
-              <ul>
-                <li v-for="(item, i) in positions.find(p => p.id === selectedPosition).requirements" :key="i">
-                  {{ item }}
-                </li>
-              </ul>
-            </div>
-            
-            <div class="position-cta">
-              <button @click="applyForPosition(selectedPosition)" class="btn primary">Apply Now</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Application Form -->
-    <section id="application-form" class="application-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>Apply Now</h2>
-          <div class="separator"></div>
-          <p>Interested in joining our team? Fill out the application form below and we'll be in touch.</p>
-        </div>
-        
-        <div 
-          class="application-form-container"
-          v-motion
-          :initial="{ opacity: 0, y: 30 }"
-          :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }"
-        >
-          <div v-if="applicationSubmitted" class="form-success">
-            <div class="success-icon">
-              <i class="fas fa-check-circle"></i>
-            </div>
-            <h3>Thank You!</h3>
-            <p>Your application has been successfully submitted. Our team will review your information and contact you if there's a match for your skills and experience.</p>
-            <button @click="applicationSubmitted = false" class="btn primary">Submit Another Application</button>
-          </div>
-          
-          <form v-else @submit.prevent="submitApplication" class="application-form">
-            <div class="form-group">
-              <label for="name">Full Name *</label>
-              <input 
-                type="text" 
-                id="name" 
-                v-model="form.name" 
-                :class="{ 'error': errors.name }"
-                placeholder="Your full name"
-              >
-              <span v-if="errors.name" class="error-message">{{ errors.name }}</span>
-            </div>
-            
-            <div class="form-group">
-              <label for="email">Email Address *</label>
-              <input 
-                type="email" 
-                id="email" 
-                v-model="form.email" 
-                :class="{ 'error': errors.email }"
-                placeholder="Your email address"
-              >
-              <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
-            </div>
-            
-            <div class="form-group">
-              <label for="phone">Phone Number *</label>
-              <input 
-                type="tel" 
-                id="phone" 
-                v-model="form.phone" 
-                :class="{ 'error': errors.phone }"
-                placeholder="Your phone number"
-              >
-              <span v-if="errors.phone" class="error-message">{{ errors.phone }}</span>
-            </div>
-            
-            <div class="form-group">
-              <label for="position">Position of Interest *</label>
-              <select 
-                id="position" 
-                v-model="form.position" 
-                :class="{ 'error': errors.position }"
-              >
-                <option value="">Select a position</option>
-                <option v-for="position in positions" :key="position.id" :value="position.title">
-                  {{ position.title }}
-                </option>
-                <option value="other">Other/Future Opportunities</option>
-              </select>
-              <span v-if="errors.position" class="error-message">{{ errors.position }}</span>
-            </div>
-            
-            <div class="form-group">
-              <label for="experience">Years of Experience *</label>
-              <select 
-                id="experience" 
-                v-model="form.experience" 
-                :class="{ 'error': errors.experience }"
-              >
-                <option value="">Select experience level</option>
-                <option value="0-1">Less than 1 year</option>
-                <option value="1-3">1-3 years</option>
-                <option value="3-5">3-5 years</option>
-                <option value="5+">5+ years</option>
-              </select>
-              <span v-if="errors.experience" class="error-message">{{ errors.experience }}</span>
-            </div>
-            
-            <div class="form-group">
-              <label for="message">Why do you want to join our team?</label>
-              <textarea 
-                id="message" 
-                v-model="form.message" 
-                placeholder="Tell us about yourself and why you'd like to join The Leading Edge"
-                rows="4"
-              ></textarea>
-            </div>
-            
-            <div class="form-group">
-              <label for="resume">Upload CV/Resume (Optional)</label>
-              <div class="file-upload">
-                <input type="file" id="resume" @change="form.resume = $event.target.files[0]">
-                <p class="file-info">PDF or Word document (max 5MB)</p>
-              </div>
-            </div>
-            
-            <div class="form-alert" v-if="formError">
-              <p>Please fix the errors in the form before submitting.</p>
-            </div>
-            
-            <button type="submit" class="btn primary">Submit Application</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- Workplace Culture -->
-    <section class="culture-section">
-      <div class="container">
-        <div 
-          class="culture-content"
-          v-motion
-          :initial="{ opacity: 0, scale: 0.9 }"
-          :enter="{ opacity: 1, scale: 1, transition: { delay: 200, duration: 800 } }"
-        >
-          <div class="culture-text">
-            <h2>Our Workplace Culture</h2>
-            <p>At The Leading Edge, we foster a culture of creativity, respect, and continuous growth. We believe that happy team members provide the best service to our clients, which is why we prioritize creating a positive and supportive work environment.</p>
-            <p>We celebrate diversity and believe that each team member brings unique perspectives and talents that contribute to our collective success. Our collaborative approach encourages sharing ideas and learning from one another.</p>
-            <p>If you're passionate about beauty, dedicated to excellence, and love making people feel their best, we'd love to hear from you!</p>
-          </div>
-          
-          <div class="culture-image"></div>
-        </div>
-      </div>
-    </section>
+    <!-- Call to Action -->
+    <CallToAction
+      title="Ready to Take the Next Step in Your Career?"
+      text="We're always looking for talented individuals to join our team. Apply today and be part of something special."
+      buttonText="View Open Positions"
+      buttonLink="#open-positions"
+      backgroundColor="#486581"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
-// Page Header
-.page-header {
-  background-color: $primary-color;
-  color: white;
-  text-align: center;
-  padding: 5rem 0 3rem;
+.careers-page {
+  // Most styles are now in the individual components
   
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: white;
-  }
-  
-  .separator {
-    width: 80px;
-    height: 3px;
-    background-color: $accent-color;
-    margin: 0 auto 1.5rem;
-  }
-  
-  p {
-    max-width: 700px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-}
-
-// Section Styling
-section {
-  padding: 5rem 0;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .separator {
-    width: 80px;
-    height: 3px;
-    background-color: $accent-color;
-    margin: 0 auto 1.5rem;
-  }
-  
-  p {
-    max-width: 700px;
-    margin: 0 auto;
-    color: custom-lighten($primary-color, 20%);
-    font-size: 1.1rem;
-  }
-}
-
-// Why Join Us Section
-.why-join-section {
-  background-color: white;
-  
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-  }
-  
-  .benefit-item {
+  .application-form-section {
+    padding: 5rem 0;
     background-color: $light-color;
-    padding: 2.5rem 2rem;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 5px 20px rgba($primary-color, 0.05);
-    transition: all 0.3s ease;
-    
-    &:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba($primary-color, 0.1);
-    }
-    
-    .icon {
-      font-size: 2.5rem;
-      color: $accent-color;
-      margin-bottom: 1.5rem;
-    }
-    
-    h3 {
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-    
-    p {
-      color: custom-lighten($primary-color, 20%);
-      line-height: 1.6;
-    }
-  }
-}
-
-// Openings Section
-.openings-section {
-  background-color: $light-color;
-  
-  .positions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-  
-  .position-card {
-    background-color: white;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 5px 15px rgba($primary-color, 0.05);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba($primary-color, 0.1);
-    }
-    
-    h3 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      color: $primary-color;
-    }
-    
-    .position-meta {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1rem;
-      
-      .type {
-        background-color: rgba($accent-color, 0.1);
-        color: $accent-color;
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        margin-right: 1rem;
-      }
-      
-      .location {
-        color: custom-lighten($primary-color, 30%);
-        font-size: 0.9rem;
-        
-        i {
-          margin-right: 0.3rem;
-        }
-      }
-    }
-    
-    .position-excerpt {
-      color: custom-lighten($primary-color, 20%);
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-  }
-  
-  .no-positions {
-    text-align: center;
-    background-color: white;
-    border-radius: 8px;
-    padding: 3rem 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    box-shadow: 0 5px 15px rgba($primary-color, 0.05);
-    
-    p {
-      color: custom-lighten($primary-color, 20%);
-      line-height: 1.6;
-    }
-  }
-}
-
-// Position Modal
-.position-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 2rem;
-  
-  .modal-content {
-    background-color: white;
-    border-radius: 8px;
-    max-width: 800px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    
-    .close-button {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      font-size: 2rem;
-      color: $primary-color;
-      cursor: pointer;
-      z-index: 10;
-      
-      &:hover {
-        color: $accent-color;
-      }
-    }
-    
-    .modal-body {
-      padding: 2rem;
-      
-      .position-details {
-        h2 {
-          font-size: 2rem;
-          margin-bottom: 1rem;
-          color: $primary-color;
-        }
-        
-        .position-meta {
-          display: flex;
-          align-items: center;
-          margin-bottom: 1.5rem;
-          
-          .type {
-            background-color: rgba($accent-color, 0.1);
-            color: $accent-color;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-right: 1rem;
-          }
-          
-          .location {
-            color: custom-lighten($primary-color, 30%);
-            font-size: 0.9rem;
-            
-            i {
-              margin-right: 0.3rem;
-            }
-          }
-        }
-        
-        .position-description {
-          margin-bottom: 2rem;
-          
-          p {
-            line-height: 1.8;
-            color: custom-lighten($primary-color, 20%);
-          }
-        }
-        
-        .position-section {
-          margin-bottom: 2rem;
-          
-          h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: $primary-color;
-            position: relative;
-            
-            &::after {
-              content: '';
-              position: absolute;
-              bottom: -5px;
-              left: 0;
-              width: 50px;
-              height: 2px;
-              background-color: $accent-color;
-            }
-          }
-          
-          ul {
-            padding-left: 1.5rem;
-            
-            li {
-              color: custom-lighten($primary-color, 20%);
-              margin-bottom: 0.8rem;
-              line-height: 1.6;
-            }
-          }
-        }
-        
-        .position-cta {
-          text-align: center;
-          margin-top: 3rem;
-          
-          .btn {
-            min-width: 200px;
-          }
-        }
-      }
-    }
-  }
-}
-
-// Application Form
-.application-section {
-  background-color: white;
-  
-  .application-form-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: white;
-    border-radius: 8px;
-    padding: 3rem;
-    box-shadow: 0 5px 20px rgba($primary-color, 0.08);
-    
-    @media (max-width: 576px) {
-      padding: 2rem 1.5rem;
-    }
-    
-    .form-success {
-      text-align: center;
-      padding: 2rem;
-      
-      .success-icon {
-        font-size: 4rem;
-        color: #4CAF50;
-        margin-bottom: 1rem;
-      }
-      
-      h3 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-        color: $primary-color;
-      }
-      
-      p {
-        margin-bottom: 2rem;
-        color: custom-lighten($primary-color, 20%);
-        line-height: 1.6;
-      }
-    }
     
     .application-form {
-      .form-group {
-        margin-bottom: 1.5rem;
-        
-        label {
-          display: block;
-          margin-bottom: 0.5rem;
-          font-weight: 500;
-          color: $primary-color;
-        }
-        
-        input, select, textarea {
-          width: 100%;
-          padding: 0.8rem 1rem;
-          border: 1px solid $light-color;
-          border-radius: 4px;
-          font-family: inherit;
-          font-size: 1rem;
-          transition: border-color 0.3s ease;
-          
-          &:focus {
-            outline: none;
-            border-color: $accent-color;
-          }
-          
-          &.error {
-            border-color: #FF5252;
-          }
-        }
-        
-        .error-message {
-          display: block;
-          color: #FF5252;
-          font-size: 0.85rem;
-          margin-top: 0.5rem;
-        }
-        
-        .file-upload {
-          input[type="file"] {
-            border: 1px dashed $light-color;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            
-            &:hover {
-              border-color: $accent-color;
-            }
-          }
-          
-          .file-info {
-            font-size: 0.85rem;
-            color: custom-lighten($primary-color, 30%);
-            margin-top: 0.5rem;
-          }
-        }
-      }
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba($primary-color, 0.08);
+      text-align: center;
       
-      .form-alert {
-        background-color: #FFEBEE;
-        color: #C62828;
-        padding: 1rem;
-        border-radius: 4px;
-        margin-bottom: 1.5rem;
-        
-        p {
-          margin: 0;
-        }
-      }
-      
-      .btn {
-        width: 100%;
-      }
-    }
-  }
-}
-
-// Culture Section
-.culture-section {
-  background-color: $light-color;
-  
-  .culture-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-    
-    @media (max-width: 991px) {
-      grid-template-columns: 1fr;
-    }
-    
-    .culture-text {
       h2 {
-        font-size: 2.2rem;
+        font-size: 2rem;
         margin-bottom: 1.5rem;
         color: $primary-color;
       }
       
-      p {
+      .form-notice {
+        color: custom-lighten($primary-color, 20%);
         margin-bottom: 1.5rem;
-        line-height: 1.8;
-    color: custom-lighten($primary-color, 20%);
-    
-    &:last-child {
-          margin-bottom: 0;
+        line-height: 1.6;
+      }
+      
+      .email-contact {
+        margin-bottom: 1.5rem;
+        
+        a {
+          font-size: 1.3rem;
+          color: $accent-color;
+          font-weight: 600;
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
-    }
-    
-    .culture-image {
-      height: 400px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba($primary-color, 0.1);
-      object-fit: cover;
       
-      @media (max-width: 991px) {
-        height: 300px;
-        margin-top: 2rem;
+      .application-note {
+        color: custom-lighten($primary-color, 20%);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+      
+      .form-actions {
+        display: flex;
+        justify-content: center;
       }
     }
-  }
-}
-
-// Button Styles
-.btn {
-  display: inline-block;
-  padding: 1rem 2rem;
-  border-radius: 4px;
-  font-weight: 600;
-  text-decoration: none;
-  text-align: center;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  cursor: pointer;
-  
-  &.primary {
-    background-color: $accent-color;
-    color: white;
-    border-color: $accent-color;
-    
-    &:hover {
-      background-color: custom-darken($accent-color, 10%);
-      border-color: custom-darken($accent-color, 10%);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-  }
-}
-
-.btn-text {
-  color: $accent-color;
-  font-weight: 600;
-  text-decoration: none;
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: $accent-color;
-    transition: width 0.3s ease;
-  }
-  
-  &:hover::after {
-    width: 100%;
   }
 }
 </style>

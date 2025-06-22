@@ -1,5 +1,10 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import PageHeader from '@/components/ui/PageHeader.vue';
+import NewsGrid from '@/components/sections/news/NewsGrid.vue';
+import FeaturedNewsItem from '@/components/sections/news/FeaturedNewsItem.vue';
+import NewsDetailView from '@/components/sections/news/NewsDetailView.vue';
+import NewsletterSignup from '@/components/sections/news/NewsletterSignup.vue';
 
 const isLoaded = ref(false);
 
@@ -24,7 +29,9 @@ const newsItems = [
       <p>Vibrant colors are making a comeback this season. Think pastel pinks, electric blues, and even multi-colored highlights that add dimension and personality to your style.</p>
       
       <p>Book your consultation today to find the perfect summer look that suits your style and personality!</p>
-    `
+    `,
+    category: 'Hair',
+    author: 'Emma Thompson'
   },
   {
     id: 2,
@@ -48,7 +55,9 @@ const newsItems = [
       <p>The collection includes cleansers, toners, moisturizers, serums, and masks suitable for all skin types. Whether you have dry, oily, combination, or sensitive skin, we have products specifically formulated to address your needs.</p>
       
       <p>Visit our salon to receive a complimentary skincare consultation with one of our beauty specialists who can recommend the perfect products for your unique skin type and concerns.</p>
-    `
+    `,
+    category: 'Beauty',
+    author: 'Sophia Chen'
   },
   {
     id: 3,
@@ -69,7 +78,9 @@ const newsItems = [
       <p>Alex is now accepting new clients and is excited to help you achieve your hair goals. For the month of June, enjoy a 15% discount on your first appointment with Alex when you mention this news article.</p>
       
       <p>Contact us today to schedule your consultation!</p>
-    `
+    `,
+    category: 'Team',
+    author: 'James Wilson'
   },
   {
     id: 4,
@@ -95,7 +106,9 @@ const newsItems = [
       <p>We also offer packages for bridesmaids, mother of the bride/groom, and other members of the wedding party. Book services for 4 or more people and receive a 10% discount on the total.</p>
       
       <p>Limited availability for Summer 2025 weddings - contact us today to secure your date!</p>
-    `
+    `,
+    category: 'Special Offers',
+    author: 'Emily Parker'
   },
   {
     id: 5,
@@ -120,28 +133,77 @@ const newsItems = [
       <p>Our renovation also focused on making our salon more environmentally friendly. We've installed energy-efficient lighting, water-saving faucets, and chosen eco-friendly materials throughout the space.</p>
       
       <p>We'd like to thank our loyal clients for their patience during the renovation process. We invite you to visit and experience our beautiful new salon environment!</p>
-    `
+    `,
+    category: 'Salon',
+    author: 'Abigail Johnson'
   }
 ];
+
+// News categories
+const categories = [
+  { slug: 'hair', name: 'Hair' },
+  { slug: 'beauty', name: 'Beauty' },
+  { slug: 'team', name: 'Team' },
+  { slug: 'special-offers', name: 'Special Offers' },
+  { slug: 'salon', name: 'Salon' }
+];
+
+// State variables
+const activeCategory = ref('all');
+const selectedArticle = ref(null);
+const showDetailView = ref(false);
 
 // Featured news is the most recent one
 const featuredNews = newsItems[0];
 
-// Selected news item for detailed view
-const selectedNews = ref(null);
-const showDetailView = ref(false);
+// Filtered news items (excluding the featured one)
+const filteredNewsItems = computed(() => {
+  const nonFeaturedItems = newsItems.filter(item => item.id !== featuredNews.id);
+  
+  if (activeCategory.value === 'all') {
+    return nonFeaturedItems;
+  }
+  
+  return nonFeaturedItems.filter(item => {
+    return item.category && item.category.toLowerCase() === activeCategory.value.replace('-', ' ');
+  });
+});
 
-// Function to view a news item in detail
-const viewNewsDetail = (newsItem) => {
-  selectedNews.value = newsItem;
+// Related articles for the detail view
+const relatedArticles = computed(() => {
+  if (!selectedArticle.value) return [];
+  
+  // Get articles from the same category or a few random ones
+  return newsItems
+    .filter(item => item.id !== selectedArticle.value.id)
+    .filter(item => {
+      if (selectedArticle.value.category) {
+        return item.category === selectedArticle.value.category;
+      }
+      return true;
+    })
+    .slice(0, 3); // Limit to 3 related articles
+});
+
+// Handler functions
+const handleCategoryChange = (category) => {
+  activeCategory.value = category;
+};
+
+const viewArticleDetail = (article) => {
+  selectedArticle.value = article;
   showDetailView.value = true;
   window.scrollTo(0, 0);
 };
 
-// Function to go back to the news list
 const backToNewsList = () => {
   showDetailView.value = false;
-  selectedNews.value = null;
+  selectedArticle.value = null;
+};
+
+const handleNewsletterSignup = (email) => {
+  console.log('Newsletter signup:', email);
+  // In a real application, you would send this to your backend
 };
 
 onMounted(() => {
@@ -152,491 +214,61 @@ onMounted(() => {
 <template>
   <div class="news-page">
     <!-- Page Header -->
-    <section class="page-header">
-      <div class="container">
-        <h1 
-          v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }"
-        >
-          Latest News
-        </h1>
-        <div 
-          class="separator"
-          v-motion
-          :initial="{ opacity: 0, scale: 0 }"
-          :enter="{ opacity: 1, scale: 1, transition: { delay: 300, duration: 600 } }"
-        ></div>
-        <p
-          v-motion
-          :initial="{ opacity: 0 }"
-          :enter="{ opacity: 1, transition: { delay: 500, duration: 800 } }"
-        >
-          Stay updated with the latest happenings at The Leading Edge
-        </p>
-      </div>
-    </section>
+    <PageHeader
+      title="Latest News"
+      description="Stay updated with the latest happenings at The Leading Edge"
+    />
 
     <section class="news-content">
       <div class="container">
         <!-- News Detail View -->
-        <div v-if="showDetailView" class="news-detail">
-          <div class="back-button">
-            <button @click="backToNewsList" class="btn secondary">
-              <i class="fas fa-arrow-left"></i> Back to News
-            </button>
-          </div>
-          
-          <div class="news-detail-content">
-            <h2>{{ selectedNews.title }}</h2>
-            <div class="news-meta">
-              <span class="date"><i class="far fa-calendar-alt"></i> {{ selectedNews.date }}</span>
-            </div>
-            
-            <div class="news-image">
-              <img :src="selectedNews.image" :alt="selectedNews.title">
-            </div>
-            
-            <div class="news-text" v-html="selectedNews.content"></div>
-            
-            <div class="share-links">
-              <p>Share this article:</p>
-              <div class="social-share">
-                <a href="#" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Share on Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Share via Email"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <NewsDetailView
+          v-if="showDetailView && selectedArticle"
+          :article="selectedArticle"
+          :relatedArticles="relatedArticles"
+          @back="backToNewsList"
+          @view-article="viewArticleDetail"
+        />
         
         <!-- News List View -->
         <div v-else class="news-list-view">
           <!-- Featured News -->
-          <div 
-            class="featured-news"
-            v-motion
-            :initial="{ opacity: 0, y: 50 }"
-            :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }"
-            @click="viewNewsDetail(featuredNews)"
-          >
-            <div class="featured-image">
-              <img :src="featuredNews.image" :alt="featuredNews.title">
-              <div class="featured-overlay">
-                <span class="featured-tag">Featured</span>
-              </div>
-            </div>
-            <div class="featured-content">
-              <div class="news-meta">
-                <span class="date"><i class="far fa-calendar-alt"></i> {{ featuredNews.date }}</span>
-              </div>
-              <h2>{{ featuredNews.title }}</h2>
-              <p>{{ featuredNews.excerpt }}</p>
-              <button class="btn-text">Read More <i class="fas fa-arrow-right"></i></button>
-            </div>
-          </div>
+          <FeaturedNewsItem
+            :article="featuredNews"
+            @click="viewArticleDetail"
+          />
           
-          <!-- News Grid -->
-          <div class="news-grid">
-            <div 
-              v-for="(item, index) in newsItems.slice(1)" 
-              :key="item.id"
-              class="news-card"
-              v-motion
-              :initial="{ opacity: 0, y: 50 }"
-              :enter="{ opacity: 1, y: 0, transition: { delay: index * 100, duration: 600 } }"
-              @click="viewNewsDetail(item)"
-            >
-              <div class="news-card-image">
-                <img :src="item.image" :alt="item.title">
-              </div>
-              <div class="news-card-content">
-                <div class="news-meta">
-                  <span class="date"><i class="far fa-calendar-alt"></i> {{ item.date }}</span>
-                </div>
-                <h3>{{ item.title }}</h3>
-                <p>{{ item.excerpt }}</p>
-                <button class="btn-text">Read More <i class="fas fa-arrow-right"></i></button>
-              </div>
-            </div>
-          </div>
+          <!-- News Grid with filters -->
+          <NewsGrid
+            :articles="filteredNewsItems"
+            :categories="categories"
+            :activeCategory="activeCategory"
+            @filter-change="handleCategoryChange"
+            @view-article="viewArticleDetail"
+            :pagination="false"
+          />
         </div>
       </div>
     </section>
+
+    <!-- Newsletter Signup -->
+    <NewsletterSignup
+      title="Subscribe to Our Newsletter"
+      description="Stay updated with the latest news, beauty tips, and exclusive offers straight to your inbox."
+      :darkMode="true"
+      @subscribe="handleNewsletterSignup"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
-// Page Header
-.page-header {
-  background-color: $primary-color;
-  color: white;
-  text-align: center;
-  padding: 5rem 0 3rem;
-  
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: white;
-  }
-  
-  .separator {
-    width: 80px;
-    height: 3px;
-    background-color: $accent-color;
-    margin: 0 auto 1.5rem;
-  }
-  
-  p {
-    max-width: 700px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-}
-
-// News Content
-.news-content {
-  padding: 5rem 0;
-  background-color: $light-color;
-}
-
-// News List View
-.news-list-view {
-  .featured-news {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba($primary-color, 0.08);
-    margin-bottom: 3rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba($primary-color, 0.12);
-    }
-    
-    .featured-image {
-      position: relative;
-      height: 100%;
-      min-height: 350px;
-      
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      
-      .featured-overlay {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        
-        .featured-tag {
-          display: inline-block;
-          background-color: $accent-color;
-          color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 4px;
-          font-weight: 600;
-          font-size: 0.9rem;
-        }
-      }
-    }
-    
-    .featured-content {
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      
-      .news-meta {
-        margin-bottom: 1rem;
-        
-        .date {
-          color: custom-lighten($primary-color, 30%);
-          font-size: 0.9rem;
-          
-          i {
-            margin-right: 5px;
-            color: $accent-color;
-          }
-        }
-      }
-      
-      h2 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-        color: $primary-color;
-        line-height: 1.3;
-      }
-      
-      p {
-        color: custom-lighten($primary-color, 20%);
-        margin-bottom: 1.5rem;
-        line-height: 1.6;
-      }
-    }
-    
-    @media (max-width: 991px) {
-      grid-template-columns: 1fr;
-      
-      .featured-image {
-        min-height: 250px;
-      }
-    }
-  }
-  
-  .news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2rem;
-    
-    .news-card {
-      background-color: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba($primary-color, 0.05);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba($primary-color, 0.1);
-        
-        .news-card-image img {
-          transform: scale(1.05);
-        }
-      }
-      
-      .news-card-image {
-        height: 200px;
-        overflow: hidden;
-        
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.5s ease;
-        }
-      }
-      
-      .news-card-content {
-        padding: 1.5rem;
-        
-        .news-meta {
-          margin-bottom: 0.8rem;
-          
-          .date {
-            color: custom-lighten($primary-color, 30%);
-            font-size: 0.85rem;
-            
-            i {
-              margin-right: 5px;
-              color: $accent-color;
-            }
-          }
-        }
-        
-        h3 {
-          font-size: 1.3rem;
-          margin-bottom: 0.8rem;
-          color: $primary-color;
-          line-height: 1.3;
-        }
-        
-        p {
-          color: custom-lighten($primary-color, 20%);
-          margin-bottom: 1rem;
-          line-height: 1.6;
-          font-size: 0.95rem;
-        }
-      }
-    }
-  }
-}
-
-// News Detail View
-.news-detail {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 5px 20px rgba($primary-color, 0.08);
-  
-  .back-button {
-    margin-bottom: 2rem;
-    
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      
-      i {
-        margin-right: 0.5rem;
-      }
-    }
-  }
-  
-  .news-detail-content {
-    h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      color: $primary-color;
-      line-height: 1.3;
-    }
-    
-    .news-meta {
-      margin-bottom: 1.5rem;
-      
-      .date {
-        color: custom-lighten($primary-color, 30%);
-        font-size: 0.95rem;
-        
-        i {
-          margin-right: 5px;
-          color: $accent-color;
-        }
-      }
-    }
-    
-    .news-image {
-      margin-bottom: 2rem;
-      border-radius: 8px;
-      overflow: hidden;
-      
-      img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-      }
-    }
-    
-    .news-text {
-      color: custom-lighten($primary-color, 20%);
-      line-height: 1.8;
-      
-      p {
-        margin-bottom: 1.5rem;
-      }
-      
-      h4 {
-        font-size: 1.4rem;
-        color: $primary-color;
-        margin: 2rem 0 1rem;
-      }
-      
-      ul {
-        padding-left: 1.5rem;
-        margin-bottom: 1.5rem;
-        
-        li {
-          margin-bottom: 0.5rem;
-        }
-      }
-    }
-    
-    .share-links {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid $light-color;
-      
-      p {
-        font-weight: 600;
-        color: $primary-color;
-        margin-bottom: 1rem;
-      }
-      
-      .social-share {
-        display: flex;
-        gap: 1rem;
-        
-        a {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          background-color: $light-color;
-          color: $primary-color;
-          transition: all 0.3s ease;
-          
-          &:hover {
-            background-color: $accent-color;
-            color: white;
-            transform: translateY(-3px);
-          }
-        }
-      }
-    }
-  }
-}
-
-// Buttons
-.btn {
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  border-radius: 4px;
-  font-weight: 600;
-  text-decoration: none;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &.secondary {
-    background-color: transparent;
-    color: $primary-color;
-    border-color: $primary-color;
-    
-    &:hover {
-      background-color: $primary-color;
-      color: white;
-    }
-  }
-}
-
-.btn-text {
-  color: $accent-color;
-  font-weight: 600;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  
-  i {
-    margin-left: 0.5rem;
-    transition: transform 0.3s ease;
-  }
-  
-  &:hover {
-    color: custom-darken($accent-color, 10%);
-    
-    i {
-      transform: translateX(3px);
-    }
-  }
-}
-
-// Responsive adjustments
-@media (max-width: 768px) {
-  .page-header {
-    h1 {
-      font-size: 2.5rem;
-    }
-  }
-  
-  .news-detail .news-detail-content h2 {
-    font-size: 1.8rem;
-  }
+.news-page {
+  // Styles specific to the news page wrapper
+  // Most styles are now in the individual components
   
   .news-content {
-    padding: 3rem 0;
+    padding: 5rem 0;
+    background-color: $light-color;
   }
 }
 </style>

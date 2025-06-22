@@ -1,0 +1,107 @@
+<template>
+  <section class="cta-section" :style="backgroundStyle">
+    <div class="container">
+      <div 
+        class="cta-content"
+        v-motion
+        :initial="{ opacity: 0, scale: 0.9 }"
+        :enter="{ opacity: 1, scale: 1, transition: { duration: 800 } }"
+      >
+        <h2>{{ title }}</h2>
+        <p>{{ text }}</p>
+        <Button :to="buttonLink" :variant="buttonVariant">{{ buttonText }}</Button>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { computed } from 'vue';
+import Button from '@/components/ui/Button.vue';
+
+const props = defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  text: {
+    type: String,
+    required: true
+  },
+  buttonText: {
+    type: String,
+    default: 'Book Now'
+  },
+  buttonLink: {
+    type: String,
+    default: '/contact'
+  },
+  buttonVariant: {
+    type: String,
+    default: 'primary'
+  },
+  backgroundImage: {
+    type: String,
+    default: ''
+  },
+  backgroundColor: {
+    type: String,
+    default: 'gradient' // 'gradient' or any CSS color
+  }
+});
+
+const backgroundStyle = computed(() => {
+  if (props.backgroundImage) {
+    return {
+      backgroundImage: `linear-gradient(to right, rgba($primary-color, 0.9), rgba($accent-color, 0.9)), url('${props.backgroundImage}')`
+    };
+  }
+  
+  if (props.backgroundColor === 'gradient') {
+    return {
+      backgroundImage: 'linear-gradient(to right, rgba($primary-color, 0.9), rgba($accent-color, 0.9))'
+    };
+  }
+  
+  return {
+    backgroundColor: props.backgroundColor
+  };
+});
+</script>
+
+<style lang="scss" scoped>
+.cta-section {
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 5rem 0;
+  
+  .cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+    
+    h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+    }
+    
+    .btn.primary {
+      background-color: white;
+      color: $primary-color;
+      border-color: white;
+      
+      &:hover {
+        background-color: transparent;
+        color: white;
+      }
+    }
+  }
+}
+</style>
