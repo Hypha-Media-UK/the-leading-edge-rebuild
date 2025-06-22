@@ -33,7 +33,7 @@ const teamMembers: ExtendedTeamMember[] = [
     id: 10,
     name: 'Alan',
     role: 'Merketing Director',
-    bio: 'Alex brings creative vision and exceptional technical skill to our makeup services. With a background in fashion and editorial work, Alex specializes in creating personalized looks that enhance each client\'s natural beauty while reflecting their individual style and personality.',
+    bio: 'Alan brings creative vision and exceptional technical skill to our makeup services. With a background in fashion and editorial work, Alex specializes in creating personalized looks that enhance each client\'s natural beauty while reflecting their individual style and personality.',
     specialties: ['Bridal Makeup', 'Editorial Looks', 'Special Effects'],
     image: '/images/new/staff/staff10.webp',
     instagram: '@alexjohnsonmakeup'
@@ -183,7 +183,7 @@ const selectedTeamMemberData = computed<ExtendedTeamMember | null>(() => {
       text="We're always looking for talented and passionate professionals to join The Leading Edge family. If you're dedicated to excellence and love what you do, we'd love to hear from you."
       buttonText="View Careers"
       buttonLink="/careers"
-      backgroundColor="#486581"
+      backgroundColor="#ffffff"
     />
   </div>
 </template>
