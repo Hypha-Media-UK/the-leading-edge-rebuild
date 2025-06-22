@@ -6,7 +6,7 @@
       class="gallery-item"
       v-motion
       :initial="{ opacity: 0, scale: 0.9 }"
-      :enter="{ opacity: 1, scale: 1, transition: { delay: 200 + (index * 150), duration: 600 } }"
+      :enter="{ opacity: 1, scale: 1, transition: { delay: 100 + (index * 50), duration: 400 } }"
     >
       <img :src="image.src" :alt="image.alt || 'Service Gallery Image'">
     </div>
