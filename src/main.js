@@ -6,7 +6,6 @@ import App from './App.vue'
 // Import all views
 import Home from './views/Home.vue'
 import OurSalon from './views/OurSalon.vue'
-import Services from './views/Services.vue'
 import ServiceDetail from './views/ServiceDetail.vue'
 import MeetTheTeam from './views/MeetTheTeam.vue'
 import ContactUs from './views/ContactUs.vue'

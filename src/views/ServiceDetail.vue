@@ -5,289 +5,30 @@ import ServiceTabs from '@/components/sections/services/ServiceTabs.vue';
 import SubTabsRow from '@/components/sections/services/SubTabsRow.vue';
 import ServiceContentSection from '@/components/sections/services/ServiceContentSection.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
-import type { ServiceTab, ServiceItem, SubTab, GalleryImage } from '@/types/services';
+import type { ServiceItem } from '@/types/services';
+import { useFadeIn } from '@/composables/useAnimations';
+import { 
+  mainServiceTabs, 
+  hairSubTabs,
+  getSubTabsByMainTab, 
+  getServicesByTab,
+  hairstylingGalleryImages,
+  cuttingStylingServices,
+  treatmentsServices,
+  highlightsServices,
+  tintsServices,
+  occasionsServices,
+  bodyWaxingServices,
+  facialWaxThreadingServices,
+  eyesNailsServices
+} from '@/data/services';
 
 const isLoaded = ref<boolean>(false);
 const activeTab = ref<string>('allHair');
 const activeSubTab = ref<string>('cuttingStyling');
 
-// Define main tabs
-const mainTabs: ServiceTab[] = [
-  {
-    id: 'allHair',
-    label: 'All Hair',
-    icon: 'fas fa-cut'
-  },
-  {
-    id: 'beautyNails',
-    label: 'Beauty & Nails',
-    icon: 'fas fa-spa'
-  },
-  {
-    id: 'massageAesthetics',
-    label: 'Massage & Aesthetics',
-    icon: 'fas fa-hand-sparkles'
-  }
-];
-
-// Define sub-tabs for hair services
-const hairSubTabs: SubTab[] = [
-  {
-    id: 'cuttingStyling',
-    label: 'Cutting & Styling'
-  },
-  {
-    id: 'treatments',
-    label: 'Treatments'
-  },
-  {
-    id: 'highlights',
-    label: 'Highlights'
-  },
-  {
-    id: 'tints',
-    label: 'Tints'
-  },
-  {
-    id: 'occasions',
-    label: 'Occasions'
-  }
-];
-
-// Define sub-tabs for beauty & nails
-const beautySubTabs: SubTab[] = [
-  {
-    id: 'bodyWaxing',
-    label: 'Body Waxing'
-  },
-  {
-    id: 'facialWaxThreading',
-    label: 'Facial Wax & Threading'
-  },
-  {
-    id: 'eyesNails',
-    label: 'Eyes & Nails'
-  }
-];
-
-// Define sub-tabs for massage & aesthetics
-const massageSubTabs: SubTab[] = [
-  {
-    id: 'bodyMassage',
-    label: 'Body Massage'
-  },
-  {
-    id: 'facialMassage',
-    label: 'Facial Massage'
-  },
-  {
-    id: 'aestheticTreatments',
-    label: 'Treatments'
-  }
-];
-
-// Gallery images for cutting & styling
-const hairstylingGalleryImages: GalleryImage[] = [
-  { src: '/images/new/misc/style1.webp', alt: 'Hair Styling Example 1' },
-  { src: '/images/new/misc/style2.webp', alt: 'Hair Styling Example 2' },
-  { src: '/images/new/misc/style3.webp', alt: 'Hair Styling Example 3' },
-  { src: '/images/new/misc/style4.webp', alt: 'Hair Styling Example 4' }
-];
-
-// Service data - Hair Cutting & Styling
-const cuttingStylingServices: ServiceItem[] = [
-  {
-    title: 'SHAMPOO CUT & BLOW DRY',
-    price: '£30.00'
-  },
-  {
-    title: 'RE-STYLE CUT & FINISH',
-    price: '£36.00'
-  },
-  {
-    title: 'LONG HAIR CUT & BLOW DRY',
-    price: '£36.00'
-  },
-  {
-    title: 'SHAMPOO & BLOW DRY',
-    price: '£20.00'
-  },
-  {
-    title: 'LONG HAIR BLOW DRY',
-    price: '£24.00'
-  },
-  {
-    title: 'FRINGE TRIM',
-    price: '£4.00'
-  }
-];
-
-// Service data - Hair Treatments
-const treatmentsServices: ServiceItem[] = [
-  {
-    title: 'MILK_SHAKE INTEGRITY',
-    price: '£15.00'
-  },
-  {
-    title: 'MILK_SHAKE PAPAYA',
-    price: '£9.50'
-  },
-  {
-    title: 'MILK_SHAKE COCOA',
-    price: '£9.50'
-  },
-  {
-    title: 'WELLA INVIGO MASK',
-    price: '£10.00'
-  },
-  {
-    title: 'OLAPLEX FROM',
-    price: '£12.00'
-  },
-  {
-    title: 'FABRIQ INC SHAMP / COND',
-    price: '£169.00'
-  }
-];
-
-// Service data - Highlights
-const highlightsServices: ServiceItem[] = [
-  {
-    title: 'FULL HEAD HIGHLIGHTS',
-    price: 'from £65.00'
-  },
-  {
-    title: 'HALF HEAD HIGHLIGHTS',
-    price: 'from £55.00'
-  },
-  {
-    title: 'T-SECTION HIGHLIGHTS',
-    price: 'from £45.00'
-  },
-  {
-    title: 'FULL HEAD TINT',
-    price: 'from £50.00'
-  },
-  {
-    title: 'BALAYAGE',
-    price: 'from £70.00'
-  },
-  {
-    title: 'COLOUR CORRECTION',
-    price: 'Price on consultation'
-  }
-];
-
-// Service data - Tints
-const tintsServices: ServiceItem[] = [
-  {
-    title: 'FULL HEAD TINT',
-    price: 'from £50.00'
-  },
-  {
-    title: 'ROOT TINT',
-    price: 'from £40.00'
-  },
-  {
-    title: 'TINT & HIGHLIGHTS',
-    price: 'from £75.00'
-  }
-];
-
-// Service data - Occasions
-const occasionsServices: ServiceItem[] = [
-  {
-    title: 'BRIDAL HAIR',
-    description: 'Complete bridal styling including consultation and trial.',
-    price: 'from £90.00'
-  },
-  {
-    title: 'SPECIAL OCCASION STYLING',
-    description: 'Styling for proms, parties, and special events.',
-    price: 'from £50.00'
-  },
-  {
-    title: 'BRIDAL PARTY PACKAGE',
-    description: 'Styling for bride and bridesmaids (price per person).',
-    price: 'from £45.00'
-  }
-];
-
-// Service data - Body Waxing
-const bodyWaxingServices: ServiceItem[] = [
-  {
-    title: 'HALF LEG WAX',
-    price: '£22.00'
-  },
-  {
-    title: 'FULL LEG WAX',
-    price: '£30.00'
-  },
-  {
-    title: 'BIKINI WAX',
-    price: '£15.00'
-  },
-  {
-    title: 'UNDERARM WAX',
-    price: '£12.00'
-  },
-  {
-    title: 'FULL ARM WAX',
-    price: '£25.00'
-  }
-];
-
-// Service data - Facial Wax & Threading
-const facialWaxThreadingServices: ServiceItem[] = [
-  {
-    title: 'EYEBROW WAX',
-    price: '£10.00'
-  },
-  {
-    title: 'EYEBROW THREADING',
-    price: '£12.00'
-  },
-  {
-    title: 'LIP WAX',
-    price: '£8.00'
-  },
-  {
-    title: 'CHIN WAX',
-    price: '£8.00'
-  }
-];
-
-// Service data - Eyes & Nails
-const eyesNailsServices: ServiceItem[] = [
-  {
-    title: 'EYELASH TINT',
-    price: '£15.00'
-  },
-  {
-    title: 'EYEBROW TINT',
-    price: '£10.00'
-  },
-  {
-    title: 'MANICURE',
-    price: '£25.00'
-  },
-  {
-    title: 'PEDICURE',
-    price: '£30.00'
-  },
-  {
-    title: 'GEL MANICURE',
-    price: '£35.00'
-  }
-];
-
 // Get active sub-tabs based on current main tab
-const activeSubTabs = computed<SubTab[]>(() => {
-  if (activeTab.value === 'allHair') return hairSubTabs;
-  if (activeTab.value === 'beautyNails') return beautySubTabs;
-  if (activeTab.value === 'massageAesthetics') return massageSubTabs;
-  return [];
-});
+const activeSubTabs = computed(() => getSubTabsByMainTab(activeTab.value));
 
 // Function to change main tab
 const setActiveTab = (tab: string): void => {
@@ -302,6 +43,9 @@ const setActiveTab = (tab: string): void => {
 const setActiveSubTab = (subTab: string): void => {
   activeSubTab.value = subTab;
 };
+
+// Get the appropriate animation for intro content
+const introAnimation = useFadeIn(200, 600);
 
 onMounted((): void => {
   isLoaded.value = true;
@@ -322,8 +66,7 @@ onMounted((): void => {
         <div 
           class="intro-content"
           v-motion
-          :initial="{ opacity: 0, y: 30 }"
-          :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 600 } }"
+          v-bind="introAnimation"
         >
           <p>All our stylists are supported with training through the "Wella Academy" where they learn new skills and techniques to keep up to date with all the latest colours and trends. Rest assured our team will give you valuable tips and advice on how to keep your style and hair in tip top condition.</p>
           <p>We continually score 4.91 out of 5 in over 1800 independent reviews carried out by visitors to our salon.</p>
@@ -336,7 +79,7 @@ onMounted((): void => {
       <div class="container">
         <!-- Main Tabs -->
         <ServiceTabs
-          :tabs="mainTabs"
+          :tabs="mainServiceTabs"
           :activeTab="activeTab"
           @tab-change="setActiveTab"
         />

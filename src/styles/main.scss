@@ -1,28 +1,11 @@
-@use 'sass:color';
+// Main styles file
+
+// Import variables
+@use 'variables' as *;
 
 // Use standard CSS @import for external stylesheets, which is still valid
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
-
-// Create color adjustment functions directly
-@function custom-darken($color, $amount) {
-  @return color.adjust($color, $lightness: -$amount);
-}
-
-@function custom-lighten($color, $amount) {
-  @return color.adjust($color, $lightness: $amount);
-}
-
-// Color Variables
-$primary-color: #404E5C;
-$secondary-color: #B5AA9D;
-$accent-color: #C58F31;
-$light-color: #DCE1E6; // Lightened version of #C9CFD6
-$highlight-color: #D0D171;
-
-// Typography
-$font-family-primary: 'Playfair Display', serif;
-$font-family-secondary: 'Poppins', sans-serif;
 
 // Global Styles
 * {
@@ -90,48 +73,7 @@ img {
   padding: 5rem 0;
 }
 
-.btn {
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &.primary {
-    background-color: $accent-color;
-    color: white;
-    border: 2px solid $accent-color;
-    
-    &:hover {
-      background-color: custom-darken($accent-color, 10%);
-      border-color: custom-darken($accent-color, 10%);
-    }
-  }
-  
-  &.secondary {
-    background-color: transparent;
-    color: $primary-color;
-    border: 2px solid $primary-color;
-    
-    &:hover {
-      background-color: $primary-color;
-      color: white;
-    }
-  }
-  
-  &.light {
-    background-color: white;
-    color: $primary-color;
-    border: 2px solid white;
-    
-    &:hover {
-      background-color: transparent;
-      color: white;
-    }
-  }
-}
+// Button styles are now in _components.scss mixin
 
 // Utility Classes
 .text-center {
