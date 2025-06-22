@@ -57,13 +57,14 @@ defineProps({
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 5px 20px rgba($primary-color, 0.1);
-  transition: all 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+              box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   
   &:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba($primary-color, 0.15);
     
-    .service-image {
+    .service-image img {
       transform: scale(1.05);
     }
   }
@@ -78,11 +79,8 @@ defineProps({
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.5s ease;
-    }
-    
-    &:hover img {
-      transform: scale(1.05);
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
     }
   }
   
@@ -108,22 +106,31 @@ defineProps({
     position: relative;
     background: none;
     border: none;
-    padding: 0;
-    display: inline;
+    padding: 0.5rem 0.8rem;
+    margin-left: -0.8rem;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
+    transition: all 0.3s ease;
     
     &::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: $accent-color;
-      transition: width 0.3s ease;
+      content: '\f054'; /* Font Awesome arrow-right icon */
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      margin-left: 0.4rem;
+      font-size: 0.8rem;
+      opacity: 0;
+      transform: translateX(-5px);
+      transition: all 0.3s ease;
     }
     
-    &:hover::after {
-      width: 100%;
+    &:hover {
+      background-color: rgba($accent-color, 0.08);
+      
+      &::after {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
   }
 }

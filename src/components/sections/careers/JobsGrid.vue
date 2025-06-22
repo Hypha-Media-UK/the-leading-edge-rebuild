@@ -18,7 +18,7 @@
             <span class="location"><i class="fas fa-map-marker-alt"></i> {{ position.location }}</span>
           </div>
           <p class="position-excerpt">{{ position.description.substring(0, 120) }}...</p>
-          <button class="btn-text">View Details</button>
+          <Button variant="primary" @click="showPositionDetails(position.id)">View Details</Button>
         </div>
       </div>
       
@@ -27,13 +27,25 @@
         <p>We don't have any openings at the moment, but we're always interested in meeting talented professionals. Please feel free to submit your application for future consideration.</p>
       </div>
     </div>
+    
+    <!-- Position Details Modal -->
+    <teleport to="#modal-portal">
+      <JobPositionModal
+        :position="selectedPositionData"
+        @close="closePositionDetails"
+        v-if="selectedPosition"
+      />
+    </teleport>
   </section>
 </template>
 
 <script setup>
+import { ref, computed } from 'vue';
 import SectionHeader from '@/components/ui/SectionHeader.vue';
+import Button from '@/components/ui/Button.vue';
+import JobPositionModal from '@/components/ui/JobPositionModal.vue';
 
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     default: 'Current Openings'
@@ -46,6 +58,26 @@ defineProps({
     type: Array,
     required: true
   }
+});
+
+const selectedPosition = ref(null);
+
+const showPositionDetails = (id) => {
+  selectedPosition.value = id;
+  // Prevent body scrolling while modal is open
+  document.body.style.overflow = 'hidden';
+};
+
+const closePositionDetails = () => {
+  selectedPosition.value = null;
+  // Re-enable body scrolling
+  document.body.style.overflow = '';
+};
+
+// Get the selected position object
+const selectedPositionData = computed(() => {
+  if (!selectedPosition.value) return null;
+  return props.positions.find(p => p.id === selectedPosition.value) || null;
 });
 </script>
 
@@ -127,25 +159,5 @@ defineProps({
   }
 }
 
-.btn-text {
-  color: $accent-color;
-  font-weight: 600;
-  text-decoration: none;
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: $accent-color;
-    transition: width 0.3s ease;
-  }
-  
-  &:hover::after {
-    width: 100%;
-  }
-}
+/* The btn-text style has been removed as we're now using the Button component */
 </style>
