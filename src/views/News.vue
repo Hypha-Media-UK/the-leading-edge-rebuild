@@ -1,15 +1,16 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import NewsGrid from '@/components/sections/news/NewsGrid.vue';
 import FeaturedNewsItem from '@/components/sections/news/FeaturedNewsItem.vue';
 import NewsDetailView from '@/components/sections/news/NewsDetailView.vue';
 import NewsletterSignup from '@/components/sections/news/NewsletterSignup.vue';
+import type { NewsArticle, NewsCategory } from '@/types/news';
 
-const isLoaded = ref(false);
+const isLoaded = ref<boolean>(false);
 
 // Sample news data
-const newsItems = [
+const newsItems: NewsArticle[] = [
   {
     id: 1,
     title: "Summer Hair Trends 2025",
@@ -140,7 +141,7 @@ const newsItems = [
 ];
 
 // News categories
-const categories = [
+const categories: NewsCategory[] = [
   { slug: 'hair', name: 'Hair' },
   { slug: 'beauty', name: 'Beauty' },
   { slug: 'team', name: 'Team' },
@@ -149,15 +150,15 @@ const categories = [
 ];
 
 // State variables
-const activeCategory = ref('all');
-const selectedArticle = ref(null);
-const showDetailView = ref(false);
+const activeCategory = ref<string>('all');
+const selectedArticle = ref<NewsArticle | null>(null);
+const showDetailView = ref<boolean>(false);
 
 // Featured news is the most recent one
-const featuredNews = newsItems[0];
+const featuredNews: NewsArticle = newsItems[0];
 
 // Filtered news items (excluding the featured one)
-const filteredNewsItems = computed(() => {
+const filteredNewsItems = computed<NewsArticle[]>(() => {
   const nonFeaturedItems = newsItems.filter(item => item.id !== featuredNews.id);
   
   if (activeCategory.value === 'all') {
@@ -170,14 +171,14 @@ const filteredNewsItems = computed(() => {
 });
 
 // Related articles for the detail view
-const relatedArticles = computed(() => {
+const relatedArticles = computed<NewsArticle[]>(() => {
   if (!selectedArticle.value) return [];
   
   // Get articles from the same category or a few random ones
   return newsItems
-    .filter(item => item.id !== selectedArticle.value.id)
+    .filter(item => item.id !== selectedArticle.value!.id)
     .filter(item => {
-      if (selectedArticle.value.category) {
+      if (selectedArticle.value?.category) {
         return item.category === selectedArticle.value.category;
       }
       return true;
@@ -186,27 +187,27 @@ const relatedArticles = computed(() => {
 });
 
 // Handler functions
-const handleCategoryChange = (category) => {
+const handleCategoryChange = (category: string): void => {
   activeCategory.value = category;
 };
 
-const viewArticleDetail = (article) => {
+const viewArticleDetail = (article: NewsArticle): void => {
   selectedArticle.value = article;
   showDetailView.value = true;
   window.scrollTo(0, 0);
 };
 
-const backToNewsList = () => {
+const backToNewsList = (): void => {
   showDetailView.value = false;
   selectedArticle.value = null;
 };
 
-const handleNewsletterSignup = (email) => {
+const handleNewsletterSignup = (email: string): void => {
   console.log('Newsletter signup:', email);
   // In a real application, you would send this to your backend
 };
 
-onMounted(() => {
+onMounted((): void => {
   isLoaded.value = true;
 });
 </script>

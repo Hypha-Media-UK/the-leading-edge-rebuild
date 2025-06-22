@@ -1,13 +1,22 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import ContactInfoSection from '@/components/sections/contact/ContactInfoSection.vue';
 import FAQSection from '@/components/sections/contact/FAQSection.vue';
+import type { 
+  FAQ, 
+  ServiceOption, 
+  TimeOption, 
+  OpeningHour, 
+  ContactItem, 
+  SocialLink,
+  FormData 
+} from '@/types/contact';
 
-const isLoaded = ref(false);
+const isLoaded = ref<boolean>(false);
 
 // FAQs data
-const faqs = [
+const faqs: FAQ[] = [
   {
     question: "How far in advance should I book an appointment?",
     answer: "We recommend booking at least 1-2 weeks in advance for regular services and 3-4 weeks for special occasions or bridal appointments to ensure availability with your preferred stylist."
@@ -27,7 +36,7 @@ const faqs = [
 ];
 
 // Service options for the form
-const serviceOptions = [
+const serviceOptions: ServiceOption[] = [
   { value: 'haircut', label: 'Haircut & Styling' },
   { value: 'color', label: 'Hair Color & Highlights' },
   { value: 'treatment', label: 'Hair Treatment' },
@@ -40,7 +49,7 @@ const serviceOptions = [
 ];
 
 // Time options for the form
-const timeOptions = [
+const timeOptions: TimeOption[] = [
   { value: '9:00', label: '9:00 AM' },
   { value: '10:00', label: '10:00 AM' },
   { value: '11:00', label: '11:00 AM' },
@@ -54,7 +63,7 @@ const timeOptions = [
 ];
 
 // Opening hours data
-const openingHours = [
+const openingHours: OpeningHour[] = [
   { day: 'Monday', time: 'Closed', closed: true },
   { day: 'Tuesday', time: '09:00 - 18:00' },
   { day: 'Wednesday', time: '09:00 - 18:00' },
@@ -65,13 +74,13 @@ const openingHours = [
 ];
 
 // Contact items data
-const contactItems = [
+const contactItems: ContactItem[] = [
   { icon: 'fas fa-phone', text: '0161 368 9999', link: 'tel:01613689999' },
   { icon: 'fas fa-envelope', text: 'enquiries@leadingedgehairandbeauty.co.uk', link: 'mailto:enquiries@leadingedgehairandbeauty.co.uk' }
 ];
 
 // Social media links data
-const socialLinks = [
+const socialLinks: SocialLink[] = [
   { icon: 'fab fa-facebook-f', url: '#', label: 'Facebook' },
   { icon: 'fab fa-instagram', url: '#', label: 'Instagram' },
   { icon: 'fab fa-twitter', url: '#', label: 'Twitter' },
@@ -79,13 +88,13 @@ const socialLinks = [
 ];
 
 // Form submission handler
-const handleFormSubmit = (formData) => {
+const handleFormSubmit = (formData: FormData): void => {
   console.log('Form submitted:', formData);
   // In a real application, you would send this data to your backend
 };
 
 // Form reset handler
-const handleFormReset = () => {
+const handleFormReset = (): void => {
   console.log('Form reset');
 };
 

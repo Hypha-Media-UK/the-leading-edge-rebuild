@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import HeroSection from '@/components/sections/home/HeroSection.vue';
 import FeaturesSection from '@/components/sections/home/FeaturesSection.vue';
@@ -7,10 +7,43 @@ import TestimonialsSection from '@/components/sections/home/TestimonialsSection.
 import InstagramFeed from '@/components/sections/home/InstagramFeed.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
 
-const isLoaded = ref(false);
+// Define types
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Service {
+  title: string;
+  description: string;
+  image: string;
+  linkText: string;
+  linkUrl: string;
+}
+
+interface Testimonial {
+  id: number;
+  quote: string;
+  name: string;
+  role: string;
+  image: string;
+}
+
+interface InstagramImage {
+  src: string;
+}
+
+interface HeroButton {
+  text: string;
+  to: string;
+  variant: 'primary' | 'secondary';
+}
+
+const isLoaded = ref<boolean>(false);
 
 // Features data
-const features = [
+const features: Feature[] = [
   {
     icon: 'fas fa-crown',
     title: 'Premium Experience',
@@ -29,7 +62,7 @@ const features = [
 ];
 
 // Services data
-const services = [
+const services: Service[] = [
   {
     title: 'Styling, Cutting & Colouring',
     description: 'Expert cutting, styling and coloring services to create the perfect look tailored to your unique style.',
@@ -54,7 +87,7 @@ const services = [
 ];
 
 // Testimonials data
-const testimonials = [
+const testimonials: Testimonial[] = [
   {
     id: 1,
     quote: "The Leading Edge has completely transformed my hair care routine. The team is professional, knowledgeable, and always makes me feel welcome.",
@@ -93,12 +126,12 @@ const testimonials = [
 ];
 
 // Instagram images
-const instagramImages = Array.from({ length: 6 }, (_, i) => ({
+const instagramImages: InstagramImage[] = Array.from({ length: 6 }, (_, i) => ({
   src: `/images/new/insta/insta${i + 1}.webp`
 }));
 
 // Hero buttons
-const heroButtons = [
+const heroButtons: HeroButton[] = [
   { text: 'Explore Services', to: '/services', variant: 'secondary' },
   { text: 'Book Appointment', to: '/contact', variant: 'secondary' },
   { text: 'Offers & Gift Vouchers', to: '/offers', variant: 'primary' }

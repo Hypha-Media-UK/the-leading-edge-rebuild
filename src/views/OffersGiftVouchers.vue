@@ -1,14 +1,15 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import PromotionsGrid from '@/components/sections/offers/PromotionsGrid.vue';
 import GiftVoucherSection from '@/components/sections/offers/GiftVoucherSection.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
+import type { Promotion } from '@/types/offers';
 
-const isLoaded = ref(false);
+const isLoaded = ref<boolean>(false);
 
 // Promotions data
-const promotions = [
+const promotions: Promotion[] = [
   {
     id: 'friend',
     title: 'Refer a Friend',
@@ -63,7 +64,7 @@ const promotions = [
   }
 ];
 
-onMounted(() => {
+onMounted((): void => {
   isLoaded.value = true;
 });
 </script>

@@ -1,18 +1,19 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import ServicesTabsSection from '@/components/sections/services/ServicesTabsSection.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
+import type { ServiceTab, ServiceItem, ServicePackage } from '@/types/services';
 
-const isLoaded = ref(false);
-const activeTab = ref('hair');
+const isLoaded = ref<boolean>(false);
+const activeTab = ref<string>('hair');
 
-const setActiveTab = (tab) => {
+const setActiveTab = (tab: string): void => {
   activeTab.value = tab;
 };
 
 // Define tabs
-const tabs = [
+const tabs: ServiceTab[] = [
   {
     id: 'hair',
     label: 'Hair',
@@ -36,7 +37,7 @@ const tabs = [
 ];
 
 // Hair services data
-const hairServices = [
+const hairServices: ServiceItem[] = [
   {
     title: "Women's Haircut & Style",
     description: "Includes consultation, shampoo, conditioner, cut, and style.",
@@ -70,7 +71,7 @@ const hairServices = [
 ];
 
 // Beauty services data
-const beautyServices = [
+const beautyServices: ServiceItem[] = [
   {
     title: "Signature Facial",
     description: "Customized facial to address your specific skin concerns.",
@@ -104,7 +105,7 @@ const beautyServices = [
 ];
 
 // Nail services data
-const nailServices = [
+const nailServices: ServiceItem[] = [
   {
     title: "Classic Manicure",
     description: "Nail shaping, cuticle care, hand massage, and polish.",
@@ -138,7 +139,7 @@ const nailServices = [
 ];
 
 // Packages data
-const packages = [
+const packages: ServicePackage[] = [
   {
     title: "Essential Package",
     price: "£140",
@@ -179,7 +180,7 @@ const packages = [
   }
 ];
 
-onMounted(() => {
+onMounted((): void => {
   isLoaded.value = true;
 });
 </script>

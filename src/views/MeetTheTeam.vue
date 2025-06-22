@@ -1,28 +1,35 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import TeamGrid from '@/components/sections/team/TeamGrid.vue';
 import TeamMemberModal from '@/components/ui/TeamMemberModal.vue';
 import TeamValuesSection from '@/components/sections/team/TeamValuesSection.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
+import type { TeamMember, TeamValue } from '@/types/team';
 
-const isLoaded = ref(false);
-const selectedTeamMember = ref(null);
+const isLoaded = ref<boolean>(false);
+const selectedTeamMember = ref<number | null>(null);
 
-const showTeamMemberDetails = (id) => {
+const showTeamMemberDetails = (id: number): void => {
   selectedTeamMember.value = id;
   // Prevent body scrolling while modal is open
   document.body.style.overflow = 'hidden';
 };
 
-const closeTeamMemberDetails = () => {
+const closeTeamMemberDetails = (): void => {
   selectedTeamMember.value = null;
   // Re-enable body scrolling
   document.body.style.overflow = '';
 };
 
+// Extended TeamMember type for this specific view
+interface ExtendedTeamMember extends TeamMember {
+  specialties?: string[];
+  instagram?: string;
+}
+
 // Team members data
-const teamMembers = [
+const teamMembers: ExtendedTeamMember[] = [
   {
     id: 10,
     name: 'Alan',
@@ -116,7 +123,7 @@ const teamMembers = [
 ];
 
 // Team values data
-const teamValues = [
+const teamValues: TeamValue[] = [
   {
     title: "Continuous Education",
     description: "Our team regularly attends workshops, training sessions, and industry events to stay at the forefront of the latest techniques and trends.",
@@ -135,12 +142,12 @@ const teamValues = [
 ];
 
 // Get the selected team member object
-const selectedTeamMemberData = computed(() => {
+const selectedTeamMemberData = computed<ExtendedTeamMember | null>(() => {
   if (!selectedTeamMember.value) return null;
   return teamMembers.find(m => m.id === selectedTeamMember.value) || null;
 });
 
-onMounted(() => {
+onMounted((): void => {
   isLoaded.value = true;
 });
 </script>

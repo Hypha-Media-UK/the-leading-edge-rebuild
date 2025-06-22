@@ -1,17 +1,18 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import ServiceTabs from '@/components/sections/services/ServiceTabs.vue';
 import SubTabsRow from '@/components/sections/services/SubTabsRow.vue';
 import ServiceContentSection from '@/components/sections/services/ServiceContentSection.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
+import type { ServiceTab, ServiceItem, SubTab, GalleryImage } from '@/types/services';
 
-const isLoaded = ref(false);
-const activeTab = ref('allHair');
-const activeSubTab = ref('cuttingStyling');
+const isLoaded = ref<boolean>(false);
+const activeTab = ref<string>('allHair');
+const activeSubTab = ref<string>('cuttingStyling');
 
 // Define main tabs
-const mainTabs = [
+const mainTabs: ServiceTab[] = [
   {
     id: 'allHair',
     label: 'All Hair',
@@ -30,7 +31,7 @@ const mainTabs = [
 ];
 
 // Define sub-tabs for hair services
-const hairSubTabs = [
+const hairSubTabs: SubTab[] = [
   {
     id: 'cuttingStyling',
     label: 'Cutting & Styling'
@@ -54,7 +55,7 @@ const hairSubTabs = [
 ];
 
 // Define sub-tabs for beauty & nails
-const beautySubTabs = [
+const beautySubTabs: SubTab[] = [
   {
     id: 'bodyWaxing',
     label: 'Body Waxing'
@@ -70,7 +71,7 @@ const beautySubTabs = [
 ];
 
 // Define sub-tabs for massage & aesthetics
-const massageSubTabs = [
+const massageSubTabs: SubTab[] = [
   {
     id: 'bodyMassage',
     label: 'Body Massage'
@@ -86,7 +87,7 @@ const massageSubTabs = [
 ];
 
 // Gallery images for cutting & styling
-const hairstylingGalleryImages = [
+const hairstylingGalleryImages: GalleryImage[] = [
   { src: '/images/new/misc/style1.webp', alt: 'Hair Styling Example 1' },
   { src: '/images/new/misc/style2.webp', alt: 'Hair Styling Example 2' },
   { src: '/images/new/misc/style3.webp', alt: 'Hair Styling Example 3' },
@@ -94,7 +95,7 @@ const hairstylingGalleryImages = [
 ];
 
 // Service data - Hair Cutting & Styling
-const cuttingStylingServices = [
+const cuttingStylingServices: ServiceItem[] = [
   {
     title: 'SHAMPOO CUT & BLOW DRY',
     price: '£30.00'
@@ -122,7 +123,7 @@ const cuttingStylingServices = [
 ];
 
 // Service data - Hair Treatments
-const treatmentsServices = [
+const treatmentsServices: ServiceItem[] = [
   {
     title: 'MILK_SHAKE INTEGRITY',
     price: '£15.00'
@@ -150,7 +151,7 @@ const treatmentsServices = [
 ];
 
 // Service data - Highlights
-const highlightsServices = [
+const highlightsServices: ServiceItem[] = [
   {
     title: 'FULL HEAD HIGHLIGHTS',
     price: 'from £65.00'
@@ -178,7 +179,7 @@ const highlightsServices = [
 ];
 
 // Service data - Tints
-const tintsServices = [
+const tintsServices: ServiceItem[] = [
   {
     title: 'FULL HEAD TINT',
     price: 'from £50.00'
@@ -194,7 +195,7 @@ const tintsServices = [
 ];
 
 // Service data - Occasions
-const occasionsServices = [
+const occasionsServices: ServiceItem[] = [
   {
     title: 'BRIDAL HAIR',
     description: 'Complete bridal styling including consultation and trial.',
@@ -213,7 +214,7 @@ const occasionsServices = [
 ];
 
 // Service data - Body Waxing
-const bodyWaxingServices = [
+const bodyWaxingServices: ServiceItem[] = [
   {
     title: 'HALF LEG WAX',
     price: '£22.00'
@@ -237,7 +238,7 @@ const bodyWaxingServices = [
 ];
 
 // Service data - Facial Wax & Threading
-const facialWaxThreadingServices = [
+const facialWaxThreadingServices: ServiceItem[] = [
   {
     title: 'EYEBROW WAX',
     price: '£10.00'
@@ -257,7 +258,7 @@ const facialWaxThreadingServices = [
 ];
 
 // Service data - Eyes & Nails
-const eyesNailsServices = [
+const eyesNailsServices: ServiceItem[] = [
   {
     title: 'EYELASH TINT',
     price: '£15.00'
@@ -281,7 +282,7 @@ const eyesNailsServices = [
 ];
 
 // Get active sub-tabs based on current main tab
-const activeSubTabs = computed(() => {
+const activeSubTabs = computed<SubTab[]>(() => {
   if (activeTab.value === 'allHair') return hairSubTabs;
   if (activeTab.value === 'beautyNails') return beautySubTabs;
   if (activeTab.value === 'massageAesthetics') return massageSubTabs;
@@ -289,7 +290,7 @@ const activeSubTabs = computed(() => {
 });
 
 // Function to change main tab
-const setActiveTab = (tab) => {
+const setActiveTab = (tab: string): void => {
   activeTab.value = tab;
   // Reset sub-tab when changing main tab
   if (tab === 'allHair') activeSubTab.value = 'cuttingStyling';
@@ -298,11 +299,11 @@ const setActiveTab = (tab) => {
 };
 
 // Function to change sub-tab
-const setActiveSubTab = (subTab) => {
+const setActiveSubTab = (subTab: string): void => {
   activeSubTab.value = subTab;
 };
 
-onMounted(() => {
+onMounted((): void => {
   isLoaded.value = true;
 });
 </script>

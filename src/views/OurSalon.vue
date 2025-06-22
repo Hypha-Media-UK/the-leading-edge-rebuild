@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import AboutStory from '@/components/sections/salon/AboutStory.vue';
@@ -6,11 +6,12 @@ import PhilosophyGrid from '@/components/sections/salon/PhilosophyGrid.vue';
 import InteriorGallery from '@/components/sections/salon/InteriorGallery.vue';
 import ProductsShowcase from '@/components/sections/salon/ProductsShowcase.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
+import type { PhilosophyItem, InteriorImage, Product } from '@/types/salon';
 
-const isLoaded = ref(false);
+const isLoaded = ref<boolean>(false);
 
 // Philosophy items data
-const philosophyItems = [
+const philosophyItems: PhilosophyItem[] = [
   {
     title: "Client-Centered",
     description: "We believe that every client deserves personalized attention and services tailored to their unique needs and preferences.",
@@ -34,7 +35,7 @@ const philosophyItems = [
 ];
 
 // Interior gallery images
-const interiorImages = [
+const interiorImages: InteriorImage[] = [
   { src: '/images/new/internal/int1.webp', alt: 'Salon interior - Main area' },
   { src: '/images/new/internal/int2.webp', alt: 'Salon interior - Styling station' },
   { src: '/images/new/internal/int3.webp', alt: 'Salon interior - Treatment area' },
@@ -42,14 +43,14 @@ const interiorImages = [
 ];
 
 // Products data
-const products = [
+const products: Product[] = [
   { image: '/images/new/products/prod1.webp', alt: 'Premium Brand Product 1' },
   { image: '/images/new/products/prod2.webp', alt: 'Premium Brand Product 2' },
   { image: '/images/new/products/prod3.webp', alt: 'Premium Brand Product 3' },
   { image: '/images/new/products/prod4.webp', alt: 'Premium Brand Product 4' }
 ];
 
-onMounted(() => {
+onMounted((): void => {
   isLoaded.value = true;
 });
 </script>

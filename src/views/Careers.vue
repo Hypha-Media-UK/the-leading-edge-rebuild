@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import PageHeader from '@/components/ui/PageHeader.vue';
 import JobsGrid from '@/components/sections/careers/JobsGrid.vue';
@@ -6,14 +6,14 @@ import BenefitsSection from '@/components/sections/careers/BenefitsSection.vue';
 import ProcessSteps from '@/components/sections/careers/ProcessSteps.vue';
 import Button from '@/components/ui/Button.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
+import type { Job, Benefit, ApplicationStep } from '@/types/careers';
 
-const isLoaded = ref(false);
-const expandedJobId = ref(null);
-const showApplicationForm = ref(false);
-const selectedJobId = ref(null);
+const isLoaded = ref<boolean>(false);
+const showApplicationForm = ref<boolean>(false);
+const selectedJobId = ref<number | null>(null);
 
 // Sample jobs data
-const jobs = [
+const jobs: Job[] = [
   {
     id: 1,
     title: 'Senior Hair Stylist',
@@ -109,7 +109,7 @@ const jobs = [
 ];
 
 // Benefits data
-const benefits = [
+const benefits: Benefit[] = [
   {
     icon: 'fas fa-graduation-cap',
     title: 'Continuous Education',
@@ -143,7 +143,7 @@ const benefits = [
 ];
 
 // Application process steps
-const applicationSteps = [
+const applicationSteps: ApplicationStep[] = [
   {
     title: 'Submit Your Application',
     description: 'Send your CV and cover letter to our careers email or apply through our website for open positions.'
@@ -162,16 +162,9 @@ const applicationSteps = [
   }
 ];
 
-// Functions to handle job interactions
-const handleJobExpand = (jobId) => {
-  expandedJobId.value = jobId;
-};
+// Function to handle job application
 
-const handleJobCollapse = () => {
-  expandedJobId.value = null;
-};
-
-const handleJobApplication = (jobId) => {
+const handleJobApplication = (jobId: number | null): void => {
   selectedJobId.value = jobId;
   showApplicationForm.value = true;
   // Scroll to application form
@@ -182,12 +175,12 @@ const handleJobApplication = (jobId) => {
 };
 
 // Get selected job details for the application form
-const selectedJob = computed(() => {
+const selectedJob = computed<Job | null>(() => {
   if (!selectedJobId.value) return null;
   return jobs.find(job => job.id === selectedJobId.value) || null;
 });
 
-onMounted(() => {
+onMounted((): void => {
   isLoaded.value = true;
 });
 </script>
