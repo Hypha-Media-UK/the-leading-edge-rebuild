@@ -4,13 +4,14 @@
       <SectionHeader 
         :title="title" 
         :description="description"
+        :isDark="darkMode"
       />
       
       <div class="brands-container">
         <div 
           v-for="(product, index) in products"
           :key="index"
-          class="brand"
+          :class="['brand', `brand-position-${index}`]"
           v-motion
           :initial="{ opacity: 0 }"
           :enter="{ opacity: 1, transition: { delay: 200 + (index * 200), duration: 600 } }"
@@ -72,9 +73,10 @@ defineProps({
 .products-section {
   padding: 5rem 0;
   background-color: white;
+  color: $primary-color; // Default dark text for light background
   
   &.dark {
-    background-color: $secondary-color;
+    background-color: $primary-color;
     color: white;
     
     .section-header {
@@ -86,9 +88,26 @@ defineProps({
   
   .brands-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: 
+      "main top-right-1"
+      "main top-right-2"
+      "main bottom-right";
+    gap: 1.5rem;
     margin-bottom: 3rem;
+    height: 500px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto auto;
+      grid-template-areas: 
+        "main"
+        "top-right-1"
+        "top-right-2"
+        "bottom-right";
+      height: auto;
+    }
     
     .brand {
       position: relative;
@@ -97,11 +116,41 @@ defineProps({
       box-shadow: 0 5px 15px rgba($primary-color, 0.1);
       transition: all 0.3s ease;
       background-color: white;
-      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 1rem;
+      
+      &.brand-position-0 {
+        grid-area: main;
+        min-height: 460px;
+        
+        @media (max-width: 768px) {
+          min-height: 300px;
+        }
+      }
+      
+      &.brand-position-1, &.brand-position-2 {
+        grid-area: top-right-1;
+        min-height: 150px;
+        
+        @media (max-width: 768px) {
+          min-height: 200px;
+        }
+      }
+      
+      &.brand-position-2 {
+        grid-area: top-right-2;
+      }
+      
+      &.brand-position-3 {
+        grid-area: bottom-right;
+        min-height: 150px;
+        
+        @media (max-width: 768px) {
+          min-height: 200px;
+        }
+      }
       
       &:hover {
         transform: scale(1.03);

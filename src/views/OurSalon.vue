@@ -4,9 +4,9 @@ import PageHeader from '@/components/ui/PageHeader.vue';
 import AboutStory from '@/components/sections/salon/AboutStory.vue';
 import PhilosophyGrid from '@/components/sections/salon/PhilosophyGrid.vue';
 import InteriorGallery from '@/components/sections/salon/InteriorGallery.vue';
-import ProductsShowcase from '@/components/sections/salon/ProductsShowcase.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
-import type { PhilosophyItem, InteriorImage, Product } from '@/types/salon';
+import type { PhilosophyItem, InteriorImage } from '@/types/salon';
+import type { Product } from '@/types/products';
 
 const isLoaded = ref<boolean>(false);
 
@@ -107,16 +107,6 @@ onMounted((): void => {
       <p>Our salon is designed to be a haven of tranquility amidst the bustle of everyday life. With thoughtfully designed spaces, comfortable seating, and ambient lighting, we've created an environment that soothes the senses while our expert team takes care of your beauty needs.</p>
       <p>From our reception area to our styling stations and treatment rooms, every corner of The Leading Edge is crafted to enhance your experience and ensure you leave feeling refreshed and rejuvenated.</p>
     </InteriorGallery>
-
-    <!-- Products Section -->
-    <ProductsShowcase
-      title="Premium Products"
-      description="We partner with the industry's finest brands to bring you exceptional quality"
-      :products="products"
-      ctaText="View our Online Shop"
-      ctaIcon="fas fa-shopping-cart"
-      :darkMode="true"
-    />
 
     <!-- CTA Section -->
     <CallToAction

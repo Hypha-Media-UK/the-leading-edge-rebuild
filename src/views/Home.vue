@@ -4,8 +4,11 @@ import HeroSection from '@/components/sections/home/HeroSection.vue';
 import FeaturesSection from '@/components/sections/home/FeaturesSection.vue';
 import ServicesPreviewSection from '@/components/sections/home/ServicesPreviewSection.vue';
 import TestimonialsSection from '@/components/sections/home/TestimonialsSection.vue';
+import ProductsShowcase from '@/components/sections/home/ProductsShowcase.vue';
 import InstagramFeed from '@/components/sections/home/InstagramFeed.vue';
 import CallToAction from '@/components/sections/common/CallToAction.vue';
+import type { Product } from '@/types/products';
+
 
 // Define types
 interface Feature {
@@ -137,6 +140,14 @@ const heroButtons: HeroButton[] = [
   { text: 'Offers & Gift Vouchers', to: '/offers', variant: 'primary' }
 ];
 
+// Products data
+const products: Product[] = [
+  { image: '/images/new/products/prod1.webp', alt: 'Premium Brand Product 1' },
+  { image: '/images/new/products/prod2.webp', alt: 'Premium Brand Product 2' },
+  { image: '/images/new/products/prod3.webp', alt: 'Premium Brand Product 3' },
+  { image: '/images/new/products/prod4.webp', alt: 'Premium Brand Product 4' }
+];
+
 onMounted(() => {
   isLoaded.value = true;
 });
@@ -171,6 +182,17 @@ onMounted(() => {
     <TestimonialsSection
       title="What Our Clients Say"
       :testimonials="testimonials"
+    />
+
+
+    <!-- Products Section -->
+    <ProductsShowcase
+      title="Premium Products"
+      description="We partner with the industry's finest brands to bring you exceptional quality"
+      :products="products"
+      ctaText="View our Online Shop"
+      ctaIcon="fas fa-shopping-cart"
+      :darkMode="true"
     />
 
     <!-- Instagram Feed -->

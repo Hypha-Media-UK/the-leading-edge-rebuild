@@ -10,12 +10,3 @@ export interface InteriorImage {
   src: string;
   alt: string;
 }
-
-export interface Product {
-  image: string;
-  alt: string;
-  name?: string;
-  description?: string;
-  price?: string;
-  link?: string;
-}
