@@ -1,5 +1,5 @@
 <template>
-  <section class="newsletter-section" :class="{ 'dark': darkMode }">
+  <section class="newsletter-section">
     <div class="container">
       <div class="newsletter-content">
         <div 
@@ -74,10 +74,6 @@ const props = defineProps({
   formNotice: {
     type: String,
     default: 'We respect your privacy and will never share your email address.'
-  },
-  darkMode: {
-    type: Boolean,
-    default: false
   }
 });
 
@@ -120,20 +116,16 @@ const validateEmail = (email) => {
 <style lang="scss" scoped>
 .newsletter-section {
   padding: 5rem 0;
-  background-color: white;
+  background-color: $secondary-color;
   
-  &.dark {
-    background-color: $secondary-color;
-    
-    .newsletter-text {
-      h2, p {
-        color: white;
-      }
+  .newsletter-text {
+    h2, p {
+      color: white;
     }
-    
-    .form-notice {
-      color: rgba(white, 0.7);
-    }
+  }
+  
+  .form-notice {
+    color: rgba(white, 0.7);
   }
   
   .newsletter-content {

@@ -1,10 +1,9 @@
 <template>
-  <section class="products-section" :class="{ 'dark': darkMode }">
+  <section class="products-section">
     <div class="container">
       <SectionHeader 
         :title="title" 
         :description="description"
-        :isDark="darkMode"
       />
       
       <div class="brands-container">
@@ -23,7 +22,7 @@
       <div class="products-cta" v-if="ctaText">
         <Button 
           :href="ctaLink" 
-          :variant="darkMode ? 'primary' : 'secondary'" 
+          variant="primary" 
           :icon="ctaIcon"
         >
           {{ ctaText }}
@@ -61,10 +60,6 @@ defineProps({
   ctaIcon: {
     type: String,
     default: 'fas fa-shopping-cart'
-  },
-  darkMode: {
-    type: Boolean,
-    default: true
   }
 });
 </script>
@@ -73,40 +68,27 @@ defineProps({
 .products-section {
   padding: 5rem 0;
   background-color: white;
-  color: $primary-color; // Default dark text for light background
-  
-  &.dark {
-    background-color: $primary-color;
-    color: white;
-    
-    .section-header {
-      :deep(h2), :deep(p) {
-        color: white;
-      }
-    }
-  }
+  color: $primary-color;
   
   .brands-container {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: 
-      "main top-right-1"
-      "main top-right-2"
-      "main bottom-right";
+    grid-template-areas:
+      "prod1 prod1 prod2 prod3"
+      "prod1 prod1 prod4 prod4";
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 200px);
     gap: 1.5rem;
     margin-bottom: 3rem;
-    height: 500px;
     
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
-      grid-template-rows: auto auto auto auto;
+      grid-template-rows: auto;
       grid-template-areas: 
-        "main"
-        "top-right-1"
-        "top-right-2"
-        "bottom-right";
-      height: auto;
+        "prod1"
+        "prod2"
+        "prod3"
+        "prod4";
+      gap: 1rem;
     }
     
     .brand {
@@ -119,36 +101,37 @@ defineProps({
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1rem;
+      padding: 0;
       
       &.brand-position-0 {
-        grid-area: main;
-        min-height: 460px;
+        grid-area: prod1;
         
         @media (max-width: 768px) {
-          min-height: 300px;
+          height: 300px;
         }
       }
       
-      &.brand-position-1, &.brand-position-2 {
-        grid-area: top-right-1;
-        min-height: 150px;
+      &.brand-position-1 {
+        grid-area: prod2;
         
         @media (max-width: 768px) {
-          min-height: 200px;
+          height: 200px;
         }
       }
       
       &.brand-position-2 {
-        grid-area: top-right-2;
+        grid-area: prod3;
+        
+        @media (max-width: 768px) {
+          height: 200px;
+        }
       }
       
       &.brand-position-3 {
-        grid-area: bottom-right;
-        min-height: 150px;
+        grid-area: prod4;
         
         @media (max-width: 768px) {
-          min-height: 200px;
+          height: 200px;
         }
       }
       
@@ -158,9 +141,9 @@ defineProps({
       }
       
       img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         display: block;
         transition: transform 0.5s ease;
       }

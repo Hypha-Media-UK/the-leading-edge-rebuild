@@ -256,7 +256,6 @@ onMounted((): void => {
     <NewsletterSignup
       title="Subscribe to Our Newsletter"
       description="Stay updated with the latest news, beauty tips, and exclusive offers straight to your inbox."
-      :darkMode="true"
       @subscribe="handleNewsletterSignup"
     />
   </div>

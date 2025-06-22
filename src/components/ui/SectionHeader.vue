@@ -1,5 +1,5 @@
 <template>
-  <div class="section-header" :class="{ 'dark': isDark }">
+  <div class="section-header">
     <h2>{{ title }}</h2>
     <div class="separator"></div>
     <p v-if="description">{{ description }}</p>
@@ -15,10 +15,6 @@ defineProps({
   description: {
     type: String,
     default: ''
-  },
-  isDark: {
-    type: Boolean,
-    default: false
   }
 });
 </script>
@@ -46,16 +42,6 @@ defineProps({
     margin: 0 auto;
     color: custom-lighten($primary-color, 20%);
     font-size: 1.1rem;
-  }
-  
-  &.dark {
-    h2 {
-      color: white;
-    }
-    
-    p {
-      color: custom-lighten(white, 10%);
-    }
   }
 }
 </style>

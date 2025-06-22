@@ -192,7 +192,6 @@ onMounted(() => {
       :products="products"
       ctaText="View our Online Shop"
       ctaIcon="fas fa-shopping-cart"
-      :darkMode="true"
     />
 
     <!-- Instagram Feed -->
