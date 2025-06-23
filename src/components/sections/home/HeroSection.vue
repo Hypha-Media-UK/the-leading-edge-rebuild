@@ -59,6 +59,9 @@ const backgroundStyle = computed(() => ({
   background-attachment: fixed;
   display: grid;
   align-items: center;
+  .container {
+    // padding: 0;
+  }
   
   @media (max-width: 768px) {
     background-attachment: scroll; // Fix for mobile devices where fixed can cause issues
@@ -98,7 +101,7 @@ const backgroundStyle = computed(() => ({
     color: white;
     flex-direction: column;
     justify-content: center;
-    padding: 0 1rem;
+    padding: 0;
     
     @media (max-width: 991px) {
       margin-top: 80px;
