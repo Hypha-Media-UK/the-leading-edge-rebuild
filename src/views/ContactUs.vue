@@ -113,7 +113,7 @@ const handleFormReset = (): void => {
       formSubtitle="Fill out the form below and we'll get back to you within 24 hours to confirm your booking."
       :serviceOptions="serviceOptions"
       :timeOptions="timeOptions"
-      locationAddress="61 Dowson Road\nHyde\nCheshire\nSK14 1QS"
+      locationAddress="61 Dowson Road, Hyde, Cheshire SK14 1QS"
       mapImage="/images/new/misc/misc001.webp"
       mapLink="https://maps.google.com/?q=61+Dowson+Road,+Hyde,+Cheshire,+SK14+1QS"
       :openingHours="openingHours"

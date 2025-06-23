@@ -10,7 +10,7 @@
     
     <!-- Location Card Content -->
     <template v-if="type === 'location'">
-      <p v-if="address">{{ address }}</p>
+      <div v-if="address" class="address-text">{{ address }}</div>
       <div v-if="mapImage || mapLink" class="map-container">
         <div 
           v-if="mapImage" 
@@ -21,7 +21,7 @@
           v-if="mapLink" 
           :href="mapLink" 
           target="_blank" 
-          variant="secondary"
+          variant="primary"
         >
           Get Directions
         </Button>
@@ -149,8 +149,14 @@ defineProps({
   p {
     color: custom-lighten($primary-color, 20%);
     line-height: 1.6;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     white-space: pre-line; // Respect line breaks in address
+  }
+  
+  // Additional specific address styling to ensure proper formatting
+  .address-text {
+    display: block;
+    white-space: pre-line; // Ensure line breaks are respected
   }
   
   .map-container {
