@@ -81,13 +81,11 @@ defineProps({
     margin-bottom: 3rem;
     
     @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
       grid-template-areas: 
-        "prod1"
-        "prod2"
-        "prod3"
-        "prod4";
+        "prod1 prod2"
+        "prod3 prod4";
       gap: 1rem;
     }
     
@@ -107,7 +105,7 @@ defineProps({
         grid-area: prod1;
         
         @media (max-width: 768px) {
-          height: 300px;
+          height: 200px;
         }
       }
       

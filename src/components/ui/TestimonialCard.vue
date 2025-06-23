@@ -58,6 +58,10 @@ const imageSrc = computed(() => {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   min-height: 280px; // Ensure consistent height
   
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+  
   .quote {
     position: absolute;
     top: 10px;
@@ -74,6 +78,12 @@ const imageSrc = computed(() => {
     margin-bottom: 2rem;
     position: relative;
     z-index: 1;
+    
+    @media (max-width: 768px) {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
   }
   
   .client {

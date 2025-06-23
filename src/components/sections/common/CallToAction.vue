@@ -7,8 +7,10 @@
         
         
       >
-        <h2>{{ title }}</h2>
-        <p>{{ text }}</p>
+        <SectionHeader 
+          :title="title" 
+          :description="text"
+        />
         <Button :to="buttonLink" :variant="buttonVariant">{{ buttonText }}</Button>
       </div>
     </div>
@@ -18,6 +20,7 @@
 <script setup>
 import { computed } from 'vue';
 import Button from '@/components/ui/Button.vue';
+import SectionHeader from '@/components/ui/SectionHeader.vue';
 
 const props = defineProps({
   title: {
@@ -81,15 +84,8 @@ const backgroundStyle = computed(() => {
     max-width: 700px;
     margin: 0 auto;
     
-    h2 {
-      color: $primary-color;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    
-    p {
+    :deep(.section-header) {
       margin-bottom: 2rem;
-      font-size: 1.2rem;
     }
     
     .btn.primary {

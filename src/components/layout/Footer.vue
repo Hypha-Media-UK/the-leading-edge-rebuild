@@ -143,12 +143,12 @@ footer {
         background-color: rgba(255, 255, 255, 0.05);
         border-radius: 6px;
         padding: 0.5rem 0;
-        margin-left: 1.8rem;
         
         .day-row {
           display: flex;
+          font-size: 0.9rem;
           justify-content: space-between;
-          padding: 0.5rem 1rem;
+          padding: 0.5rem 1.9rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
           transition: background-color 0.2s ease;
           
@@ -231,6 +231,13 @@ footer {
     color: rgba(255, 255, 255, 0.7);
   }
 }
+
+@media (max-width: 992px) {
+  .contact {
+    margin-top: -100px;
+  }
+}
+
 
 @media (max-width: 768px) {
   .footer-content {
