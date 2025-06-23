@@ -8,28 +8,54 @@ const currentYear = ref(new Date().getFullYear());
   <footer>
     <div class="container">
       <div class="footer-content">
-        <div class="footer-section info">
-          <h3>The Leading Edge</h3>
-          <p>The premier hair and beauty salon offering a full range of styling and beauty services in a luxurious environment.</p>
-          <div class="social-icons">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-          </div>
-        </div>
         
         <div class="footer-section links">
           <h3>Quick Links</h3>
-          <ul>
-            <li><router-link to="/">Home</router-link></li>
-            <li><router-link to="/our-salon">Our Salon</router-link></li>
-            <li><router-link to="/services">Services</router-link></li>
-            <li><router-link to="/meet-the-team">Meet the Team</router-link></li>
-            <li><router-link to="/contact">Contact Us</router-link></li>
-            <li><router-link to="/careers">Careers</router-link></li>
-            <li><router-link to="/news">Latest News</router-link></li>
-          </ul>
+          <div class="links-grid">
+            <ul>
+              <li><router-link to="/">Home</router-link></li>
+              <li><router-link to="/our-salon">Our Salon</router-link></li>
+              <li><router-link to="/services">Services</router-link></li>
+              <li><router-link to="/meet-the-team">Meet the Team</router-link></li>
+              <li><router-link to="/contact">Contact Us</router-link></li>
+              <li><router-link to="/careers">Careers</router-link></li>
+              <li><router-link to="/news">Latest News</router-link></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-section hours">
+          <h3>Opening Hours</h3>
+          <div class="hours-grid">
+            <div class="day-row closed">
+              <span class="day">Monday:</span>
+              <span class="hours">Closed</span>
+            </div>
+            <div class="day-row">
+              <span class="day">Tuesday:</span>
+              <span class="hours">09:00 - 18:00</span>
+            </div>
+            <div class="day-row">
+              <span class="day">Wednesday:</span>
+              <span class="hours">09:00 - 18:00</span>
+            </div>
+            <div class="day-row">
+              <span class="day">Thursday:</span>
+              <span class="hours">09:00 - 20:00</span>
+            </div>
+            <div class="day-row">
+              <span class="day">Friday:</span>
+              <span class="hours">09:00 - 19:00</span>
+            </div>
+            <div class="day-row">
+              <span class="day">Saturday:</span>
+              <span class="hours">09:00 - 17:00</span>
+            </div>
+            <div class="day-row closed">
+              <span class="day">Sunday:</span>
+              <span class="hours">Closed</span>
+            </div>
+          </div>
         </div>
         
         <div class="footer-section contact">
@@ -37,38 +63,12 @@ const currentYear = ref(new Date().getFullYear());
           <p><i class="fas fa-map-marker-alt"></i> 61 Dowson Road, Hyde, Cheshire, SK14 1QS</p>
           <p><i class="fas fa-phone"></i> 0161 368 9999</p>
           <p><i class="fas fa-envelope"></i> enquiries@leadingedgehairandbeauty.co.uk</p>
-          <div class="opening-hours">
-            <p><i class="fas fa-clock"></i> Opening Hours</p>
-            <div class="hours-grid">
-              <div class="day-row closed">
-                <span class="day">Monday:</span>
-                <span class="hours">Closed</span>
-              </div>
-              <div class="day-row">
-                <span class="day">Tuesday:</span>
-                <span class="hours">09:00 - 18:00</span>
-              </div>
-              <div class="day-row">
-                <span class="day">Wednesday:</span>
-                <span class="hours">09:00 - 18:00</span>
-              </div>
-              <div class="day-row">
-                <span class="day">Thursday:</span>
-                <span class="hours">09:00 - 20:00</span>
-              </div>
-              <div class="day-row">
-                <span class="day">Friday:</span>
-                <span class="hours">09:00 - 19:00</span>
-              </div>
-              <div class="day-row">
-                <span class="day">Saturday:</span>
-                <span class="hours">09:00 - 17:00</span>
-              </div>
-              <div class="day-row closed">
-                <span class="day">Sunday:</span>
-                <span class="hours">Closed</span>
-              </div>
-            </div>
+          
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="X"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
           </div>
         </div>
       </div>
@@ -94,6 +94,10 @@ footer {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
+  
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .footer-section {
@@ -117,13 +121,16 @@ footer {
   p {
     margin-bottom: 1rem;
     line-height: 1.6;
-  }
-  
-  &.info {
-    p {
-      margin-bottom: 1.5rem;
+    
+    @media (max-width: 992px) {
+      font-size: 0.95rem;
+    }
+    
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
     }
   }
+  
   
   &.contact {
     i {
@@ -131,24 +138,70 @@ footer {
       color: $accent-color;
     }
     
-    .opening-hours {
+    .social-icons {
+      margin-top: 1.5rem;
+    }
+  }
+  
+  &.hours {
+    .hours-grid {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      padding: 0.5rem 0;
       margin-top: 1.5rem;
       
-      p {
-        font-weight: 600;
-        margin-bottom: 0.8rem;
-      }
-      
-      .hours-grid {
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 6px;
-        padding: 0.5rem 0;
+      .day-row {
+        display: flex;
+        font-size: 0.9rem;
+        justify-content: space-between;
+        padding: 0.5rem 1.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        transition: background-color 0.2s ease;
         
-        .day-row {
-          display: flex;
-          font-size: 0.9rem;
-          justify-content: space-between;
-          padding: 0.5rem 1.9rem;
+        @media (max-width: 768px) {
+          font-size: 0.85rem;
+          padding: 0.5rem 1.5rem;
+        }
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        &.closed {
+          .hours {
+            color: $accent-color;
+            font-style: italic;
+          }
+        }
+        
+        .day {
+          font-weight: 500;
+        }
+        
+        .hours {
+          text-align: right;
+        }
+      }
+    }
+  }
+  
+  &.links {
+    .links-grid {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      padding: 0.5rem 0;
+      margin-top: 1.5rem;
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        
+        li {
           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
           transition: background-color 0.2s ease;
           
@@ -160,39 +213,23 @@ footer {
             background-color: rgba(255, 255, 255, 0.1);
           }
           
-          &.closed {
-            .hours {
+          a {
+            color: $light-color;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 0.5rem 1.9rem;
+            font-size: 0.9rem;
+            
+            @media (max-width: 768px) {
+              font-size: 0.85rem;
+              padding: 0.5rem 1.5rem;
+            }
+            
+            &:hover {
               color: $accent-color;
-              font-style: italic;
             }
           }
-          
-          .day {
-            font-weight: 500;
-          }
-          
-          .hours {
-            text-align: right;
-          }
-        }
-      }
-    }
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    
-    li {
-      margin-bottom: 0.8rem;
-      
-      a {
-        color: $light-color;
-        text-decoration: none;
-        transition: color 0.3s ease;
-        
-        &:hover {
-          color: $accent-color;
         }
       }
     }
@@ -207,16 +244,31 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
     transition: all 0.3s ease;
     
+    i {
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      transition: color 0.3s ease;
+      transform: translateX(5px);
+    }
+    
     &:hover {
       background-color: $accent-color;
       transform: translateY(-3px);
+      
+      i {
+        color: white;
+      }
     }
   }
 }
@@ -233,9 +285,7 @@ footer {
 }
 
 @media (max-width: 992px) {
-  .contact {
-    margin-top: -100px;
-  }
+  /* Removed the negative margin that was pushing contact up */
 }
 
 
@@ -245,7 +295,7 @@ footer {
   }
   
   .footer-section {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
   }
 }
 </style>
