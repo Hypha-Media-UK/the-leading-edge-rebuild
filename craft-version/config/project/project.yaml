@@ -1,0 +1,22 @@
+dateModified: 1751029798
+email:
+  fromEmail: access@hypha.media
+  fromName: tle-new
+  transportType: craft\mail\transportadapters\Sendmail
+meta:
+  __names__:
+    67b864d2-f9ca-464f-b7ba-1d0a25c9bbdc: tle-new # tle-new
+    778898bd-c954-4159-a117-36edc766a017: tle-new # tle-new
+system:
+  edition: solo
+  live: true
+  name: tle-new
+  schemaVersion: 5.7.0.3
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  require2fa: false
+  requireEmailVerification: true

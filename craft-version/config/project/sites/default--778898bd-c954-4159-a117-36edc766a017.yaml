@@ -1,0 +1,8 @@
+baseUrl: $PRIMARY_SITE_URL
+handle: default
+hasUrls: true
+language: en-GB
+name: tle-new
+primary: true
+siteGroup: 67b864d2-f9ca-464f-b7ba-1d0a25c9bbdc # tle-new
+sortOrder: 1
