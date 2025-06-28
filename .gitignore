@@ -30,3 +30,4 @@
 # !.env.example
 
 # # Build files
+.DS_Store
