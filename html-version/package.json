@@ -1,0 +1,17 @@
+{
+  "name": "the-leading-edge-html",
+  "version": "1.0.0",
+  "description": "The Leading Edge Hair and Beauty Salon - HTML Version",
+  "scripts": {
+    "scss:dev": "sass scss/pages:css --watch --source-map",
+    "scss:build": "sass scss/pages:css --style=compressed --no-source-map",
+    "build": "npm run scss:build",
+    "dev": "npm run scss:dev"
+  },
+  "dependencies": {
+    "gsap": "^3.12.2"
+  },
+  "devDependencies": {
+    "sass": "^1.69.0"
+  }
+}
