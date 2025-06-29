@@ -70,8 +70,8 @@
                     <a href="/services" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
-            <div class="text-center mt-3">
-                <a href="/services" class="btn btn-secondary">View All Services</a>
+            <div class="services-cta">
+                <a href="/services" class="btn btn-primary">View All Services</a>
             </div>
         </div>
     </section>
@@ -80,68 +80,87 @@
     <section class="section testimonials">
         <div class="container">
             <h2 class="text-center">What Our Clients Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial">
-                    <blockquote>
-                        <p>"The Leading Edge has completely transformed my hair care routine. The team is professional, knowledgeable, and always makes me feel welcome."</p>
-                        <footer>
-                            <img src="/images/new/testimonials/test001.webp" alt="Sarah Johnson">
-                            <cite>
-                                <strong>Sarah Johnson</strong>
-                                <span>Regular Client</span>
-                            </cite>
-                        </footer>
-                    </blockquote>
+            <div class="testimonials-slider">
+                <div class="testimonial-container">
+                    <div class="testimonial-wrapper active" data-testimonial="0">
+                        <div class="testimonial">
+                            <blockquote>
+                                <p>"The Leading Edge has completely transformed my hair care routine. The team is professional, knowledgeable, and always makes me feel welcome."</p>
+                                <footer>
+                                    <img src="/images/new/testimonials/test001.webp" alt="Sarah Johnson">
+                                    <cite>
+                                        <strong>Sarah Johnson</strong>
+                                        <span>Regular Client</span>
+                                    </cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="testimonial-wrapper" data-testimonial="1">
+                        <div class="testimonial">
+                            <blockquote>
+                                <p>"Absolutely love the results every time I visit. The stylists here are true artists and always keep up with the latest trends and techniques."</p>
+                                <footer>
+                                    <img src="/images/new/testimonials/test002.webp" alt="Michael Thompson">
+                                    <cite>
+                                        <strong>Michael Thompson</strong>
+                                        <span>Loyal Customer</span>
+                                    </cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="testimonial-wrapper" data-testimonial="2">
+                        <div class="testimonial">
+                            <blockquote>
+                                <p>"Their attention to detail is incredible. I came in with a vague idea of what I wanted and left with exactly the style I didn't even know I needed!"</p>
+                                <footer>
+                                    <img src="/images/new/testimonials/test003.webp" alt="Emma Wilson">
+                                    <cite>
+                                        <strong>Emma Wilson</strong>
+                                        <span>First-time Client</span>
+                                    </cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
                 </div>
-                <div class="testimonial">
-                    <blockquote>
-                        <p>"Absolutely love the results every time I visit. The stylists here are true artists and always keep up with the latest trends and techniques."</p>
-                        <footer>
-                            <img src="/images/new/testimonials/test002.webp" alt="Michael Thompson">
-                            <cite>
-                                <strong>Michael Thompson</strong>
-                                <span>Loyal Customer</span>
-                            </cite>
-                        </footer>
-                    </blockquote>
-                </div>
-                <div class="testimonial">
-                    <blockquote>
-                        <p>"Their attention to detail is incredible. I came in with a vague idea of what I wanted and left with exactly the style I didn't even know I needed!"</p>
-                        <footer>
-                            <img src="/images/new/testimonials/test003.webp" alt="Emma Wilson">
-                            <cite>
-                                <strong>Emma Wilson</strong>
-                                <span>First-time Client</span>
-                            </cite>
-                        </footer>
-                    </blockquote>
+                
+                <div class="testimonial-controls">
+                    <div class="testimonial-arrows">
+                        <button class="arrow prev" onclick="previousTestimonial()">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="arrow next" onclick="nextTestimonial()">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     {# Products Showcase - from Vue ProductsShowcase component #}
-    <section class="section products">
+    <section class="section products-section">
         <div class="container">
             <h2 class="text-center">Premium Products</h2>
             <p class="text-center">We partner with the industry's finest brands to bring you exceptional quality</p>
-            <div class="products-grid">
-                <div class="product">
+            <div class="brands-container">
+                <div class="brand brand-position-0">
                     <img src="/images/new/products/prod1.webp" alt="Premium Brand Product 1">
                 </div>
-                <div class="product">
+                <div class="brand brand-position-1">
                     <img src="/images/new/products/prod2.webp" alt="Premium Brand Product 2">
                 </div>
-                <div class="product">
+                <div class="brand brand-position-2">
                     <img src="/images/new/products/prod3.webp" alt="Premium Brand Product 3">
                 </div>
-                <div class="product">
+                <div class="brand brand-position-3">
                     <img src="/images/new/products/prod4.webp" alt="Premium Brand Product 4">
                 </div>
             </div>
-            <div class="text-center mt-3">
-                <a href="#" class="btn btn-primary">
+            <div class="products-cta">
+                <a href="#" class="btn btn-primary shop-btn">
                     <i class="fas fa-shopping-cart"></i>
                     View our Online Shop
                 </a>

@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initHeaderScroll();
   initMobileMenu();
   initSmoothScroll();
+  initTestimonialsCarousel();
 });
 
 // Header scroll functionality (from Vue Header.vue)
@@ -118,3 +119,53 @@ function initSmoothScroll() {
     });
   });
 }
+
+// Testimonials carousel functionality (from Vue TestimonialsSection.vue)
+let currentTestimonialIndex = 0;
+let testimonialInterval = null;
+
+function initTestimonialsCarousel() {
+  const testimonialWrappers = document.querySelectorAll('.testimonial-wrapper');
+  if (testimonialWrappers.length === 0) return;
+  
+  // Start auto-rotation
+  testimonialInterval = setInterval(() => {
+    nextTestimonial();
+  }, 6000); // 6 seconds like Vue version
+}
+
+function nextTestimonial() {
+  const testimonialWrappers = document.querySelectorAll('.testimonial-wrapper');
+  if (testimonialWrappers.length === 0) return;
+  
+  // Hide current testimonial
+  testimonialWrappers[currentTestimonialIndex].classList.remove('active');
+  
+  // Move to next testimonial
+  currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonialWrappers.length;
+  
+  // Show new testimonial after a short delay
+  setTimeout(() => {
+    testimonialWrappers[currentTestimonialIndex].classList.add('active');
+  }, 500);
+}
+
+function previousTestimonial() {
+  const testimonialWrappers = document.querySelectorAll('.testimonial-wrapper');
+  if (testimonialWrappers.length === 0) return;
+  
+  // Hide current testimonial
+  testimonialWrappers[currentTestimonialIndex].classList.remove('active');
+  
+  // Move to previous testimonial
+  currentTestimonialIndex = (currentTestimonialIndex - 1 + testimonialWrappers.length) % testimonialWrappers.length;
+  
+  // Show new testimonial after a short delay
+  setTimeout(() => {
+    testimonialWrappers[currentTestimonialIndex].classList.add('active');
+  }, 500);
+}
+
+// Make functions global so they can be called from HTML onclick
+window.nextTestimonial = nextTestimonial;
+window.previousTestimonial = previousTestimonial;
