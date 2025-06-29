@@ -780,46 +780,93 @@ footer {
   
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
-    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
 }
 
-// Service Card Styles
-.service {
+// Service Card Styles (from Vue ServiceCard.vue)
+.service-card {
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba($primary-color, 0.05);
-  transition: all 0.3s ease;
-  
-  img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  h3 {
-    padding: 1.5rem 1.5rem 1rem;
-    margin-bottom: 0.5rem;
-    font-size: 1.3rem;
-  }
-  
-  p {
-    padding: 0 1.5rem;
-    color: custom-lighten($primary-color, 20%);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-  
-  .btn {
-    margin: 0 1.5rem 1.5rem;
-  }
+  box-shadow: 0 5px 20px rgba($primary-color, 0.1);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+              box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba($primary-color, 0.1);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba($primary-color, 0.15);
+    
+    .service-image img {
+      transform: scale(1.05);
+    }
+  }
+  
+  .service-image {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+  }
+  
+  .service-content {
+    padding: 1.5rem;
+    
+    h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.4rem;
+    }
+    
+    p {
+      color: custom-lighten($primary-color, 20%);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+  }
+
+  .btn-text {
+    color: $accent-color;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    background: none;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    margin-left: -0.8rem;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    
+    &::after {
+      content: '\f054'; /* Font Awesome arrow-right icon */
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      margin-left: 0.4rem;
+      font-size: 0.8rem;
+      opacity: 0;
+      transform: translateX(-5px);
+      transition: all 0.3s ease;
+    }
+    
+    &:hover {
+      background-color: rgba($accent-color, 0.08);
+      
+      &::after {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
   }
 }
 
@@ -892,49 +939,72 @@ footer {
   }
 }
 
-// Testimonial Card Styles (for carousel)
+// Testimonial Card Styles (from Vue TestimonialCard.vue)
 .testimonial {
+  position: relative;
+  padding: 3rem;
   background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 5px 20px rgba($primary-color, 0.05);
   color: $primary-color;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  min-height: 280px; // Ensure consistent height
   
-  blockquote {
-    margin: 0;
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+  
+  .quote {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 6rem;
+    color: rgba($accent-color, 0.1);
+    font-family: 'Georgia', serif;
+    line-height: 1;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
     
-    p {
-      font-style: italic;
+    @media (max-width: 768px) {
+      font-size: 1rem;
       line-height: 1.6;
       margin-bottom: 1.5rem;
-      color: $text-secondary;
     }
+  }
+  
+  .client {
+    display: flex;
+    align-items: center;
     
-    footer {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+    .client-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 1rem;
       
       img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
+        display: block;
+      }
+    }
+    
+    .client-info {
+      h4 {
+        margin: 0 0 0.3rem;
+        font-size: 1.1rem;
       }
       
-      cite {
-        font-style: normal;
-        
-        strong {
-          display: block;
-          color: $primary-color;
-          margin-bottom: 0.25rem;
-        }
-        
-        span {
-          color: $text-light;
-          font-size: 0.9rem;
-        }
+      span {
+        color: custom-lighten($primary-color, 30%);
+        font-size: 0.9rem;
       }
     }
   }
@@ -1037,6 +1107,84 @@ footer {
         margin-right: 0.8rem;
         font-size: 1.2rem;
       }
+    }
+  }
+}
+
+// Section Header Styles (from Vue SectionHeader.vue)
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: $primary-color;
+    
+    @media (max-width: 1200px) {
+      font-size: 2.2rem;
+      margin-bottom: 0.9rem;
+    }
+    
+    @media (max-width: 992px) {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    @media (max-width: 768px) {
+      font-size: 1.8rem;
+      margin-bottom: 0.7rem;
+    }
+    
+    @media (max-width: 576px) {
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+    }
+  }
+  
+  .separator {
+    width: 80px;
+    height: 3px;
+    background-color: $accent-color;
+    margin: 0 auto 1.5rem;
+    
+    @media (max-width: 992px) {
+      width: 70px;
+      margin-bottom: 1.3rem;
+    }
+    
+    @media (max-width: 768px) {
+      width: 60px;
+      height: 2px;
+      margin-bottom: 1.2rem;
+    }
+    
+    @media (max-width: 576px) {
+      width: 50px;
+      margin-bottom: 1rem;
+    }
+  }
+  
+  p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: custom-lighten($primary-color, 20%);
+    font-size: 1.1rem;
+    
+    @media (max-width: 992px) {
+      font-size: 1.05rem;
+      max-width: 650px;
+    }
+    
+    @media (max-width: 768px) {
+      font-size: 1rem;
+      max-width: 600px;
+    }
+    
+    @media (max-width: 576px) {
+      font-size: 0.9rem;
+      max-width: 100%;
+      line-height: 1.5;
     }
   }
 }

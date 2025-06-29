@@ -24,7 +24,10 @@
     {# Features Section - from Vue FeaturesSection component #}
     <section class="section features">
         <div class="container">
-            <h2 class="text-center">Why Choose Us</h2>
+            <div class="section-header">
+                <h2>Why Choose Us</h2>
+                <div class="separator"></div>
+            </div>
             <div class="features-grid">
                 <div class="feature">
                     <i class="fas fa-crown"></i>
@@ -48,26 +51,41 @@
     {# Services Preview Section - from Vue ServicesPreviewSection component #}
     <section class="section services-preview">
         <div class="container">
-            <h2 class="text-center">Our Services</h2>
-            <p class="text-center">Discover our range of premium hair and beauty services</p>
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <div class="separator"></div>
+                <p>Discover our range of premium hair and beauty services</p>
+            </div>
             <div class="services-grid">
-                <div class="service">
-                    <img src="/images/new/services/service1.webp" alt="Styling, Cutting & Colouring">
-                    <h3>Styling, Cutting & Colouring</h3>
-                    <p>Expert cutting, styling and coloring services to create the perfect look tailored to your unique style.</p>
-                    <a href="/services" class="btn btn-primary">Learn More</a>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/images/new/services/service1.webp" alt="Styling, Cutting & Colouring">
+                    </div>
+                    <div class="service-content">
+                        <h3>Styling, Cutting & Colouring</h3>
+                        <p>Expert cutting, styling and coloring services to create the perfect look tailored to your unique style.</p>
+                        <a href="/services" class="btn-text">Learn More</a>
+                    </div>
                 </div>
-                <div class="service">
-                    <img src="/images/new/services/service2.webp" alt="Nail & Beauty Services">
-                    <h3>Nail & Beauty Services</h3>
-                    <p>Complete nail care, facial treatments, and beauty services to enhance your natural features.</p>
-                    <a href="/services" class="btn btn-primary">Learn More</a>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/images/new/services/service2.webp" alt="Nail & Beauty Services">
+                    </div>
+                    <div class="service-content">
+                        <h3>Nail & Beauty Services</h3>
+                        <p>Complete nail care, facial treatments, and beauty services to enhance your natural features.</p>
+                        <a href="/services" class="btn-text">Learn More</a>
+                    </div>
                 </div>
-                <div class="service">
-                    <img src="/images/new/services/service3.webp" alt="Massage & Aesthetic Treatments">
-                    <h3>Massage & Aesthetic Treatments</h3>
-                    <p>Relaxing massage therapy and advanced aesthetic treatments for total body wellness and beauty.</p>
-                    <a href="/services" class="btn btn-primary">Learn More</a>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/images/new/services/service3.webp" alt="Massage & Aesthetic Treatments">
+                    </div>
+                    <div class="service-content">
+                        <h3>Massage & Aesthetic Treatments</h3>
+                        <p>Relaxing massage therapy and advanced aesthetic treatments for total body wellness and beauty.</p>
+                        <a href="/services" class="btn-text">Learn More</a>
+                    </div>
                 </div>
             </div>
             <div class="services-cta">
@@ -79,49 +97,55 @@
     {# Testimonials Section - from Vue TestimonialsSection component #}
     <section class="section testimonials">
         <div class="container">
-            <h2 class="text-center">What Our Clients Say</h2>
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+                <div class="separator"></div>
+            </div>
             <div class="testimonials-slider">
                 <div class="testimonial-container">
                     <div class="testimonial-wrapper active" data-testimonial="0">
                         <div class="testimonial">
-                            <blockquote>
-                                <p>"The Leading Edge has completely transformed my hair care routine. The team is professional, knowledgeable, and always makes me feel welcome."</p>
-                                <footer>
-                                    <img src="/images/new/testimonials/test001.webp" alt="Sarah Johnson">
-                                    <cite>
-                                        <strong>Sarah Johnson</strong>
-                                        <span>Regular Client</span>
-                                    </cite>
-                                </footer>
-                            </blockquote>
+                            <div class="quote">"</div>
+                            <p>The Leading Edge has completely transformed my hair care routine. The team is professional, knowledgeable, and always makes me feel welcome.</p>
+                            <div class="client">
+                                <div class="client-image">
+                                    <img src="/images/new/testimonials/test001.webp" alt="Sarah Johnson - Regular Client">
+                                </div>
+                                <div class="client-info">
+                                    <h4>Sarah Johnson</h4>
+                                    <span>Regular Client</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="testimonial-wrapper" data-testimonial="1">
                         <div class="testimonial">
-                            <blockquote>
-                                <p>"Absolutely love the results every time I visit. The stylists here are true artists and always keep up with the latest trends and techniques."</p>
-                                <footer>
-                                    <img src="/images/new/testimonials/test002.webp" alt="Michael Thompson">
-                                    <cite>
-                                        <strong>Michael Thompson</strong>
-                                        <span>Loyal Customer</span>
-                                    </cite>
-                                </footer>
-                            </blockquote>
+                            <div class="quote">"</div>
+                            <p>Absolutely love the results every time I visit. The stylists here are true artists and always keep up with the latest trends and techniques.</p>
+                            <div class="client">
+                                <div class="client-image">
+                                    <img src="/images/new/testimonials/test002.webp" alt="Michael Thompson - Loyal Customer">
+                                </div>
+                                <div class="client-info">
+                                    <h4>Michael Thompson</h4>
+                                    <span>Loyal Customer</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="testimonial-wrapper" data-testimonial="2">
                         <div class="testimonial">
-                            <blockquote>
-                                <p>"Their attention to detail is incredible. I came in with a vague idea of what I wanted and left with exactly the style I didn't even know I needed!"</p>
-                                <footer>
-                                    <img src="/images/new/testimonials/test003.webp" alt="Emma Wilson">
-                                    <cite>
-                                        <strong>Emma Wilson</strong>
-                                        <span>First-time Client</span>
-                                    </cite>
-                                </footer>
-                            </blockquote>
+                            <div class="quote">"</div>
+                            <p>Their attention to detail is incredible. I came in with a vague idea of what I wanted and left with exactly the style I didn't even know I needed!</p>
+                            <div class="client">
+                                <div class="client-image">
+                                    <img src="/images/new/testimonials/test003.webp" alt="Emma Wilson - First-time Client">
+                                </div>
+                                <div class="client-info">
+                                    <h4>Emma Wilson</h4>
+                                    <span>First-time Client</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -143,8 +167,11 @@
     {# Products Showcase - from Vue ProductsShowcase component #}
     <section class="section products-section">
         <div class="container">
-            <h2 class="text-center">Premium Products</h2>
-            <p class="text-center">We partner with the industry's finest brands to bring you exceptional quality</p>
+            <div class="section-header">
+                <h2>Premium Products</h2>
+                <div class="separator"></div>
+                <p>We partner with the industry's finest brands to bring you exceptional quality</p>
+            </div>
             <div class="brands-container">
                 <div class="brand brand-position-0">
                     <img src="/images/new/products/prod1.webp" alt="Premium Brand Product 1">
@@ -171,8 +198,11 @@
     {# Instagram Feed - from Vue InstagramFeed component #}
     <section class="section instagram">
         <div class="container">
-            <h2 class="text-center">Follow Our Journey</h2>
-            <p class="text-center">Stay updated with our latest styles and salon updates</p>
+            <div class="section-header">
+                <h2>Follow Our Journey</h2>
+                <div class="separator"></div>
+                <p>Stay updated with our latest styles and salon updates</p>
+            </div>
             <div class="instagram-grid">
                 <div class="instagram-image">
                     <img src="/images/new/insta/insta1.webp" alt="Instagram Post 1">
