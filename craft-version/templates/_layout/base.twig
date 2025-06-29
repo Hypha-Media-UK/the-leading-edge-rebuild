@@ -11,21 +11,6 @@
     
     {# SEO Meta Tags #}
     <title>{% block title %}{{ entry.title ?? siteName }}{% endblock %}</title>
-    <meta name="description" content="{% block metaDescription %}{{ entry.metaDescription ?? 'Premium hair and beauty salon offering expert styling, cutting, coloring, and spa services.' }}{% endblock %}">
-    <meta name="keywords" content="{% block metaKeywords %}hair salon, beauty salon, hair cutting, hair coloring, spa services, nail services{% endblock %}">
-    
-    {# Open Graph Meta Tags #}
-    <meta property="og:title" content="{% block ogTitle %}{{ entry.title ?? siteName }}{% endblock %}">
-    <meta property="og:description" content="{% block ogDescription %}{{ entry.metaDescription ?? 'Premium hair and beauty salon offering expert styling, cutting, coloring, and spa services.' }}{% endblock %}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ craft.app.request.absoluteUrl }}">
-    <meta property="og:image" content="{% block ogImage %}{{ siteUrl }}images/og-image.jpg{% endblock %}">
-    
-    {# Twitter Card Meta Tags #}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{% block twitterTitle %}{{ entry.title ?? siteName }}{% endblock %}">
-    <meta name="twitter:description" content="{% block twitterDescription %}{{ entry.metaDescription ?? 'Premium hair and beauty salon offering expert styling, cutting, coloring, and spa services.' }}{% endblock %}">
-    <meta name="twitter:image" content="{% block twitterImage %}{{ siteUrl }}images/og-image.jpg{% endblock %}">
     
     {# Favicon #}
     <link rel="icon" type="image/x-icon" href="{{ siteUrl }}favicon.ico">
