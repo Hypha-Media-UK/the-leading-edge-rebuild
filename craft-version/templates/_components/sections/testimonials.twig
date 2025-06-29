@@ -1,24 +1,26 @@
 {# Testimonials Section Component #}
-{% macro testimonials(title, testimonials = []) %}
+{% macro testimonials(title, testimonials = [], description = '') %}
     <section class="testimonials">
         <div class="container">
             <div class="section-header">
                 <h2>{{ title }}</h2>
+                {% if description %}
+                    <p>{{ description }}</p>
+                {% endif %}
             </div>
+            
             <div class="testimonials-slider">
-                <div class="testimonials-track">
+                <div class="testimonial-container">
                     {% for testimonial in testimonials %}
-                        <div class="testimonial-card">
-                            <div class="testimonial-content">
-                                <div class="quote-icon">
-                                    <i class="fas fa-quote-left"></i>
-                                </div>
-                                <p class="testimonial-quote">{{ testimonial.quote }}</p>
-                                <div class="testimonial-author">
-                                    <div class="author-image">
-                                        <img src="/images/new/testimonials/{{ testimonial.image }}" alt="{{ testimonial.name }}">
+                        <div class="testimonial-wrapper" data-testimonial-index="{{ loop.index0 }}" {% if loop.first %}style="opacity: 1;"{% else %}style="opacity: 0;"{% endif %}>
+                            <div class="testimonial">
+                                <div class="quote">"</div>
+                                <p>{{ testimonial.quote }}</p>
+                                <div class="client">
+                                    <div class="client-image">
+                                        <img src="/images/new/testimonials/{{ testimonial.image }}" alt="{{ testimonial.name }} - {{ testimonial.role }}">
                                     </div>
-                                    <div class="author-info">
+                                    <div class="client-info">
                                         <h4>{{ testimonial.name }}</h4>
                                         <span>{{ testimonial.role }}</span>
                                     </div>
@@ -26,6 +28,17 @@
                             </div>
                         </div>
                     {% endfor %}
+                </div>
+                
+                <div class="testimonial-controls">
+                    <div class="testimonial-arrows">
+                        <button class="arrow prev" aria-label="Previous testimonial">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="arrow next" aria-label="Next testimonial">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
