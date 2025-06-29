@@ -107,6 +107,33 @@ img {
   margin-top: 3rem;
 }
 
+// Global Section Header Separators
+.section-header h2::after,
+.team-intro h2::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: $accent-color;
+  margin: 1rem auto 1.5rem;
+  
+  @media (max-width: 992px) {
+    width: 70px;
+    margin-bottom: 1.3rem;
+  }
+  
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 2px;
+    margin-bottom: 1.2rem;
+  }
+  
+  @media (max-width: 576px) {
+    width: 50px;
+    margin-bottom: 1rem;
+  }
+}
+
 // Media Queries
 @media (max-width: 1200px) {
   .container {

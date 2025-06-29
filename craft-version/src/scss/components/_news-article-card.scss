@@ -1,6 +1,6 @@
 // News Article Card Component Styles (extracted from Vue NewsArticleCard.vue)
 .news-card {
-  background-color: white;
+  background-color: white !important;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 5px 20px rgba($primary-color, 0.08);

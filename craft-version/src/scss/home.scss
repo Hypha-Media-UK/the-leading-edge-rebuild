@@ -3,5 +3,8 @@
 // Import main styles (includes variables, components, global styles)
 @import 'main';
 
+// Import home page components
+@import 'components/features';
+
 // Import home page specific styles
 @import 'pages/home';
