@@ -31,3 +31,5 @@
 
 # # Build files
 .DS_Store
+craft-version/config.codekit3
+php-version/config.codekit3
