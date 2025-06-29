@@ -15,8 +15,7 @@
                         <div class="service-content">
                             <h3>{{ service.title }}</h3>
                             <p>{{ service.description }}</p>
-                            {% from '_components/ui/button.twig' import button as btn %}
-                            {{ btn(service.linkText, 'secondary', service.linkUrl) }}
+                            <a href="{{ service.linkUrl }}" class="service-link">{{ service.linkText }}</a>
                         </div>
                     </div>
                 {% endfor %}
