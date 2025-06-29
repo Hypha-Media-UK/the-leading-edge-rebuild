@@ -106,12 +106,3 @@ $z-index-tooltip: 1070;
 $transition-base: all 0.3s ease;
 $transition-fast: all 0.15s ease;
 $transition-slow: all 0.5s ease;
-
-// Custom color functions (using modern Sass color module)
-@function custom-darken($color, $percentage) {
-  @return color.mix(black, $color, $percentage);
-}
-
-@function custom-lighten($color, $percentage) {
-  @return color.mix(white, $color, $percentage);
-}

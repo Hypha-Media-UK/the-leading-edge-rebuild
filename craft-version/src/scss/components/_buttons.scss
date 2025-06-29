@@ -1,0 +1,70 @@
+@use '../abstracts' as *;
+
+// Button Styles
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: $border-radius;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  text-align: center;
+  cursor: pointer;
+  transition: $transition-base;
+  
+  &.btn-primary {
+    background-color: $accent-color;
+    color: white;
+    
+    &:hover {
+      background-color: custom-darken($accent-color, 10%);
+    }
+  }
+  
+  &.btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    
+    &:hover {
+      background-color: white;
+      color: $primary-color;
+    }
+  }
+}
+
+// Text button styles (for service cards)
+.btn-text {
+  color: $accent-color;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  background: none;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  margin-left: -0.8rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  
+  &::after {
+    content: '\f054'; /* Font Awesome arrow-right icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-left: 0.4rem;
+    font-size: 0.8rem;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+  }
+  
+  &:hover {
+    background-color: rgba($accent-color, 0.08);
+    
+    &::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}

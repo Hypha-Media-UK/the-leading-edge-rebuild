@@ -1,0 +1,32 @@
+@use '../abstracts' as *;
+
+// Global Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: $font-family-secondary;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $primary-color;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: $accent-color;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: custom-darken($accent-color, 10%);
+  }
+}
