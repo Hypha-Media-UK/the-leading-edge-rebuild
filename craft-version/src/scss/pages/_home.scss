@@ -395,6 +395,8 @@
 // Products Showcase Section
 .products-showcase {
   padding: 5rem 0;
+  background-color: white;
+  color: $primary-color;
   
   .section-header {
     text-align: center;
@@ -413,22 +415,78 @@
   
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    grid-template-areas:
+      "prod1 prod1 prod2 prod3"
+      "prod1 prod1 prod4 prod4";
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 200px);
+    gap: 1.5rem;
     margin-bottom: 3rem;
     
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      grid-template-areas: 
+        "prod1 prod2"
+        "prod3 prod4";
+      gap: 1rem;
+    }
+    
     .product-item {
-      text-align: center;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba($primary-color, 0.1);
+      transition: all 0.3s ease;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      
+      &:nth-child(1) {
+        grid-area: prod1;
+        
+        @media (max-width: 768px) {
+          height: 200px;
+        }
+      }
+      
+      &:nth-child(2) {
+        grid-area: prod2;
+        
+        @media (max-width: 768px) {
+          height: 200px;
+        }
+      }
+      
+      &:nth-child(3) {
+        grid-area: prod3;
+        
+        @media (max-width: 768px) {
+          height: 200px;
+        }
+      }
+      
+      &:nth-child(4) {
+        grid-area: prod4;
+        
+        @media (max-width: 768px) {
+          height: 200px;
+        }
+      }
+      
+      &:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 25px rgba($primary-color, 0.15);
+      }
       
       img {
         width: 100%;
-        height: auto;
-        border-radius: 8px;
-        transition: transform 0.3s ease;
-        
-        &:hover {
-          transform: scale(1.05);
-        }
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
       }
     }
   }
