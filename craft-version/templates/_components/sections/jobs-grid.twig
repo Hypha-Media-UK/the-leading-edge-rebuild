@@ -1,0 +1,68 @@
+{# Jobs Grid Component Macro #}
+{% macro jobsGrid(title, description, positions) %}
+    <section class="openings-section">
+        <div class="container">
+            {% if title or description %}
+                <div class="section-header">
+                    {% if title %}
+                        <h2>{{ title }}</h2>
+                    {% endif %}
+                    {% if description %}
+                        <p>{{ description }}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+            {% if positions|length > 0 %}
+                <div class="positions-grid">
+                    {% for position in positions %}
+                        <div class="position-card" data-position-id="{{ position.id }}">
+                            <h3>{{ position.title }}</h3>
+                            <div class="position-meta">
+                                <span class="type">{{ position.type }}</span>
+                                <span class="location"><i class="fas fa-map-marker-alt"></i> {{ position.location }}</span>
+                            </div>
+                            <p class="position-excerpt">{{ position.description|slice(0, 120) }}...</p>
+                            {% from '_components/ui/button.twig' import button as btn %}
+                            {{ btn('View Details', 'primary', '#', '', 'button', 'view-details-btn', '', 'small') }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-positions">
+                    <p>We don't have any openings at the moment, but we're always interested in meeting talented professionals. Please feel free to submit your application for future consideration.</p>
+                </div>
+            {% endif %}
+        </div>
+        
+        {# Position Details Modal #}
+        <div id="position-modal" class="position-modal" style="display: none;">
+            <div class="modal-overlay">
+                <div class="modal-content">
+                    <button class="modal-close" aria-label="Close modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="modal-body">
+                        <h2 class="position-title"></h2>
+                        <div class="position-meta">
+                            <span class="type"></span>
+                            <span class="location"><i class="fas fa-map-marker-alt"></i> <span class="location-text"></span></span>
+                        </div>
+                        <div class="position-description"></div>
+                        <div class="position-responsibilities">
+                            <h4>Key Responsibilities:</h4>
+                            <ul class="responsibilities-list"></ul>
+                        </div>
+                        <div class="position-requirements">
+                            <h4>Requirements:</h4>
+                            <ul class="requirements-list"></ul>
+                        </div>
+                        <div class="modal-actions">
+                            <a href="#application-form" class="btn primary apply-btn">Apply for this Position</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endmacro %}
