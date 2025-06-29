@@ -10,13 +10,16 @@ export default defineConfig({
         home: resolve(__dirname, 'src/scss/home.scss'),
         services: resolve(__dirname, 'src/scss/services.scss'),
         salon: resolve(__dirname, 'src/scss/salon.scss'),
+        team: resolve(__dirname, 'src/scss/team.scss'),
+        contact: resolve(__dirname, 'src/scss/contact.scss'),
         // JS files
         main: resolve(__dirname, 'src/js/main.js'),
         'home-js': resolve(__dirname, 'src/js/home.js'),
         'services-js': resolve(__dirname, 'src/js/services.js'),
         'salon-js': resolve(__dirname, 'src/js/salon.js'),
+        'team-js': resolve(__dirname, 'src/js/team.js'),
+        'contact-js': resolve(__dirname, 'src/js/contact.js'),
         // Add more page-specific entries as needed
-        // contact: resolve(__dirname, 'src/scss/contact.scss'),
       },
       output: {
         assetFileNames: (assetInfo) => {

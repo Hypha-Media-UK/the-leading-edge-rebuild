@@ -1,0 +1,28 @@
+{# Team Grid Component Macro #}
+{% macro teamGrid(title, description, teamMembers) %}
+    <section class="team-section">
+        <div class="container">
+            <div class="team-intro">
+                <h2>{{ title|default('Our Talented Professionals') }}</h2>
+                <p>{{ description|default('The Leading Edge team consists of passionate, highly-trained professionals who are dedicated to their craft. Each team member brings their unique expertise and creative vision to provide you with an exceptional salon experience.') }}</p>
+            </div>
+            
+            <div class="team-grid">
+                {% for member in teamMembers %}
+                    <div class="team-member" data-member-id="{{ member.id }}">
+                        <div class="member-image">
+                            <img src="{{ member.image }}" alt="{{ member.name }} - {{ member.role }}">
+                            <div class="member-overlay">
+                                <span>View Profile</span>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3>{{ member.name }}</h3>
+                            <p class="member-role">{{ member.role }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endmacro %}
