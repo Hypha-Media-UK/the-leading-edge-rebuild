@@ -1,0 +1,33 @@
+{# Testimonials Section Component #}
+{% macro testimonials(title, testimonials = []) %}
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>{{ title }}</h2>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonials-track">
+                    {% for testimonial in testimonials %}
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <div class="quote-icon">
+                                    <i class="fas fa-quote-left"></i>
+                                </div>
+                                <p class="testimonial-quote">{{ testimonial.quote }}</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image">
+                                        <img src="/images/new/testimonials/{{ testimonial.image }}" alt="{{ testimonial.name }}">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4>{{ testimonial.name }}</h4>
+                                        <span>{{ testimonial.role }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endmacro %}

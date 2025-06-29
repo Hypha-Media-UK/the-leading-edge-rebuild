@@ -1,0 +1,20 @@
+{# Hero Section Component #}
+{% macro hero(heading, text, buttons = [], backgroundImage = '/images/new/heros/hero3.webp') %}
+    <section class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('{{ backgroundImage }}')">
+        <div class="container">
+            <div class="hero-content">
+                <div class="text-content">
+                    <h1>{{ heading|raw }}</h1>
+                    <p>{{ text }}</p>
+                </div>
+                
+                <div class="hero-buttons">
+                    {% for button in buttons %}
+                        {% from '_components/ui/button.twig' import button as btn %}
+                        {{ btn(button.text, button.variant, button.href) }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endmacro %}

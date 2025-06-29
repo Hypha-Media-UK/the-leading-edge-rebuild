@@ -1,0 +1,21 @@
+{# Features Section Component #}
+{% macro features(title, features = []) %}
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>{{ title }}</h2>
+            </div>
+            <div class="features-grid">
+                {% for feature in features %}
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="{{ feature.icon }}"></i>
+                        </div>
+                        <h3>{{ feature.title }}</h3>
+                        <p>{{ feature.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endmacro %}

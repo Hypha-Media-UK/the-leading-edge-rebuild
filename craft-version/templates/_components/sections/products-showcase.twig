@@ -1,0 +1,24 @@
+{# Products Showcase Section Component #}
+{% macro productsShowcase(title, description, products = [], ctaText = '', ctaIcon = '') %}
+    <section class="products-showcase">
+        <div class="container">
+            <div class="section-header">
+                <h2>{{ title }}</h2>
+                <p>{{ description }}</p>
+            </div>
+            <div class="products-grid">
+                {% for product in products %}
+                    <div class="product-item">
+                        <img src="{{ product.image }}" alt="{{ product.alt }}">
+                    </div>
+                {% endfor %}
+            </div>
+            {% if ctaText %}
+                <div class="section-cta">
+                    {% from '_components/ui/button.twig' import button as btn %}
+                    {{ btn(ctaText, 'primary', '#', ctaIcon) }}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endmacro %}

@@ -1,0 +1,32 @@
+{# Services Preview Section Component #}
+{% macro servicesPreview(title, description, services = [], ctaText = '', ctaLink = '') %}
+    <section class="services-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2>{{ title }}</h2>
+                <p>{{ description }}</p>
+            </div>
+            <div class="services-grid">
+                {% for service in services %}
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="{{ service.image }}" alt="{{ service.title }}">
+                        </div>
+                        <div class="service-content">
+                            <h3>{{ service.title }}</h3>
+                            <p>{{ service.description }}</p>
+                            {% from '_components/ui/button.twig' import button as btn %}
+                            {{ btn(service.linkText, 'secondary', service.linkUrl) }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if ctaText and ctaLink %}
+                <div class="section-cta">
+                    {% from '_components/ui/button.twig' import button as btn %}
+                    {{ btn(ctaText, 'primary', ctaLink) }}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endmacro %}

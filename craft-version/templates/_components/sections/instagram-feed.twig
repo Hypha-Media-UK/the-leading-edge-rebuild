@@ -1,0 +1,29 @@
+{# Instagram Feed Section Component #}
+{% macro instagramFeed(title, description, images = [], instagramUrl = '', ctaText = '') %}
+    <section class="instagram-feed">
+        <div class="container">
+            <div class="section-header">
+                <h2>{{ title }}</h2>
+                <p>{{ description }}</p>
+            </div>
+            <div class="instagram-grid">
+                {% for image in images %}
+                    <div class="instagram-item">
+                        <a href="{{ instagramUrl }}" target="_blank" rel="noopener noreferrer">
+                            <img src="{{ image.src }}" alt="Instagram post">
+                            <div class="instagram-overlay">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if ctaText and instagramUrl %}
+                <div class="section-cta">
+                    {% from '_components/ui/button.twig' import button as btn %}
+                    {{ btn(ctaText, 'primary', instagramUrl, 'fab fa-instagram') }}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endmacro %}
