@@ -1,6 +1,6 @@
-@use '../abstracts' as *;
+// Header Component - Shared across all pages
+@use '../abstracts/variables' as *;
 
-// Header Styles (from Vue Header.vue)
 header {
   position: fixed;
   top: 0;
@@ -69,7 +69,7 @@ nav {
         }
         
         &:hover::after,
-        &.router-link-active::after {
+        &.active::after {
           width: 100%;
         }
       }

@@ -1,70 +1,160 @@
-@use '../abstracts' as *;
+// Button Component - Shared across all pages
+@use '../abstracts/variables' as *;
 
-// Button Styles
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: $border-radius;
+  border-radius: 4px;
   text-decoration: none;
-  font-weight: $font-weight-medium;
+  font-weight: 600;
   text-align: center;
   cursor: pointer;
-  transition: $transition-base;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  line-height: 1.5;
   
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($accent-color, 0.3);
+  }
+  
+  // Primary Button
   &.btn-primary {
     background-color: $accent-color;
     color: white;
     
     &:hover {
       background-color: custom-darken($accent-color, 10%);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba($accent-color, 0.3);
+    }
+    
+    &:active {
+      transform: translateY(0);
     }
   }
   
+  // Secondary Button
   &.btn-secondary {
     background-color: transparent;
-    color: white;
-    border: 2px solid white;
+    color: $accent-color;
+    border: 2px solid $accent-color;
     
     &:hover {
-      background-color: white;
-      color: $primary-color;
+      background-color: $accent-color;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba($accent-color, 0.3);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  // White Button (for dark backgrounds)
+  &.btn-white {
+    background-color: white;
+    color: $primary-color;
+    
+    &:hover {
+      background-color: custom-darken(white, 5%);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  // Large Button
+  &.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+  
+  // Small Button
+  &.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  // Full Width Button
+  &.btn-full {
+    width: 100%;
+    display: block;
+  }
+  
+  // Disabled Button
+  &:disabled,
+  &.btn-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+  
+  // Button with Icon
+  &.btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    i {
+      font-size: 1.1em;
+    }
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    
+    &.btn-large {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+    }
+    
+    &.btn-small {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
     }
   }
 }
 
-// Text button styles (for service cards)
-.btn-text {
-  color: $accent-color;
+// Button Groups
+.btn-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  
+  @media (max-width: 576px) {
+    flex-direction: column;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// Special Book Now Button
+.btn-book-now {
+  background-color: $accent-color;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   text-decoration: none;
   font-weight: 600;
-  position: relative;
-  background: none;
-  border: none;
-  padding: 0.5rem 0.8rem;
-  margin-left: -0.8rem;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 4px;
   transition: all 0.3s ease;
   
-  &::after {
-    content: '\f054'; /* Font Awesome arrow-right icon */
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    margin-left: 0.4rem;
-    font-size: 0.8rem;
-    opacity: 0;
-    transform: translateX(-5px);
-    transition: all 0.3s ease;
-  }
-  
   &:hover {
-    background-color: rgba($accent-color, 0.08);
-    
-    &::after {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    background-color: custom-darken($accent-color, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba($accent-color, 0.3);
   }
 }

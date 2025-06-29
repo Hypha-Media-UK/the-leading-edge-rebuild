@@ -1,0 +1,381 @@
+// Contact page SCSS - using exact Vue component styles
+@use '../abstracts/variables' as *;
+@use '../base/main';
+
+// Import existing component mixins
+@use '../abstracts/components' as *;
+@use '../abstracts/layout' as *;
+@use '../abstracts/typography' as *;
+
+// Import shared components
+@use '../components/header';
+@use '../components/footer';
+@use '../components/buttons';
+
+// Page Header
+.page-header {
+  background: linear-gradient(135deg, $primary-color, custom-darken($primary-color, 10%));
+  color: white;
+  padding: 8rem 0 4rem;
+  margin-top: 80px;
+  text-align: center;
+  
+  .page-header-content {
+    max-width: 800px;
+    margin: 0 auto;
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: white;
+      
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
+      
+      @media (max-width: 576px) {
+        font-size: 2rem;
+      }
+    }
+    
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      
+      @media (max-width: 768px) {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+// Contact Info Section - exact Vue styles
+.contact-info-section {
+  padding: 5rem 0;
+  background-color: white;
+  
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    gap: 3rem;
+    
+    @media (max-width: 991px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .contact-form-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba($primary-color, 0.08);
+  }
+  
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+// Form Header - exact Vue styles
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: $primary-color;
+  }
+  
+  p {
+    color: custom-lighten($primary-color, 20%);
+  }
+}
+
+// Contact Form - exact Vue styles
+.contact-form {
+  .form-field {
+    margin-bottom: 1.5rem;
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: $primary-color;
+    }
+    
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      
+      &:focus {
+        outline: none;
+        border-color: $accent-color;
+        box-shadow: 0 0 0 2px rgba($accent-color, 0.2);
+      }
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    
+    @media (max-width: 576px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Contact Cards
+.contact-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba($primary-color, 0.05);
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    
+    i {
+      font-size: 1.2rem;
+      color: $accent-color;
+    }
+    
+    h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: $primary-color;
+    }
+  }
+  
+  .card-content {
+    p {
+      margin: 0 0 1rem;
+      color: custom-lighten($primary-color, 20%);
+      line-height: 1.6;
+    }
+  }
+}
+
+// Location Card
+.location-card {
+  .map-container {
+    position: relative;
+    
+    img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    
+    .map-link {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: background-color 0.3s ease;
+      
+      &:hover {
+        background: rgba(0, 0, 0, 0.9);
+      }
+    }
+  }
+}
+
+// Hours Card
+.hours-card {
+  .hours-list {
+    .hours-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .day {
+        font-weight: 500;
+        color: $primary-color;
+      }
+      
+      .time {
+        color: custom-lighten($primary-color, 20%);
+        
+        &.closed {
+          color: $accent-color;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
+
+// Connect Card
+.connect-card {
+  .contact-items {
+    margin-bottom: 1.5rem;
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      color: custom-lighten($primary-color, 20%);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: $accent-color;
+      }
+      
+      i {
+        color: $accent-color;
+        width: 1.2rem;
+      }
+    }
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 0.75rem;
+    
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: $bg-light;
+      color: $primary-color;
+      border-radius: 50%;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: $accent-color;
+        color: white;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// FAQ Section - exact Vue styles
+.faq-section {
+  background-color: $light-color;
+  padding: 5rem 0;
+  
+  .section-header {
+    margin-bottom: 3rem;
+    
+    h2 {
+      font-size: 2.5rem;
+      color: $primary-color;
+      
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+  }
+  
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    
+    @media (max-width: 576px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .faq-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba($primary-color, 0.05);
+    
+    .faq-question {
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s ease;
+      
+      &:hover {
+        background-color: $bg-light;
+      }
+      
+      h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: $primary-color;
+        flex: 1;
+      }
+      
+      i {
+        color: $accent-color;
+        transition: transform 0.3s ease;
+      }
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      
+      p {
+        padding: 0 1.5rem 1.5rem;
+        margin: 0;
+        color: custom-lighten($primary-color, 20%);
+        line-height: 1.6;
+      }
+    }
+    
+    &.active {
+      .faq-question i {
+        transform: rotate(180deg);
+      }
+      
+      .faq-answer {
+        max-height: 200px;
+      }
+    }
+  }
+}
+
+// Page-specific styles
+.contact-page {
+  main {
+    padding-top: 0;
+  }
+}
