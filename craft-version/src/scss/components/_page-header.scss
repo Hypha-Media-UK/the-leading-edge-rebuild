@@ -3,18 +3,18 @@
   background-color: $primary-color;
   color: white;
   text-align: center;
-  padding: 5rem 0 3rem;
+  padding: 8rem 0 3rem; // Increased top padding to accommodate fixed header
   
   @media (max-width: 992px) {
-    padding: 4.5rem 0 2.5rem;
+    padding: 7rem 0 2.5rem; // Adjusted for smaller screens
   }
   
   @media (max-width: 768px) {
-    padding: 4rem 0 2rem;
+    padding: 6rem 0 2rem; // Adjusted for mobile
   }
   
   @media (max-width: 576px) {
-    padding: 3.5rem 0 1.5rem;
+    padding: 5.5rem 0 1.5rem; // Adjusted for small mobile
   }
   
   h1 {
@@ -86,6 +86,29 @@
       font-size: 0.9rem;
       max-width: 100%;
       line-height: 1.5;
+    }
+  }
+  
+  .gift-voucher-cta {
+    margin-top: 2rem;
+    
+    @media (max-width: 768px) {
+      margin-top: 1.5rem;
+    }
+    
+    .btn {
+      font-size: 1.1rem;
+      padding: 1.2rem 2.5rem;
+      
+      @media (max-width: 768px) {
+        font-size: 1rem;
+        padding: 1rem 2rem;
+      }
+      
+      @media (max-width: 576px) {
+        font-size: 0.9rem;
+        padding: 0.9rem 1.8rem;
+      }
     }
   }
 }

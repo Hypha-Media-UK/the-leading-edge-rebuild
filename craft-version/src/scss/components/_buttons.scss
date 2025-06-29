@@ -49,6 +49,23 @@
     }
   }
   
+  &.primary-special {
+    background: linear-gradient(135deg, $accent-color, custom-lighten($accent-color, 15%));
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba($accent-color, 0.3);
+    
+    &:hover {
+      background: linear-gradient(135deg, custom-darken($accent-color, 5%), $accent-color);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba($accent-color, 0.4);
+    }
+    
+    i {
+      margin-right: 0.5rem;
+    }
+  }
+  
   .btn-icon {
     margin-right: 0.5rem;
   }
