@@ -1,0 +1,51 @@
+color: null
+fieldLayouts:
+  c46b8c78-a935-4055-9cae-ad0add08f540:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-06-29T10:11:12+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: a0b5c7dd-05ab-4825-a52d-93a605e8dd9e
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: ee6a958f-a2c9-4381-8588-82434dbcdf85
+        userCondition: null
+handle: ent_services
+hasTitleField: true
+icon: bell-concierge
+name: Services
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

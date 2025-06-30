@@ -1,0 +1,31 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 30ad092a-2532-490a-90cd-0ba6c6414f10 # Meet The Team
+handle: meetTheTeam
+maxAuthors: 1
+name: 'Meet The Team'
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  778898bd-c954-4159-a117-36edc766a017: # tle-new
+    enabledByDefault: true
+    hasUrls: true
+    template: team.twig
+    uriFormat: 'meet-the-team/{slug}'
+structure:
+  maxLevels: null
+  uid: 11bd6b56-3f62-428b-aeef-8fa57755142e
+type: structure

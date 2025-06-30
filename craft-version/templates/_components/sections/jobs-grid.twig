@@ -16,7 +16,7 @@
             {% if positions|length > 0 %}
                 <div class="positions-grid">
                     {% for position in positions %}
-                        <div class="position-card" data-position-id="{{ position.id }}">
+                        <div class="position-card" data-modal-target="position-modal-{{ position.id }}">
                             <h3>{{ position.title }}</h3>
                             <div class="position-meta">
                                 <span class="type">{{ position.type }}</span>
@@ -35,27 +35,35 @@
             {% endif %}
         </div>
         
-        {# Position Details Modal #}
-        <div id="position-modal" class="position-modal" style="display: none;">
-            <div class="modal-overlay">
-                <div class="modal-content">
-                    <button class="modal-close" aria-label="Close modal">
-                        <i class="fas fa-times"></i>
-                    </button>
+        {# Individual modals for each position #}
+        {% for position in positions %}
+            <div id="position-modal-{{ position.id }}" class="modal-overlay" style="display: none;">
+                <div class="modal-content modal-medium">
+                    <button class="modal-close" aria-label="Close modal">&times;</button>
                     <div class="modal-body">
-                        <h2 class="position-title"></h2>
+                        <h2 class="position-title">{{ position.title }}</h2>
                         <div class="position-meta">
-                            <span class="type"></span>
-                            <span class="location"><i class="fas fa-map-marker-alt"></i> <span class="location-text"></span></span>
+                            <span class="type">{{ position.type }}</span>
+                            <span class="location"><i class="fas fa-map-marker-alt"></i> <span class="location-text">{{ position.location }}</span></span>
                         </div>
-                        <div class="position-description"></div>
+                        <div class="position-description">
+                            <p>{{ position.description }}</p>
+                        </div>
                         <div class="position-responsibilities">
                             <h4>Key Responsibilities:</h4>
-                            <ul class="responsibilities-list"></ul>
+                            <ul class="responsibilities-list">
+                                {% for responsibility in position.responsibilities %}
+                                    <li>{{ responsibility }}</li>
+                                {% endfor %}
+                            </ul>
                         </div>
                         <div class="position-requirements">
                             <h4>Requirements:</h4>
-                            <ul class="requirements-list"></ul>
+                            <ul class="requirements-list">
+                                {% for requirement in position.requirements %}
+                                    <li>{{ requirement }}</li>
+                                {% endfor %}
+                            </ul>
                         </div>
                         <div class="modal-actions">
                             <a href="#application-form" class="btn primary apply-btn">Apply for this Position</a>
@@ -63,6 +71,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        {% endfor %}
     </section>
 {% endmacro %}

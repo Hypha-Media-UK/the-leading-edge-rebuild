@@ -10,16 +10,43 @@
 <div class="home-page">
     {# Hero Section #}
     {% from '_components/sections/hero.twig' import hero %}
-    {{ hero(
-        'Experience True <span>Beauty</span> &amp; <span>Elegance</span>',
-        'At The Leading Edge, we blend artistry with expertise to create looks that enhance your natural beauty.',
-        [
-            { text: 'Explore Services', href: '/services', variant: 'secondary' },
-            { text: 'Book Appointment', href: '/contact', variant: 'secondary' },
-            { text: 'Offers & Gift Vouchers', href: '/offers', variant: 'primary' }
-        ],
-        '/images/new/heros/hero3.webp'
-    ) }}
+    
+    {# Get the homepage entry #}
+    {% set homepageEntry = craft.entries.section('homepage').one() %}
+    
+    {% if homepageEntry %}
+        {# Build the buttons array from the table field #}
+        {% set heroButtons = [] %}
+        {% for row in homepageEntry.fd_heroButtons %}
+            {% if row.buttonText and row.buttonLink %}
+                {% set heroButtons = heroButtons|merge([{
+                    text: row.buttonText,
+                    href: row.buttonLink,
+                    variant: row.highlight ? 'primary' : 'secondary'
+                }]) %}
+            {% endif %}
+        {% endfor %}
+        
+        {# Render the hero with dynamic content #}
+        {{ hero(
+            homepageEntry.fd_heroTitle,
+            homepageEntry.fd_heroText,
+            heroButtons,
+            homepageEntry.fd_heroImage.one().url ?? '/images/new/heros/hero3.webp'
+        ) }}
+    {% else %}
+        {# Fallback to original hardcoded content if no homepage entry exists #}
+        {{ hero(
+            'Experience True <span>Beauty</span> &amp; <span>Elegance</span>',
+            'At The Leading Edge, we blend artistry with expertise to create looks that enhance your natural beauty.',
+            [
+                { text: 'Explore Services', href: '/services', variant: 'secondary' },
+                { text: 'Book Appointment', href: '/contact', variant: 'secondary' },
+                { text: 'Offers & Gift Vouchers', href: '/offers', variant: 'primary' }
+            ],
+            '/images/new/heros/hero3.webp'
+        ) }}
+    {% endif %}
 
     {# Features Section #}
     {% from '_components/sections/features.twig' import features %}

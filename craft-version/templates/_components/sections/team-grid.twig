@@ -9,7 +9,7 @@
             
             <div class="team-grid">
                 {% for member in teamMembers %}
-                    <div class="team-member" data-member-id="{{ member.id }}">
+                    <div class="team-member" data-modal-target="team-modal-{{ member.id }}">
                         <div class="member-image">
                             <img src="{{ member.image }}" alt="{{ member.name }} - {{ member.role }}">
                             <div class="member-overlay">
@@ -24,5 +24,50 @@
                 {% endfor %}
             </div>
         </div>
+        
+        {# Individual modals for each team member #}
+        {% for member in teamMembers %}
+            <div id="team-modal-{{ member.id }}" class="modal-overlay" style="display: none;">
+                <div class="modal-content modal-large">
+                    <button class="modal-close" aria-label="Close modal">&times;</button>
+                    <div class="modal-body">
+                        <div class="member-profile-grid">
+                            <div class="member-image-container">
+                                <img src="{{ member.image }}" alt="{{ member.name }} - {{ member.role }}">
+                            </div>
+                            <div class="member-content">
+                                <h2>{{ member.name }}</h2>
+                                <p class="member-modal-title">{{ member.role }}</p>
+                                
+                                <div class="member-bio">
+                                    <p>{{ member.bio }}</p>
+                                </div>
+                                
+                                <div class="member-specialties">
+                                    <h3>Specialties</h3>
+                                    <div class="specialty-tags">
+                                        {% for specialty in member.specialties %}
+                                            <span class="specialty-tag">{{ specialty }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                
+                                <div class="member-social">
+                                    <a href="https://instagram.com/{{ member.instagram|replace('@', '') }}" class="instagram-link" target="_blank">
+                                        <i class="fab fa-instagram"></i> {{ member.instagram }}
+                                    </a>
+                                </div>
+                                
+                                <div class="booking-cta">
+                                    <a href="/contact" class="btn primary">
+                                        Book with {{ member.name|split(' ')|first }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </section>
 {% endmacro %}

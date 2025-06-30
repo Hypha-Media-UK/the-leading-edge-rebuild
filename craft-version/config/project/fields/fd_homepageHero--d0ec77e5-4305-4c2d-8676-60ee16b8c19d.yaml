@@ -1,0 +1,26 @@
+columnSuffix: null
+handle: fd_homepageHero
+instructions: null
+name: 'Homepage Hero'
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 8b5f8dd5-f86f-4ad5-96fb-7959f19b56f4 # Homepage Hero
+  includeTableView: false
+  maxEntries: 1
+  minEntries: null
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

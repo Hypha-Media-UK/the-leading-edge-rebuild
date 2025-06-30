@@ -1,0 +1,31 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 477b6431-5770-454b-bb37-17e4210d7b4a # Offers
+handle: offers
+maxAuthors: 1
+name: Offers
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  778898bd-c954-4159-a117-36edc766a017: # tle-new
+    enabledByDefault: true
+    hasUrls: true
+    template: offers.twig
+    uriFormat: 'offers/{slug}'
+structure:
+  maxLevels: null
+  uid: c39640ce-38d6-41f1-b5db-602e273b825d
+type: structure

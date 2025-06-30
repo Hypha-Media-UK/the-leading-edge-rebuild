@@ -1,0 +1,28 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 6f2a1f60-3fc4-451a-bbcd-d0e88751a51f # Contact Us
+handle: contactUs
+maxAuthors: 1
+name: 'Contact Us'
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  778898bd-c954-4159-a117-36edc766a017: # tle-new
+    enabledByDefault: true
+    hasUrls: true
+    template: contact.twig
+    uriFormat: contact-us
+type: single

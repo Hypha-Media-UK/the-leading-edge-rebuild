@@ -1,0 +1,31 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: a1d92cf0-fb9f-4734-9edc-b4c475592950 # Careers
+handle: careers
+maxAuthors: 1
+name: Careers
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  778898bd-c954-4159-a117-36edc766a017: # tle-new
+    enabledByDefault: true
+    hasUrls: true
+    template: careers.twig
+    uriFormat: 'careers/{slug}'
+structure:
+  maxLevels: null
+  uid: 0f26463a-9ba9-4b57-a073-820dfa73a542
+type: structure

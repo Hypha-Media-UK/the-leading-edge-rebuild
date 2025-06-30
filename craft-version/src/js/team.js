@@ -61,13 +61,74 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Team member click functionality (for future modal implementation)
+    // Team member modal functionality
     const teamMembers = document.querySelectorAll('.team-member');
+    let currentModal = null;
+    
+    console.log('Team members found:', teamMembers.length);
+
+    // Open modal when team member is clicked
     teamMembers.forEach(member => {
-        member.addEventListener('click', function() {
-            const memberId = this.getAttribute('data-member-id');
-            // Future: Open modal with team member details
-            console.log('Team member clicked:', memberId);
+        member.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Team member clicked!', this);
+            const modalTarget = this.getAttribute('data-modal-target');
+            console.log('Modal target:', modalTarget);
+            showTeamMemberModal(modalTarget);
         });
     });
+
+    // Close modal functionality for all modals
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-close')) {
+            closeTeamModal();
+        }
+        
+        if (e.target.classList.contains('modal-overlay')) {
+            closeTeamModal();
+        }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && currentModal) {
+            closeTeamModal();
+        }
+    });
+
+    function showTeamMemberModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) {
+            console.error('Modal not found:', modalId);
+            return;
+        }
+
+        console.log('Showing modal:', modalId);
+        
+        // Hide any currently open modal
+        if (currentModal) {
+            currentModal.style.display = 'none';
+            currentModal.classList.remove('active');
+        }
+
+        // Show the new modal
+        modal.style.display = 'flex';
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        
+        // Store reference to current modal
+        currentModal = modal;
+        
+        // Focus management for accessibility
+        modal.focus();
+    }
+
+    function closeTeamModal() {
+        if (currentModal) {
+            currentModal.style.display = 'none';
+            currentModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            currentModal = null;
+        }
+    }
 });

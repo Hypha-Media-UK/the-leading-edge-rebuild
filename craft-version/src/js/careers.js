@@ -1,168 +1,107 @@
 // Careers page specific JavaScript
 
-// Store positions data for modal functionality
-const positionsData = [
-    {
-        id: 1,
-        title: 'Senior Hair Stylist',
-        type: 'Full-time',
-        location: 'London',
-        description: 'We are looking for an experienced hair stylist with a minimum of 5 years in the industry. The ideal candidate will have expertise in cutting, coloring, and styling techniques for all hair types.',
-        responsibilities: [
-            'Provide exceptional hair services to clients including cutting, coloring, and styling',
-            'Stay updated on the latest hair trends and techniques',
-            'Maintain a clean and organized workspace',
-            'Build and maintain a loyal client base',
-            'Collaborate with team members for special events and promotions'
-        ],
-        requirements: [
-            'Minimum 5 years of experience as a hair stylist',
-            'Valid cosmetology license',
-            'Strong portfolio demonstrating technical skills',
-            'Excellent customer service skills',
-            'Ability to work weekends and some evenings'
-        ]
-    },
-    {
-        id: 2,
-        title: 'Beauty Therapist',
-        type: 'Part-time / Full-time',
-        location: 'London',
-        description: 'We are seeking a skilled beauty therapist to join our team. The successful candidate will provide a range of beauty treatments including facials, body treatments, and makeup application.',
-        responsibilities: [
-            'Perform various beauty treatments to the highest standard',
-            'Provide skincare consultations and recommend appropriate products',
-            'Keep up-to-date with the latest beauty trends and techniques',
-            'Maintain treatment room cleanliness and hygiene',
-            'Assist with retail sales and promotions'
-        ],
-        requirements: [
-            'NVQ Level 3 in Beauty Therapy or equivalent',
-            'At least 2 years of experience in a professional salon setting',
-            'Knowledge of premium skincare brands and treatments',
-            'Excellent communication and interpersonal skills',
-            'Flexibility to work evenings and weekends'
-        ]
-    },
-    {
-        id: 3,
-        title: 'Salon Receptionist',
-        type: 'Full-time',
-        location: 'London',
-        description: 'We are looking for a friendly and organized receptionist to be the first point of contact for our clients. The ideal candidate will have excellent communication skills and a passion for customer service.',
-        responsibilities: [
-            'Greet clients and manage the reception desk',
-            'Handle booking appointments and managing the salon schedule',
-            'Process payments and maintain accurate records',
-            'Answer phone calls and respond to emails',
-            'Assist with retail sales and inventory management'
-        ],
-        requirements: [
-            'Previous experience in a customer service role, preferably in a salon environment',
-            'Proficiency with scheduling software and point-of-sale systems',
-            'Excellent organizational and multitasking abilities',
-            'Professional appearance and friendly demeanor',
-            'Available to work flexible hours including weekends'
-        ]
-    }
-];
-
 // Careers page functionality
 document.addEventListener('DOMContentLoaded', function() {
     
     // Position modal functionality
-    const modal = document.getElementById('position-modal');
-    const modalClose = document.querySelector('.modal-close');
-    const modalOverlay = document.querySelector('.modal-overlay');
+    const positionCards = document.querySelectorAll('.position-card');
     const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+    let currentModal = null;
+    
+    console.log('Position cards found:', positionCards.length);
+    console.log('View Details buttons found:', viewDetailsButtons.length);
     
     // Open modal when "View Details" is clicked
     viewDetailsButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
+            console.log('View Details button clicked!', this);
             const positionCard = this.closest('.position-card');
-            const positionId = parseInt(positionCard.getAttribute('data-position-id'));
-            showPositionModal(positionId);
+            console.log('Position card found:', positionCard);
+            const modalTarget = positionCard.getAttribute('data-modal-target');
+            console.log('Modal target:', modalTarget);
+            showPositionModal(modalTarget);
         });
     });
     
-    // Close modal functionality
-    if (modalClose) {
-        modalClose.addEventListener('click', closeModal);
-    }
-    
-    if (modalOverlay) {
-        modalOverlay.addEventListener('click', function(e) {
-            if (e.target === modalOverlay) {
-                closeModal();
+    // Also handle clicks on the position card itself
+    positionCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Only trigger if not clicking the button
+            if (!e.target.closest('.view-details-btn')) {
+                e.preventDefault();
+                const modalTarget = this.getAttribute('data-modal-target');
+                showPositionModal(modalTarget);
             }
         });
-    }
+    });
     
-    // Close modal on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal && modal.style.display === 'block') {
+    // Close modal functionality for all modals
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-close')) {
+            closeModal();
+        }
+        
+        if (e.target.classList.contains('modal-overlay')) {
             closeModal();
         }
     });
     
-    function showPositionModal(positionId) {
-        const position = positionsData.find(p => p.id === positionId);
-        if (!position || !modal) return;
-        
-        // Populate modal content
-        const modalBody = modal.querySelector('.modal-body');
-        modalBody.querySelector('.position-title').textContent = position.title;
-        modalBody.querySelector('.position-meta .type').textContent = position.type;
-        modalBody.querySelector('.position-meta .location-text').textContent = position.location;
-        modalBody.querySelector('.position-description').textContent = position.description;
-        
-        // Populate responsibilities
-        const responsibilitiesList = modalBody.querySelector('.responsibilities-list');
-        responsibilitiesList.innerHTML = '';
-        position.responsibilities.forEach(responsibility => {
-            const li = document.createElement('li');
-            li.textContent = responsibility;
-            responsibilitiesList.appendChild(li);
-        });
-        
-        // Populate requirements
-        const requirementsList = modalBody.querySelector('.requirements-list');
-        requirementsList.innerHTML = '';
-        position.requirements.forEach(requirement => {
-            const li = document.createElement('li');
-            li.textContent = requirement;
-            requirementsList.appendChild(li);
-        });
-        
-        // Update apply button to scroll to form and pre-select position
-        const applyBtn = modalBody.querySelector('.apply-btn');
-        applyBtn.addEventListener('click', function(e) {
-            e.preventDefault();
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && currentModal) {
             closeModal();
-            
-            // Pre-select the position in the form
-            const positionSelect = document.getElementById('position');
-            if (positionSelect) {
-                positionSelect.value = position.title;
-            }
-            
-            // Scroll to application form
-            const applicationForm = document.getElementById('application-form');
-            if (applicationForm) {
-                applicationForm.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
+        }
+    });
+    
+    function showPositionModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) {
+            console.error('Modal not found:', modalId);
+            return;
+        }
+
+        console.log('Showing modal:', modalId);
         
-        // Show modal
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
+        // Hide any currently open modal
+        if (currentModal) {
+            currentModal.style.display = 'none';
+            currentModal.classList.remove('active');
+        }
+
+        // Show the new modal
+        modal.style.display = 'flex';
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        
+        // Store reference to current modal
+        currentModal = modal;
+        
+        // Handle apply button click
+        const applyBtn = modal.querySelector('.apply-btn');
+        if (applyBtn) {
+            applyBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                closeModal();
+                
+                // Scroll to application form
+                const applicationForm = document.getElementById('application-form');
+                if (applicationForm) {
+                    applicationForm.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+        
+        // Focus management for accessibility
+        modal.focus();
     }
     
     function closeModal() {
-        if (modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
+        if (currentModal) {
+            currentModal.style.display = 'none';
+            currentModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            currentModal = null;
         }
     }
     

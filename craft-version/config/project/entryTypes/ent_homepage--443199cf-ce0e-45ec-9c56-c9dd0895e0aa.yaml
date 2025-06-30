@@ -1,0 +1,102 @@
+color: null
+fieldLayouts:
+  24bf6dca-7857-4a5e-b73a-2ae8771d8afc:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-06-30T13:39:13+00:00'
+            elementCondition: null
+            heading: 'Main Hero'
+            type: craft\fieldlayoutelements\Heading
+            uid: a4d72b26-5a08-4c93-9e40-d035560f81ea
+            userCondition: null
+          -
+            dateAdded: '2025-06-30T13:36:20+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 02ff67bf-3173-4fd0-afd8-a14a0d77b2b4 # Hero Image
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e4ddc82f-17ad-484f-a186-674162c83161
+            userCondition: null
+            warning: null
+            width: 25
+          -
+            dateAdded: '2025-06-30T13:42:33+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: c390192e-142a-4684-88ca-1199e16203a9 # Basic Rich Text
+            handle: fd_heroTitle
+            includeInCards: false
+            instructions: null
+            label: 'Hero Title'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ab831dd5-5c36-4ea5-a212-b47f3ec6636d
+            userCondition: null
+            warning: null
+            width: 25
+          -
+            dateAdded: '2025-06-30T13:47:07+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: c390192e-142a-4684-88ca-1199e16203a9 # Basic Rich Text
+            handle: fd_heroText
+            includeInCards: false
+            instructions: null
+            label: 'Hero Text'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 77c17a57-3055-4a42-a182-2a082ca75246
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2025-06-30T13:39:13+00:00'
+            elementCondition: null
+            type: craft\fieldlayoutelements\HorizontalRule
+            uid: ec06c127-1214-4f5b-ba26-45c87517f6f2
+            userCondition: null
+          -
+            dateAdded: '2025-06-30T14:25:42+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 0ff28b13-970b-4527-be92-e3c883444b57 # Hero Buttons
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1b72b695-a950-43fb-b96e-a77ca4762a99
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 94c614ba-36e4-47d4-87c5-3a39edefb644
+        userCondition: null
+handle: ent_homepage
+hasTitleField: false
+icon: house
+name: Homepage
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: Homepage
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

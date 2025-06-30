@@ -1,0 +1,51 @@
+color: null
+fieldLayouts:
+  c2ff294a-a153-4dd4-9909-618959a8298e:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-06-29T10:15:54+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: c496953f-eb01-4fd3-a252-1a85e3e39070
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: a97c646e-e0ad-4c3a-8ad0-88264183615f
+        userCondition: null
+handle: ent_careers
+hasTitleField: true
+icon: user-graduate
+name: Careers
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

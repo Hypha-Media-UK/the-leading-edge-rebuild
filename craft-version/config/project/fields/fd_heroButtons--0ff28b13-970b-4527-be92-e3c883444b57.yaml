@@ -1,0 +1,75 @@
+columnSuffix: null
+handle: fd_heroButtons
+instructions: null
+name: 'Hero Buttons'
+searchable: false
+settings:
+  addRowLabel: 'Add a button'
+  columns:
+    __assoc__:
+      -
+        - col1
+        -
+          __assoc__:
+            -
+              - heading
+              - 'Button Text'
+            -
+              - handle
+              - buttonText
+            -
+              - width
+              - ''
+            -
+              - type
+              - singleline
+      -
+        - col2
+        -
+          __assoc__:
+            -
+              - heading
+              - 'Button Link'
+            -
+              - handle
+              - buttonLink
+            -
+              - width
+              - ''
+            -
+              - type
+              - url
+      -
+        - col3
+        -
+          __assoc__:
+            -
+              - heading
+              - Highlight
+            -
+              - handle
+              - highlight
+            -
+              - width
+              - ''
+            -
+              - type
+              - lightswitch
+  defaults:
+    -
+      __assoc__:
+        -
+          - col1
+          - ''
+        -
+          - col2
+          - ''
+        -
+          - col3
+          - ''
+  maxRows: 3
+  minRows: null
+  staticRows: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Table

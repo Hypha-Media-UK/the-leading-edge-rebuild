@@ -1,12 +1,50 @@
-dateModified: 1751029798
+dateModified: 1751293913
 email:
   fromEmail: access@hypha.media
   fromName: tle-new
   transportType: craft\mail\transportadapters\Sendmail
+fs:
+  assets:
+    hasUrls: true
+    name: Assets
+    settings:
+      path: assets
+    type: craft\fs\Local
+    url: /assets
 meta:
   __names__:
+    0ff28b13-970b-4527-be92-e3c883444b57: 'Hero Buttons' # Hero Buttons
+    2e6a616d-8d16-493d-bd2d-b776b4d3f32d: 'Basic 1' # Basic 1
+    02ff67bf-3173-4fd0-afd8-a14a0d77b2b4: 'Hero Image' # Hero Image
+    6d710c97-632d-485c-a392-7551dc8fe957: Salon # Salon
+    6f2a1f60-3fc4-451a-bbcd-d0e88751a51f: 'Contact Us' # Contact Us
+    7c24ae98-baab-44d1-bd12-4b57d54250b9: Homepage # Homepage
+    8b5f8dd5-f86f-4ad5-96fb-7959f19b56f4: 'Homepage Hero' # Homepage Hero
+    8d461451-a216-4782-819a-65b930c0f2a2: Salon # Salon
+    9d785b51-ab67-4e45-b27d-7186300c3f51: Assets # Assets
+    9fbf25ab-0115-4bae-bfbf-2c34702e98a3: 'Text Field' # Text Field
+    30ad092a-2532-490a-90cd-0ba6c6414f10: 'Meet The Team' # Meet The Team
+    49c2f117-87f4-422a-9339-e51bea7ae175: Simple # Simple
     67b864d2-f9ca-464f-b7ba-1d0a25c9bbdc: tle-new # tle-new
+    428ba341-e659-4340-9f29-31bb9efcb7eb: 'Contact Us' # Contact Us
+    477b6431-5770-454b-bb37-17e4210d7b4a: Offers # Offers
+    3169df3d-45be-43b0-be3b-31683800d693: Services # Services
+    3347f9bf-466e-49b5-82a2-580fe9d71fdb: 'Single Line Text' # Single Line Text
+    4736fbad-f74a-449a-9df1-458b53ccee7b: 'Meet The Team' # Meet The Team
+    09802ad0-e6c6-4b8a-bbdd-954800a6c7c1: 'Link Field' # Link Field
+    067992f8-d5ea-4031-a86f-e6e8053036a0: Services # Services
+    255763e4-0b4b-487a-8797-e1ca645d34f3: Offers # Offers
+    443199cf-ce0e-45ec-9c56-c9dd0895e0aa: Homepage # Homepage
     778898bd-c954-4159-a117-36edc766a017: tle-new # tle-new
+    a1d92cf0-fb9f-4734-9edc-b4c475592950: Careers # Careers
+    c390192e-142a-4684-88ca-1199e16203a9: 'Basic Rich Text' # Basic Rich Text
+    d0ec77e5-4305-4c2d-8676-60ee16b8c19d: 'Homepage Hero' # Homepage Hero
+    ec1526bf-aa56-48e0-bd89-d9e943fa6f4c: Careers # Careers
+plugins:
+  ckeditor:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.0.0
 system:
   edition: solo
   live: true

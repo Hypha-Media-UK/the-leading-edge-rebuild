@@ -41,23 +41,96 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // News article modal functionality
+    const readMoreButtons = document.querySelectorAll('.read-more-btn');
+    let currentModal = null;
+    
+    console.log('News cards found:', newsCards.length);
+
     // Article click functionality
     const featuredNews = document.querySelector('.featured-news');
     if (featuredNews) {
-        featuredNews.addEventListener('click', function() {
-            const articleId = this.getAttribute('data-article-id');
-            console.log('Featured article clicked:', articleId);
-            // Future: Navigate to article detail or open modal
+        featuredNews.addEventListener('click', function(e) {
+            e.preventDefault();
+            const modalTarget = this.getAttribute('data-modal-target');
+            showNewsModal(modalTarget);
         });
     }
     
     newsCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const articleId = this.getAttribute('data-article-id');
-            console.log('News card clicked:', articleId);
-            // Future: Navigate to article detail or open modal
+        card.addEventListener('click', function(e) {
+            e.preventDefault();
+            const modalTarget = this.getAttribute('data-modal-target');
+            showNewsModal(modalTarget);
         });
     });
+
+    // Also handle "Read More" button clicks specifically
+    readMoreButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const card = this.closest('.news-card');
+            if (card) {
+                const modalTarget = card.getAttribute('data-modal-target');
+                showNewsModal(modalTarget);
+            }
+        });
+    });
+
+    // Close modal functionality for all modals
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-close')) {
+            closeNewsModal();
+        }
+        
+        if (e.target.classList.contains('modal-overlay')) {
+            closeNewsModal();
+        }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && currentModal) {
+            closeNewsModal();
+        }
+    });
+
+    function showNewsModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) {
+            console.error('Modal not found:', modalId);
+            return;
+        }
+
+        console.log('Showing modal:', modalId);
+        
+        // Hide any currently open modal
+        if (currentModal) {
+            currentModal.style.display = 'none';
+            currentModal.classList.remove('active');
+        }
+
+        // Show the new modal
+        modal.style.display = 'flex';
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        
+        // Store reference to current modal
+        currentModal = modal;
+        
+        // Focus management for accessibility
+        modal.focus();
+    }
+
+    function closeNewsModal() {
+        if (currentModal) {
+            currentModal.style.display = 'none';
+            currentModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            currentModal = null;
+        }
+    }
     
     // GSAP animations for news page
     if (typeof gsap !== 'undefined') {

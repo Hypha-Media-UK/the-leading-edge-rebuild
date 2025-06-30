@@ -1,0 +1,85 @@
+color: null
+fieldLayouts:
+  ec42a470-9839-4e6f-8872-bb3b9be5193b:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-06-30T13:20:49+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: 02ff67bf-3173-4fd0-afd8-a14a0d77b2b4 # Hero Image
+            handle: fd_heroImage
+            includeInCards: false
+            instructions: null
+            label: 'Hero Image'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 71c77163-7bac-4c38-bb10-1a21379c6cd5
+            userCondition: null
+            warning: null
+            width: 25
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-06-30T13:18:20+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: 'Hero Title'
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 3ee8aefb-cf92-44f2-b299-8d212ffe6819
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            dateAdded: '2025-06-30T13:23:42+00:00'
+            editCondition: null
+            elementCondition: null
+            fieldUid: c390192e-142a-4684-88ca-1199e16203a9 # Basic Rich Text
+            handle: fd_heroText
+            includeInCards: false
+            instructions: null
+            label: 'Hero Text'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f8a0b1a5-3fd1-4f4c-b127-7f4e73c7ffb9
+            userCondition: null
+            warning: null
+            width: 50
+        name: Content
+        uid: 734d8438-7d76-4d59-afcf-e2699693201d
+        userCondition: null
+handle: ent_homepageHero
+hasTitleField: true
+icon: null
+name: 'Homepage Hero'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

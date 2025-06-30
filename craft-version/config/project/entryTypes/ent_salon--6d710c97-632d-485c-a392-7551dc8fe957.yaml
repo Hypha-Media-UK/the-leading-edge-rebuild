@@ -1,0 +1,51 @@
+color: null
+fieldLayouts:
+  2c770334-9031-41f6-8fb9-96c3842b0ff7:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-06-29T10:12:29+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: f842a09b-de95-4c24-adee-b16c9cb4255c
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 95984a23-3494-4541-9be1-a3d0504d65d3
+        userCondition: null
+handle: ent_salon
+hasTitleField: true
+icon: scissors
+name: Salon
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
